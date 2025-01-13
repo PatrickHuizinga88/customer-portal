@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {PlusCircle} from 'lucide-vue-next'
-import type {Database} from "~/types/database.types";
+// import type {Database} from "~/types/database.types";
 import {Page, PageActions, PageHeader} from "~/components/layout/page";
 import {SkeletonTable} from "~/components/ui/skeleton";
 
@@ -8,11 +8,17 @@ definePageMeta({
   layout: 'default-sidebar',
 })
 
-const supabase = useSupabaseClient<Database>()
+// const supabase = useSupabaseClient<Database>()
 
-const {data: customers, status} = useAsyncData(async () => {
-  const {data} = await supabase.from('customers').select('*')
-  return data
+// const {data: customers, status} = useAsyncData(async () => {
+//   const {data} = await supabase.from('customers').select('*')
+//   return data
+// })
+
+const {data: customers, status} = useLazyFetch('/api/customers', {
+  transform: (data) => {
+    return data.slice(0, 10)
+  }
 })
 </script>
 
@@ -40,7 +46,7 @@ const {data: customers, status} = useAsyncData(async () => {
                   {{ $t('common.general.name') }}
                 </th>
                 <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold">{{
-                    $t('common.general.email')
+                    $t('customers.address')
                   }}
                 </th>
                 <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
@@ -50,16 +56,17 @@ const {data: customers, status} = useAsyncData(async () => {
               </thead>
               <tbody class="divide-y divide-border bg-card">
               <tr v-for="customer in customers" :key="customer.id">
-                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium sm:pl-6">
-                  <NuxtLink :to="`/customers/${customer.id}`">
-                    <template v-if="customer.first_name || customer.last_name">
-                      {{ customer.first_name + ' ' + customer.last_name }}
+                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium truncate sm:pl-6 max-w-[320px]">
+                  <NuxtLink :to="`/customers/${customer.id}`" class="truncate">
+                    <template v-if="customer.name">
+                      {{ customer.name }}
                     </template>
                     <template v-else>-</template>
                   </NuxtLink>
                 </td>
                 <td class="whitespace-nowrap px-3 py-4 text-sm text-muted-foreground">
-                  <a :href="`mailto:${customer.email}`">{{ customer.email || '-' }}</a>
+<!--                  <a :href="`mailto:${customer.email}`">{{ customer.email || '-' }}</a>-->
+                  {{ customer.primary_address.streetandnumber }}
                 </td>
                 <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
                   <NuxtLink :to="`/customers/${customer.id}/edit`" class="text-primary hover:underline">
@@ -78,7 +85,7 @@ const {data: customers, status} = useAsyncData(async () => {
       <SkeletonTable :columns="2"/>
     </template>
     <div v-else class="w-full text-center">{{
-        $t('common.no_records_found', {item: $t('customers.customers', 2)})
+        $t('common.general.no_records_found', {item: $t('customers.customers', 2)})
       }}
     </div>
   </Page>

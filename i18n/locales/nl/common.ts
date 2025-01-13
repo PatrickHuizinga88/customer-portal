@@ -18,6 +18,7 @@ export default {
     },
 
     actions: {
+      actions: "Acties",
       add: "Voeg {item} toe",
       back_to: "Terug naar {item}",
       cancel: "Annuleren",

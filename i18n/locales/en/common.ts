@@ -18,6 +18,7 @@ export default {
     },
 
     actions: {
+      actions: "Actions",
       add: "Add {item}",
       back_to: "Back to {item}",
       cancel: "Cancel",

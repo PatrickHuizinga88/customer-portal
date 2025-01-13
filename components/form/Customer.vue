@@ -42,36 +42,33 @@ const loading = ref(false)
 const onSubmit = form.handleSubmit(async (values) => {
   try {
     loading.value = true
-    await useAsyncData(async () => {
-      const {data, error} = await supabase.from('customers').upsert({
-        id: props.customer?.id,
-        first_name: values.firstName,
-        last_name: values.lastName,
-        email: values.email,
-        phone_number: values.phoneNumber,
-        address: values.address,
-        postal_code: values.postal_code,
-        city: values.city,
-        country: values.country,
-      }, {onConflict: 'id'})
-      if (error) console.error(error)
-      return data
-    })
+    const {data, error} = await supabase.from('customers').upsert({
+      id: props.customer?.id,
+      first_name: values.firstName,
+      last_name: values.lastName,
+      email: values.email,
+      phone_number: values.phoneNumber,
+      address: values.address,
+      postal_code: values.postal_code,
+      city: values.city,
+      country: values.country,
+    }, {
+      onConflict: 'id'
+    }).select()
+    if (error) throw error
     notificationStore.createNotification({
       type: 'success',
       action: 'save',
       item: `${values.firstName} ${values.lastName}`
     })
-    if (props.customer) navigateTo(`/customers/${props.customer.id}`)
+    navigateTo(`/customers/${data[0].id}`)
   } catch (error) {
-    if (error) {
-      notificationStore.createNotification({
-        type: 'destructive',
-        action: 'save',
-        item: `${values.firstName} ${values.lastName}`
-      })
-      throw error
-    }
+    notificationStore.createNotification({
+      type: 'destructive',
+      action: 'save',
+      item: `${values.firstName} ${values.lastName}`
+    })
+    console.error(error)
   } finally {
     loading.value = false
   }

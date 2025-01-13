@@ -63,6 +63,6 @@ const { data: users, status } = useFetch<User[]>('/api/users')
     <template v-else-if="status === 'pending'">
       <SkeletonTable :columns="3" />
     </template>
-    <div v-else class="w-full text-center">{{ $t('common.no_records_found', {item: $t('users.users', 2)}) }}</div>
+    <div v-else class="w-full text-center">{{ $t('common.general.no_records_found', {item: $t('users.users', 2)}) }}</div>
   </Page>
 </template>
