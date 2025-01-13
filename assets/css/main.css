@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    * {
+        @apply border-border;
+    }
+    html {
+        @apply bg-background text-foreground;
+    }
+    body:has(#sidebar) {
+        @apply bg-gradient-to-br from-primary/20 to-20% to-background bg-left-top bg-[length:840px_840px] bg-no-repeat;
+    }
+}
