@@ -10,7 +10,9 @@ const fallBackProfile = {
   account_number: '1234567890'
 }
 
-const {data: profile} = useFetch('http://localhost:3001/customers', {
+const { public: {backendUrl} } = useRuntimeConfig()
+
+const {data: profile} = await useFetch(`${backendUrl}/customers`, {
   query: {
     id: 1
   },
@@ -33,7 +35,7 @@ const {data: profile} = useFetch('http://localhost:3001/customers', {
         <dl class="space-y-4">
           <div>
             <dt>{{ $t('profile.name') }}</dt>
-            <dd class="font-medium">{{ profile.name || fallBackProfile.name  }}</dd>
+            <dd class="font-medium">{{ profile.name || fallBackProfile.name }}</dd>
           </div>
           <div>
             <dt>{{ $t('profile.email') }}</dt>
@@ -53,7 +55,7 @@ const {data: profile} = useFetch('http://localhost:3001/customers', {
             </dd>
           </div>
         </dl>
-        <Button variant="outline" class="w-full mt-4">
+        <Button variant="outline" class="w-full sm:w-auto mt-4">
           <Pencil class="size-5"/>
           {{ $t('profile.edit_personal_details') }}
         </Button>
@@ -72,7 +74,7 @@ const {data: profile} = useFetch('http://localhost:3001/customers', {
             <dd class="font-medium">{{ profile.account_number || fallBackProfile.account_number }}</dd>
           </div>
         </dl>
-        <Button variant="outline" class="w-full mt-4">
+        <Button variant="outline" class="w-full sm:w-auto mt-4">
           <Pencil class="size-5"/>
           {{ $t('profile.edit_payment_method') }}
         </Button>
@@ -106,7 +108,7 @@ const {data: profile} = useFetch('http://localhost:3001/customers', {
             </dd>
           </div>
         </dl>
-        <Button variant="outline" class="w-full mt-4">
+        <Button variant="outline" class="w-full sm:w-auto mt-4">
           <Pencil class="size-5"/>
           {{ $t('profile.edit_password') }}
         </Button>

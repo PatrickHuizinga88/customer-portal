@@ -39,7 +39,8 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     public: {
-      baseUrl: 'localhost:3000'
+      baseUrl: 'localhost:3000',
+      backendUrl: 'http://localhost:3001',
     },
     novuloUsername: '',
     novuloPassword: '',
@@ -74,6 +75,7 @@ export default defineNuxtConfig({
   },
 
   colorMode: {
+    preference: 'light',
     classSuffix: '',
   },
 

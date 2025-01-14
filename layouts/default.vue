@@ -10,7 +10,9 @@ import {
   DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator,
   DropdownMenuTrigger
 } from "~/components/ui/dropdown-menu";
+import type {Database} from "~/types/database.types";
 
+const supabase = useSupabaseClient<Database>()
 const notificationStore = useNotificationStore()
 const {t} = useI18n()
 
@@ -38,6 +40,13 @@ const notifications = [
   {title: 'New claim reported', description: 'A new claim has been reported by John Doe'},
 ]
 
+const signOut = async () => {
+  const { error } = await supabase.auth.signOut()
+  if (!error) {
+    await navigateTo('/login')
+  }
+}
+
 watch(useRoute(), () => {
   open.value = false
 })
@@ -55,7 +64,8 @@ watch(useRoute(), () => {
           <ul class="hidden md:flex gap-4">
             <li v-for="item in mainNavItems">
               <NuxtLink :to="item.url" activeClass="text-primary bg-muted"
-                        class="inline-block px-2 py-1 rounded-md text-sm font-medium hover:bg-muted duration-150">{{ item.name }}
+                        class="inline-block px-2 py-1.5 rounded-md text-sm font-medium hover:bg-muted duration-150">
+                {{ item.name }}
               </NuxtLink>
             </li>
           </ul>
@@ -79,7 +89,10 @@ watch(useRoute(), () => {
                     </div>
                   </DropdownMenuItem>
                 </template>
-                <div v-else>{{ $t('common.general.no_records_found', {item: lowercase($t('common.notifications.notifications', 2))}) }}</div>
+                <div v-else>{{
+                    $t('common.general.no_records_found', {item: lowercase($t('common.notifications.notifications', 2))})
+                  }}
+                </div>
               </DropdownMenuGroup>
             </DropdownMenuContent>
           </DropdownMenu>
@@ -90,9 +103,15 @@ watch(useRoute(), () => {
               </Avatar>
             </DropdownMenuTrigger>
             <DropdownMenuContent>
-              <DropdownMenuItem v-for="item in userNavItems">
-                <component :is="item.icon" class="size-4"/>
-                <span>{{ item.name }}</span>
+              <DropdownMenuItem v-for="item in userNavItems" @click="!item.url ? signOut() : null" :asChild="item.url !== undefined">
+                <NuxtLink v-if="item.url" to="/profile">
+                  <component :is="item.icon" class="size-4"/>
+                  <span>{{ item.name }}</span>
+                </NuxtLink>
+                <template v-else>
+                  <component :is="item.icon" class="size-4"/>
+                  <span>{{ item.name }}</span>
+                </template>
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
@@ -106,12 +125,17 @@ watch(useRoute(), () => {
               <ul class="flex flex-col align-stretch gap-4">
                 <li v-for="item in mainNavItems">
                   <NuxtLink :to="item.url" activeClass="text-primary"
-                            class="inline-block w-full px-2 py-1 text-2xl font-semibold text-right rounded hover:bg-muted duration-150">{{ item.name }}
+                            class="inline-block px-2 py-1 text-2xl font-semibold text-right rounded hover:bg-muted duration-150">
+                    {{ item.name }}
                   </NuxtLink>
                 </li>
                 <li v-for="item in userNavItems">
-                  <NuxtLink v-if="item.url" :to="item.url" activeClass="text-primary" class="inline-block w-full px-2 py-1 text-2xl font-semibold text-right rounded hover:bg-muted duration-150">{{ item.name }}</NuxtLink>
-                  <button v-else class="inline-block w-full px-2 py-1 text-2xl font-semibold text-right rounded hover:bg-muted duration-150">
+                  <NuxtLink v-if="item.url" :to="item.url" activeClass="text-primary"
+                            class="inline-block px-2 py-1 text-2xl font-semibold text-right rounded hover:bg-muted duration-150">
+                    {{ item.name }}
+                  </NuxtLink>
+                  <button v-else
+                          class="inline-block px-2 py-1 text-2xl font-semibold text-right rounded hover:bg-muted duration-150">
                     {{ item.name }}
                   </button>
                 </li>

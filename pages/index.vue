@@ -10,6 +10,17 @@ definePageMeta({
 const user = useSupabaseUser()
 const {t} = useI18n()
 
+const { public: {backendUrl} } = useRuntimeConfig()
+
+const {data: profile} = useFetch(`${backendUrl}/customers`, {
+  query: {
+    id: 1
+  },
+  transform: (data) => {
+    return data.response
+  }
+})
+
 const recentActivities = [
   {
     id: 1,
@@ -34,9 +45,9 @@ const greeting = computed(() => {
 </script>
 
 <template>
-  <Page :title="`${greeting}, ${user.id || 'common.general.guest'}! 👋`" :description="$t('home.header.description')">
+  <Page :title="`${greeting}, ${profile.name || 'common.general.guest'}!`" :description="$t('home.header.description')">
     <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-8">
-      <NuxtLink to="/"
+      <NuxtLink to="#"
                 class="w-full flex flex-col items-center gap-y-2 text-sm text-center bg-primary/10 hover:bg-primary/20 duration-150 rounded-xl border text-sm font-medium px-7 py-5">
         <ShieldPlus class="size-10 text-primary"/>
         {{ $t('home.quick_actions.new_insurance') }}
@@ -51,7 +62,7 @@ const greeting = computed(() => {
         <Files class="size-10 text-primary"/>
         {{ $t('home.quick_actions.show_documents') }}
       </NuxtLink>
-      <NuxtLink to="/contact"
+      <NuxtLink to="#"
                 class="w-full flex flex-col items-center gap-y-2 text-sm text-center bg-primary/10 hover:bg-primary/20 duration-150 rounded-xl border text-sm font-medium px-7 py-5">
         <Headset class="size-10 text-primary"/>
         {{ $t('home.quick_actions.contact_us') }}

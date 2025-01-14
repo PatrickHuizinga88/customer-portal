@@ -3,8 +3,8 @@ export default {
     contact: "Contact",
 
     header: {
-      title: "Schade melden",
-      description: "Vervelend om te horen dat je schade hebt opgelopen. Laten we dit direct regelen."
+      title: "Contact",
+      description: "Wij staan klaar om je te helpen. Neem contact met ons op via onderstaande gegevens.",
     }
   }
 }
