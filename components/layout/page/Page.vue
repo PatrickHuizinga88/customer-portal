@@ -2,11 +2,12 @@
 defineProps<{
   title: string
   subtitle?: string
+  description?: string
 }>()
 </script>
 
 <template>
-  <LayoutHeader :pageTitle="title" :pageSubtitle="subtitle"/>
+  <LayoutHeader :pageTitle="title" :pageSubtitle="subtitle" :pageDescription="description"/>
   <main>
     <slot/>
   </main>

@@ -3,7 +3,7 @@ import type {Database} from "~/types/database.types";
 import {Page} from "~/components/layout/page";
 
 definePageMeta({
-  layout: 'default-sidebar'
+  layout: 'default'
 })
 
 const supabase = useSupabaseClient<Database>()

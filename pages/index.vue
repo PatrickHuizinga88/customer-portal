@@ -1,88 +1,107 @@
 <script setup lang="ts">
-import { StatCard } from "~/components/ui/stat-card";
-import { Card } from "~/components/ui/card";
-import { Avatar, AvatarFallback } from "~/components/ui/avatar";
-import { ArrowRight } from 'lucide-vue-next';
+import {Card} from "~/components/ui/card";
+import {ShieldPlus, AlertTriangle, Files, Headset, ArrowRight, Snowflake} from 'lucide-vue-next';
 import {Page} from "~/components/layout/page";
 
 definePageMeta({
-  layout: 'default-sidebar'
+  layout: 'default'
 })
 
 const user = useSupabaseUser()
-const {locale} = useI18n()
+const {t} = useI18n()
 
-const recentCustomers = [
+const recentActivities = [
   {
     id: 1,
-    name: 'Leanne Graham',
-    avatar: 'LG',
-    date: '3 days ago'
+    icon: Headset,
+    title: 'Contact met support',
+    description: '5 dagen geleden'
   },
   {
     id: 2,
-    name: 'Ervin Howell',
-    avatar: 'EH',
-    date: '5 days ago'
+    icon: ShieldPlus,
+    title: 'Nieuwe verzekering',
+    description: '1 jaar geleden'
   },
-  {
-    id: 3,
-    name: 'Clementine Bauch',
-    avatar: 'CB',
-    date: '2 weeks ago'
-  },
-  {
-    id: 4,
-    name: 'Patricia Lebsack',
-    avatar: 'PL',
-    date: '3 weeks ago'
-  }
 ]
+
+const greeting = computed(() => {
+  const hour = new Date().getHours()
+  if (hour >= 6 && hour < 12) return t('home.header.title.good_morning')
+  if (hour >= 12 && hour < 18) return t('home.header.title.good_afternoon')
+  return t('home.header.title.good_evening')
+})
 </script>
 
 <template>
-  <Page :title="`${$t('dashboard.welcome')}, ${user?.id || 'common.general.guest'}! 👋`">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
-      <StatCard :title="$t('customers.customers', 2)" :stat="123" :difference="12.5" :subtitle="lowercase($t('dashboard.compared_to_last_week'))"/>
-      <StatCard :title="$t('users.users', 2)" :stat="10"/>
-      <StatCard :title="$t('dashboard.last_sign_in')" :stat="capitalize($dayjs(user?.last_sign_in_at).locale(locale).fromNow())"/>
+  <Page :title="`${greeting}, ${user.id || 'common.general.guest'}! 👋`" :description="$t('home.header.description')">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-8">
+      <NuxtLink to="/"
+                class="w-full flex flex-col items-center gap-y-2 text-sm text-center bg-primary/10 hover:bg-primary/20 duration-150 rounded-xl border text-sm font-medium px-7 py-5">
+        <ShieldPlus class="size-10 text-primary"/>
+        {{ $t('home.quick_actions.new_insurance') }}
+      </NuxtLink>
+      <NuxtLink to="/report-claim"
+                class="w-full flex flex-col items-center gap-y-2 text-sm text-center bg-primary/10 hover:bg-primary/20 duration-150 rounded-xl border text-sm font-medium px-7 py-5">
+        <AlertTriangle class="size-10 text-primary"/>
+        {{ $t('claims.report_a_claim') }}
+      </NuxtLink>
+      <NuxtLink to="/insurances"
+                class="w-full flex flex-col items-center gap-y-2 text-sm text-center bg-primary/10 hover:bg-primary/20 duration-150 rounded-xl border text-sm font-medium px-7 py-5">
+        <Files class="size-10 text-primary"/>
+        {{ $t('home.quick_actions.show_documents') }}
+      </NuxtLink>
+      <NuxtLink to="/contact"
+                class="w-full flex flex-col items-center gap-y-2 text-sm text-center bg-primary/10 hover:bg-primary/20 duration-150 rounded-xl border text-sm font-medium px-7 py-5">
+        <Headset class="size-10 text-primary"/>
+        {{ $t('home.quick_actions.contact_us') }}
+      </NuxtLink>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-4 xl:grid-cols-3 2xl:grid-cols-4 gap-4 mb-4">
-      <Card class="col-span-full xl:col-span-2 2xl:col-span-3">
-        <template #header>
-          <h3 class="font-medium">
-            {{ $t('dashboard.revenue_history') }}
-          </h3>
-        </template>
-        <div class="mt-5">
-          <!-- TODO: Add graph -->
-          <div class="flex items-center justify-center h-40 text-muted-foreground text-sm">
-            {{ $t('dashboard.no_data') }}
-          </div>
-        </div>
-      </Card>
-      <Card :title="$t('dashboard.recent_registered_customers')" :description="$t('dashboard.in_the_last_30_days')" class="col-span-1 md:col-span-2 xl:col-span-1">
-        <template #action>
-          <Button variant="ghost" size="sm" as-child>
-            <NuxtLink to="/customers">
-              {{ $t('dashboard.view_all') }}
-              <ArrowRight class="size-4" aria-hidden="true" />
-            </NuxtLink>
-          </Button>
-        </template>
-        <ul class="space-y-4">
-          <li v-for="customer in recentCustomers" class="flex items-center">
-            <Avatar>
-              <AvatarFallback>{{ customer.avatar }}</AvatarFallback>
-            </Avatar>
-            <div class="text-sm ml-4">
-              <NuxtLink :to="`/customers/${customer.id}`" class="font-medium hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">{{ customer.name }}</NuxtLink>
-              <div class="text-muted-foreground">{{ customer.date }}</div>
+    <div class="grid grid-cols-1 md:grid-cols-2 items-start gap-4 mb-8 md:mt-12">
+      <Card :title="$t('home.recent_activities.title')"
+            :description="$t('home.recent_activities.description')">
+        <ul class="space-y-1">
+          <li v-for="activity in recentActivities" class="flex py-2 px-2 -mx-2">
+            <component :is="activity.icon" class="size-5 text-primary"/>
+            <div class="text-sm ml-3">
+              <NuxtLink to="#"
+                        class="font-medium hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
+                {{ activity.title }}
+              </NuxtLink>
+              <div class="text-muted-foreground">{{ activity.description }}</div>
             </div>
           </li>
         </ul>
       </Card>
+      <div
+          class="relative bg-gradient-to-br from-primary to-primary-dark rounded-2xl p-5 sm:p-6 flex flex-col gap-y-6 text-primary-foreground mt-7 md:mt-0">
+        <div class="absolute right-0 -top-7" aria-hidden="true">
+          <div class="relative text-accent h-20 w-[104px]">
+            <Snowflake class="absolute size-16 right-0 bottom-0"/>
+            <Snowflake class="absolute size-10 left-0 top-2"/>
+            <Snowflake class="absolute size-4 top-0 left-10"/>
+          </div>
+        </div>
+        <div class="space-y-3">
+          <div class="pr-16">
+            <h2 class="h3">Ben jij klaar voor de wintersport?</h2>
+          </div>
+          <p>Met onze uitgebreide reisverzekering bent u overal ter wereld gedekt tegen onverwachte kosten. Of het nu
+            gaat om medische hulp, verlies van bagage of geannuleerde vluchten, wij staan voor u klaar.</p>
+        </div>
+        <div class="bg-accent p-[3px] rounded-lg">
+          <Button variant="ghost" size="lg" class="group bg-background text-foreground w-full" as-child>
+            <NuxtLink to="#">
+              Bekijk onze reisverzekering
+              <ArrowRight class="size-5 group-hover:translate-x-0.5 duration-150"/>
+            </NuxtLink>
+          </Button>
+            <p class="text-xs text-center text-accent-foreground font-medium mt-2 mb-1">
+              <strong>Actie!</strong> Ontvang tijdelijk de eerste maand gratis.
+            </p>
+        </div>
+      </div>
     </div>
   </Page>
 </template>

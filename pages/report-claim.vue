@@ -1,0 +1,46 @@
+<script setup lang="ts">
+import {Page} from "~/components/layout/page";
+import {Card} from "~/components/ui/card";
+import {CarFront, Building} from "lucide-vue-next";
+
+const recentClaims = [
+  {
+    icon: CarFront,
+    title: 'Autoschade aan Tesla Model Y',
+    description: '13-01-2024 op de Weg der Wijzen',
+    status: 'claimed'
+  },
+  {
+    icon: Building,
+    title: 'Inboedelschade',
+    description: '24-09-2020 aan Josink Hofweg 9A',
+    status: 'claimed'
+  }
+]
+</script>
+
+<template>
+  <Page :title="$t('claims.header.title')" :description="$t('claims.header.description')">
+    <ClaimsWizard/>
+    <Card :title="$t('claims.recent_claims.title')"
+          :description="$t('claims.recent_claims.description')"
+          class="mt-8">
+      <ul class="space-y-1">
+        <li v-for="claim in recentClaims" class="flex py-2 px-2 -mx-2">
+          <component :is="claim.icon" class="size-5 text-primary"/>
+          <div class="text-sm ml-3">
+            <NuxtLink to="#"
+                      class="font-medium hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
+              {{ claim.title }}
+            </NuxtLink>
+            <div class="text-muted-foreground">{{ claim.description }}</div>
+          </div>
+        </li>
+      </ul>
+    </Card>
+  </Page>
+</template>
+
+<style scoped>
+
+</style>

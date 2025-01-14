@@ -12,12 +12,12 @@
   "devDependencies": {
     "@nuxtjs/color-mode": "^3.5.2",
     "@nuxtjs/supabase": "^1.4.5",
-    "@nuxtjs/tailwindcss": "^6.12.2",
+    "@nuxtjs/tailwindcss": "^6.13.1",
     "dayjs": "^1.11.13",
     "dayjs-nuxt": "^2.1.11",
     "nuxt": "^3.15.1",
     "shadcn-nuxt": "^0.10.4",
-    "typescript": "^5.7.2",
+    "typescript": "^5.7.3",
     "vue": "^3.5.13",
     "vue-router": "^4.5.0"
   },
@@ -25,7 +25,6 @@
     "@nuxtjs/i18n": "^9.1.1",
     "@pinia/nuxt": "^0.5.5",
     "@types/uuid": "^9.0.8",
-    "@unlok-co/nuxt-stripe": "^4.0.1",
     "@vee-validate/zod": "^4.15.0",
     "@vueuse/core": "^10.11.1",
     "@vueuse/nuxt": "^10.11.1",

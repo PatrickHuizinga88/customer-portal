@@ -5,7 +5,7 @@ import {Page, PageActions, PageHeader} from "~/components/layout/page";
 import {SkeletonTable} from "~/components/ui/skeleton";
 
 definePageMeta({
-  layout: 'default-sidebar',
+  layout: 'default',
 })
 
 // const supabase = useSupabaseClient<Database>()

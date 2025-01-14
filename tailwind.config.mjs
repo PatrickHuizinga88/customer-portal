@@ -9,7 +9,7 @@ export default {
   theme: {
     container: {
       center: true,
-      padding: "1.5rem",
+      padding: "1rem",
       screens: {
         "2xl": "1400px",
       },
@@ -26,14 +26,17 @@ export default {
         foreground: "hsl(var(--foreground))",
         primary: {
           DEFAULT: "hsl(var(--primary))",
+          dark: "color-mix(in srgb, hsl(var(--primary)) 80%, hsl(var(--foreground)))",
           foreground: "hsl(var(--primary-foreground))",
         },
         secondary: {
           DEFAULT: "hsl(var(--secondary))",
+          dark: "color-mix(in srgb, hsl(var(--secondary)) 80%, hsl(var(--foreground)))",
           foreground: "hsl(var(--secondary-foreground))",
         },
         accent: {
           DEFAULT: "hsl(var(--accent))",
+          dark: "color-mix(in srgb, hsl(var(--accent)) 80%, hsl(var(--foreground)))",
           foreground: "hsl(var(--accent-foreground))",
         },
         muted: {
@@ -42,18 +45,22 @@ export default {
         },
         info: {
           DEFAULT: "hsl(var(--info))",
+          dark: "color-mix(in srgb, hsl(var(--info)) 80%, hsl(var(--foreground)))",
           foreground: "hsl(var(--info-foreground))",
         },
         success: {
           DEFAULT: "hsl(var(--success))",
+          dark: "color-mix(in srgb, hsl(var(--success)) 80%, hsl(var(--foreground)))",
           foreground: "hsl(var(--success-foreground))",
         },
         warning: {
           DEFAULT: "hsl(var(--warning))",
+          dark: "color-mix(in srgb, hsl(var(--warning)) 80%, hsl(var(--foreground)))",
           foreground: "hsl(var(--warning-foreground))",
         },
         destructive: {
           DEFAULT: "hsl(var(--destructive))",
+          dark: "color-mix(in srgb, hsl(var(--destructive)) 80%, hsl(var(--foreground)))",
           foreground: "hsl(var(--destructive-foreground))",
         },
         popover: {

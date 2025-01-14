@@ -34,6 +34,7 @@ export default {
     },
 
     notifications: {
+      notifications: "Notificatie | Notificaties",
       save: {
         success: {
           title: "Opslaan geslaagd",

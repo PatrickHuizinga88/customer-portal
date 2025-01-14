@@ -6,7 +6,7 @@ import {Loader2} from "lucide-vue-next";
 import {Page} from "~/components/layout/page";
 
 definePageMeta({
-  layout: 'default-sidebar'
+  layout: 'default'
 })
 
 const notificationStore = useNotificationStore()

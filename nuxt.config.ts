@@ -1,3 +1,5 @@
+import { APP_NAME } from './constants';
+
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: {enabled: true},
@@ -11,10 +13,10 @@ export default defineNuxtConfig({
   app: {
     // TODO - Setup: Change meta tags and add favicon
     head: {
-      title: 'Webapp boilerplate',
+      title: APP_NAME,
       meta: [
         {name: 'viewport', content: 'width=device-width, initial-scale=1'},
-        {name: 'og:title', content: 'Webapp boilerplate'},
+        {name: 'og:title', content: APP_NAME},
         {name: 'description', content: 'Kickstart your Nuxt app.'},
         {name: 'og:description', content: 'Kickstart your Nuxt app.'},
         {name: 'msapplication-TileColor', content: '#ffffff'},
@@ -52,7 +54,6 @@ export default defineNuxtConfig({
     '@nuxtjs/color-mode',
     '@nuxtjs/i18n',
     'dayjs-nuxt',
-    '@unlok-co/nuxt-stripe',
   ],
 
   supabase: {
@@ -82,12 +83,12 @@ export default defineNuxtConfig({
       {
         code: 'en',
         name: 'English',
-        files: ['en/common', 'en/authentication', 'en/customers', 'en/dashboard', 'en/settings', 'en/users']
+        files: ['en/common', 'en/authentication', 'en/home']
       },
       {
         code: 'nl',
         name: 'Nederlands',
-        files: ['nl/common', 'nl/authentication', 'nl/customers', 'nl/dashboard', 'nl/settings', 'nl/users']
+        files: ['nl/common', 'nl/authentication', 'nl/claims', 'nl/contact', 'nl/home', 'nl/insurances', 'nl/profile']
       },
     ],
     // customRoutes: 'config',
@@ -129,19 +130,13 @@ export default defineNuxtConfig({
     //     nl: '/instellingen',
     //   },
     // },
-    defaultLocale: 'en',
+    defaultLocale: 'nl',
   },
 
   dayjs: {
     locales: ['en', 'nl'],
     defaultLocale: 'en',
     plugins: ['relativeTime', 'utc', 'timezone'],
-  },
-
-  stripe: {
-    server: {
-      key: process.env.STRIPE_SECRET_KEY,
-    },
   },
 
   compatibilityDate: '2024-12-17',

@@ -6,7 +6,7 @@ import type {Database} from "~/types/database.types";
 import {Page, PageActions, PageBackButton, PageHeader} from "~/components/layout/page";
 
 definePageMeta({
-  layout: 'default-sidebar',
+  layout: 'default',
 })
 
 const supabase = useSupabaseClient<Database>()

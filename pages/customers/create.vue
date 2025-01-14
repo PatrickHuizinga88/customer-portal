@@ -2,7 +2,7 @@
 import {Page} from "~/components/layout/page";
 
 definePageMeta({
-  layout: 'default-sidebar'
+  layout: 'default'
 })
 </script>
 
