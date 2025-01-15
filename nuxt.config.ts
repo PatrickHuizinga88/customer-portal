@@ -83,15 +83,15 @@ export default defineNuxtConfig({
     strategy: 'no_prefix',
     locales: [
       {
-        code: 'en',
-        name: 'English',
-        files: ['en/common', 'en/authentication', 'en/home']
-      },
-      {
         code: 'nl',
         name: 'Nederlands',
         files: ['nl/common', 'nl/authentication', 'nl/claims', 'nl/contact', 'nl/home', 'nl/insurances', 'nl/profile']
       },
+      // {
+      //   code: 'en',
+      //   name: 'English',
+      //   files: ['en/common', 'en/authentication', 'en/home']
+      // },
     ],
     // customRoutes: 'config',
     // pages: {
