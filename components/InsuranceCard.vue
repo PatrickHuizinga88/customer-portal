@@ -9,23 +9,23 @@ const props = defineProps<{
   insurance: {
     id: number
     name: string
-    status: 'active' | 'in_progress' | 'ended'
+    status: 'actief' | 'verwerking' | 'afgelopen'
     premium: number
     coverage: string
     is_claimable: boolean
     is_editable: boolean
-    policy_id: number
+    policy_id?: number
     potential?: 'jewelry'
   }
 }>()
 
 const statusClasses = computed(() => {
   switch (props.insurance.status) {
-    case 'active':
+    case 'actief':
       return 'bg-success/10 text-success border-success'
-    case 'in_progress':
+    case 'verwerking':
       return 'bg-yellow-500'
-    case 'ended':
+    case 'afgelopen':
       return 'bg-red-500'
   }
 })
@@ -52,7 +52,7 @@ const statusClasses = computed(() => {
     <div class="space-y-2">
       <Sheet>
         <SheetTrigger as-child>
-          <Button v-if="insurance.policy_id" class="w-full">
+          <Button class="w-full" :disabled="!insurance.policy_id">
             <File class="size-5"/>
             {{ $t('insurances.view_policy') }}
           </Button>

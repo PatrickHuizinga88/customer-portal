@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {ArrowLeft, ArrowRight} from "lucide-vue-next";
+import {ArrowLeft, ArrowRight, Building, CarFront} from "lucide-vue-next";
 import {useForm} from "vee-validate";
 import {toTypedSchema} from "@vee-validate/zod";
 import * as z from "zod";
@@ -18,11 +18,20 @@ const objects = [{
   object_details: 'Josink Hofweg 9A, 7545 PP Enschede',
 }]
 
+const objectIcon = (type: string) => {
+  switch (type) {
+    case 'car':
+      return CarFront
+    case 'business_premises':
+      return Building
+  }
+}
+
 const formSchema = toTypedSchema(z.object({
-  object: z.number(),
+  object: z.string(),
 }))
 
-const { handleSubmit } = useForm({
+const {handleSubmit} = useForm({
   validationSchema: formSchema,
 })
 
@@ -36,22 +45,26 @@ const onSubmit = handleSubmit(() => {
     <form @submit="onSubmit">
       <div v-if="currentStep === 1" class="space-y-8">
         <h2>Waarmee heb je schade opgelopen?</h2>
-        <FormField v-slot="{ componentField }" type="radio" name="object">
-          <FormItem class="space-y-3">
+        <FormField v-slot="{ field }" name="object">
+          <FormItem class="grid md:grid-cols-2 gap-3 space-y-0">
             <FormControl>
-              <RadioGroup
-                  class="flex flex-col space-y-1"
-                  v-bind="componentField"
-              >
-                <FormItem v-for="object in objects" class="flex items-center space-y-0 gap-x-3">
-                  <FormControl>
-                    <RadioGroupItem :value="object.id" />
-                  </FormControl>
-                  <FormLabel class="font-normal">
-                    {{ object.object_name}}
-                  </FormLabel>
-                </FormItem>
-              </RadioGroup>
+              <FormItem v-for="object in objects" class="relative space-y-0">
+                <FormControl>
+                  <input v-bind="field" type="radio" :value="object.id.toString()" class="peer absolute right-4 top-1/2 -translate-y-1/2"/>
+                </FormControl>
+                <FormLabel
+                    class="bg-background flex items-center rounded-lg border p-3 pr-8 cursor-pointer transition-[background-color] duration-200 hover:bg-background/90 peer-focus-visible:bg-muted peer-checked:border-primary peer-checked:outline peer-checked:outline-2 peer-checked:outline-primary">
+                  <div class="p-2 bg-primary/10 text-primary rounded-lg mr-3">
+                    <component v-if="object.type" :is="objectIcon(object.type)" class="size-10"/>
+                  </div>
+                  <div>
+                    <span class="block h4 font-medium">{{ object.object_name }}</span>
+                    <p v-if="object.object_details" class="text-sm text-muted-foreground">{{
+                        object.object_details
+                      }}</p>
+                  </div>
+                </FormLabel>
+              </FormItem>
             </FormControl>
             <FormMessage/>
           </FormItem>
@@ -61,7 +74,8 @@ const onSubmit = handleSubmit(() => {
         <h2>Wanneer en waar heeft het incident plaats gevonden?</h2>
       </div>
       <div class="flex gap-3 mt-8">
-        <Button v-if="currentStep > 1" @click="currentStep--" type="button" variant="outline" size="icon-lg" class="shrink-0" aria-label="Vorige stap">
+        <Button v-if="currentStep > 1" @click="currentStep--" type="button" variant="outline" size="icon-lg"
+                class="shrink-0" aria-label="Vorige stap">
           <ArrowLeft class="size-5"/>
         </Button>
         <Button type="submit" size="lg" class="w-full">

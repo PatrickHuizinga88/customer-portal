@@ -7,19 +7,9 @@ definePageMeta({
   layout: 'default'
 })
 
-const user = useSupabaseUser()
 const {t} = useI18n()
 
-const { public: {backendUrl} } = useRuntimeConfig()
-
-const {data: profile} = await useLazyFetch(`${backendUrl}/customers`, {
-  query: {
-    id: 1
-  },
-  transform: (data) => {
-    return data.response
-  }
-})
+const {data: profile} = await useFetch('/api/customers')
 
 const recentActivities = [
   {

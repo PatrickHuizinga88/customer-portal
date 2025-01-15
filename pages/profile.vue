@@ -10,16 +10,7 @@ const fallBackProfile = {
   account_number: '1234567890'
 }
 
-const { public: {backendUrl} } = useRuntimeConfig()
-
-const {data: profile} = await useFetch(`${backendUrl}/customers`, {
-  query: {
-    id: 1
-  },
-  transform: (data) => {
-    return data.response
-  }
-})
+const {data: profile} = await useFetch('/api/customers')
 </script>
 
 <template>
@@ -35,21 +26,21 @@ const {data: profile} = await useFetch(`${backendUrl}/customers`, {
         <dl class="space-y-4">
           <div>
             <dt>{{ $t('profile.name') }}</dt>
-            <dd class="font-medium">{{ profile.name || fallBackProfile.name }}</dd>
+            <dd class="font-medium">{{ profile?.name || fallBackProfile.name }}</dd>
           </div>
           <div>
             <dt>{{ $t('profile.email') }}</dt>
-            <dd class="font-medium">{{ profile.email || fallBackProfile.email }}</dd>
+            <dd class="font-medium">{{ profile?.email || fallBackProfile.email }}</dd>
           </div>
           <div>
             <dt>{{ $t('profile.phone') }}</dt>
-            <dd class="font-medium">{{ profile.phone_number || fallBackProfile.phone_number }}</dd>
+            <dd class="font-medium">{{ profile?.telephone || fallBackProfile.phone_number }}</dd>
           </div>
           <div>
             <dt>{{ $t('profile.address') }}</dt>
             <dd class="font-medium">
-              <template v-if="profile.primary_address">
-                {{ `${profile.primary_address.streetandnumber}, ${profile.primary_address.postalcode} ${profile.primary_address.city}` }}
+              <template v-if="profile?.primary_address">
+                {{ `${profile?.primary_address.streetandnumber}, ${profile?.primary_address.postalcode} ${profile?.primary_address.city}` }}
               </template>
               <template v-else>{{fallBackProfile.address }}</template>
             </dd>
@@ -71,7 +62,7 @@ const {data: profile} = await useFetch(`${backendUrl}/customers`, {
         <dl class="space-y-4">
           <div>
             <dt>{{ $t('profile.account_number') }}</dt>
-            <dd class="font-medium">{{ profile.account_number || fallBackProfile.account_number }}</dd>
+            <dd class="font-medium">{{ profile?.bankaccount || fallBackProfile.account_number }}</dd>
           </div>
         </dl>
         <Button variant="outline" class="w-full sm:w-auto mt-4">

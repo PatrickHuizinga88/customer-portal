@@ -14,7 +14,7 @@ const objects = [
       {
         id: 1,
         name: 'Autoverzekering',
-        status: 'active',
+        status: 'actief',
         premium: 87.23,
         coverage: 'Allrisk',
         is_claimable: true,
@@ -32,33 +32,30 @@ const objects = [
       {
         id: 2,
         name: 'Opstalverzekering',
-        status: 'active',
+        status: 'actief',
         premium: 40.00,
         coverage: 'Herstel van woningschade',
         is_claimable: true,
         is_editable: false,
-        policy_id: 124,
       },
       {
         id: 3,
         name: 'Inboedelverzekering',
-        status: 'active',
+        status: 'actief',
         premium: 25.34,
         coverage: 'Schade aan inboedel',
         is_claimable: true,
         is_editable: false,
-        policy_id: 125,
         potential: 'jewelry'
       },
       {
         id: 4,
         name: 'Aansprakelijkheidsverz.',
-        status: 'active',
+        status: 'actief',
         premium: 7.50,
         coverage: 'Schade aan derden',
         is_claimable: false,
         is_editable: true,
-        policy_id: 126,
       }
     ]
   }

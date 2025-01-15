@@ -59,7 +59,7 @@ const signIn = async () => {
         <div>
           <div class="flex items-center justify-between">
             <Label for="password" class="block text-sm font-medium leading-6">{{ $t('authentication.common.password') }}</Label>
-            <Button variant="link" class="h-auto p-0" as-child>
+            <Button variant="link" size="sm" class="h-auto p-0" as-child>
               <NuxtLinkLocale to="password-recovery">
                 {{ $t('authentication.login.forgot_password') }}
               </NuxtLinkLocale>

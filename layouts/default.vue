@@ -26,7 +26,7 @@ const mainNavItems = [
 ]
 
 const secondaryNavItems = [
-  {name: t('general.notifications.notifications', 2), icon: Bell},
+  {name: t('common.notifications.notifications', 2), icon: Bell},
 ]
 
 const userNavItems = [
@@ -34,11 +34,7 @@ const userNavItems = [
   {name: t('authentication.common.sign_out'), icon: LogOut},
 ]
 
-const notifications = [
-  {title: 'New claim reported', description: 'A new claim has been reported by John Doe'},
-  {title: 'New claim reported', description: 'A new claim has been reported by John Doe'},
-  {title: 'New claim reported', description: 'A new claim has been reported by John Doe'},
-]
+const notifications = []
 
 const signOut = async () => {
   const { error } = await supabase.auth.signOut()
@@ -89,7 +85,7 @@ watch(useRoute(), () => {
                     </div>
                   </DropdownMenuItem>
                 </template>
-                <div v-else>{{
+                <div v-else class="text-sm text-muted-foreground px-2 py-2">{{
                     $t('common.general.no_records_found', {item: lowercase($t('common.notifications.notifications', 2))})
                   }}
                 </div>
