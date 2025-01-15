@@ -12,7 +12,7 @@ const {t} = useI18n()
 
 const { public: {backendUrl} } = useRuntimeConfig()
 
-const {data: profile} = useFetch(`${backendUrl}/customers`, {
+const {data: profile} = await useLazyFetch(`${backendUrl}/customers`, {
   query: {
     id: 1
   },

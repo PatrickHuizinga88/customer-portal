@@ -38,11 +38,11 @@ const signIn = async () => {
 <template>
   <div class="sm:mx-auto sm:w-full sm:max-w-sm">
     <img src="~/assets/images/logo.svg" alt="Logo" class="mx-auto h-12 w-auto">
-    <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight">{{ $t('authentication.login.sign_in_to_account') }}</h2>
+    <h2 class="mt-10 text-center text-3xl font-bold leading-9 tracking-tight">{{ $t('authentication.common.sign_in') }}</h2>
   </div>
 
   <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-[480px]">
-    <div class="bg-card border px-6 py-12 shadow-[0_10px_50px_-15px] shadow-primary/25 sm:rounded-xl sm:px-12">
+    <div class="bg-card sm:border px-6 py-12 sm:shadow-[0_10px_50px_-15px] sm:shadow-primary/25 sm:rounded-xl sm:px-12">
       <form class="space-y-6" @submit.prevent="signIn">
         <div>
           <Label for="email" class="block text-sm font-medium leading-6">{{ $t('common.general.email') }}</Label>

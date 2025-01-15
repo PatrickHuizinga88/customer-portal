@@ -134,7 +134,7 @@ watch(useRoute(), () => {
                             class="inline-block px-2 py-1 text-2xl font-semibold text-right rounded hover:bg-muted duration-150">
                     {{ item.name }}
                   </NuxtLink>
-                  <button v-else
+                  <button v-else @click="signOut"
                           class="inline-block px-2 py-1 text-2xl font-semibold text-right rounded hover:bg-muted duration-150">
                     {{ item.name }}
                   </button>
