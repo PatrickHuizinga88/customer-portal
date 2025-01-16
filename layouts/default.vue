@@ -50,7 +50,7 @@ watch(useRoute(), () => {
 
 <template>
   <NuxtLoadingIndicator color="hsl(var(--primary)"/>
-  <header class="sticky top-0 flex items-center bg-background/80 border-b border-border h-16 backdrop-blur">
+  <header class="sticky top-0 flex items-center bg-background/80 border-b border-border h-16 backdrop-blur z-10">
     <div class="container">
       <nav class="flex justify-between items-center">
         <div class="flex gap-8 items-center">
