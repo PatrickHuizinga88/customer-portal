@@ -10,7 +10,7 @@ export default defineEventHandler(async (event) => {
 
   const {response} = await $fetch<Response>(`${backendUrl}/customer`, {
     query: {
-      guid: 'c71385c7-12ba-4930-91b1-7cee58503239'
+      guid: 'd9caa03c-2544-46b3-bb12-53ae94e7f025'
     },
     headers: {
       Authorization: `Basic ${btoa(novuloUsername + ":" + novuloPassword)}`
