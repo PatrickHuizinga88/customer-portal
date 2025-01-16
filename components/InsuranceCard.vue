@@ -7,25 +7,25 @@ const props = defineProps<{
     object_details: string
   }
   insurance: {
-    id: number
+    guid: number
     name: string
-    status: 'actief' | 'verwerking' | 'afgelopen'
+    status: 'Lopend' | 'Verwerking' | 'Afgelopen'
     premium: number
     coverage: string
     is_claimable: boolean
     is_editable: boolean
-    policy_id?: number
+    reference?: number
     potential?: 'jewelry'
   }
 }>()
 
 const statusClasses = computed(() => {
   switch (props.insurance.status) {
-    case 'actief':
+    case 'Lopend':
       return 'bg-success/10 text-success border-success'
-    case 'verwerking':
+    case 'Verwerking':
       return 'bg-yellow-500'
-    case 'afgelopen':
+    case 'Afgelopen':
       return 'bg-red-500'
   }
 })
@@ -52,7 +52,7 @@ const statusClasses = computed(() => {
     <div class="space-y-2">
       <Sheet>
         <SheetTrigger as-child>
-          <Button class="w-full" :disabled="!insurance.policy_id">
+          <Button class="w-full" :disabled="!insurance.reference">
             <File class="size-5"/>
             {{ $t('insurances.view_policy') }}
           </Button>
@@ -77,7 +77,7 @@ const statusClasses = computed(() => {
                 <h3 class="h4">Algemene informatie</h3>
                 <dl>
                   <div class="flex justify-between items-center gap-x-6 odd:bg-muted rounded p-3">
-                    <dt>Verzekeringstype</dt>
+                    <dt>Dekking</dt>
                     <dd class="font-medium text-right">{{ insurance.coverage }}</dd>
                   </div>
                   <div class="flex justify-between items-center gap-x-6 odd:bg-muted rounded p-3">
@@ -98,7 +98,7 @@ const statusClasses = computed(() => {
                   </div>
                   <div class="flex justify-between items-center gap-x-6 odd:bg-muted rounded p-3">
                     <dt>Polisnummer</dt>
-                    <dd class="font-medium text-right">{{ insurance.policy_id }}</dd>
+                    <dd class="font-medium text-right">{{ insurance.reference }}</dd>
                   </div>
                   <div class="flex justify-between items-center gap-x-6 odd:bg-muted rounded p-3">
                     <dt>Contactpersoon</dt>
@@ -119,7 +119,7 @@ const statusClasses = computed(() => {
         </SheetContent>
       </Sheet>
 
-      <Button v-if="insurance.is_claimable" variant="outline" class="w-full" as-child>
+      <Button variant="outline" class="w-full" as-child>
         <NuxtLink to="/report-claim">
           <AlertTriangle class="size-5"/>
           {{ $t('claims.report_a_claim') }}

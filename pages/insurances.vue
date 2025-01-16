@@ -129,8 +129,8 @@ const objectIcon = (type: string) => {
           </div>
         </div>
         <div class="grid md:grid-cols-2 lg:grid-cols-3 items-start gap-6">
-          <InsuranceCard :object="{object_name: object.object_name, object_details: object.object_details}"
-                         :insurance="insurances[index]"/>
+          <InsuranceCard v-for="insurance in object.insurances" :object="{object_name: object.object_name, object_details: object.object_details}"
+                         :insurance="insurance"/>
         </div>
         <Separator v-if="index !== objects.length - 1" class="w-full !mt-8"/>
       </div>
