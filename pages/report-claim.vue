@@ -6,16 +6,16 @@ import {CarFront, Building} from "lucide-vue-next";
 const recentClaims = [
   {
     icon: CarFront,
-    title: 'Autoschade aan Tesla Model Y',
-    description: '13-01-2024 op de Weg der Wijzen',
+    title: 'Autoschade aan Tesla 3',
+    description: '13-01-2024 op de A2',
     status: 'claimed'
   },
-  {
-    icon: Building,
-    title: 'Inboedelschade',
-    description: '24-09-2020 aan Josink Hofweg 9A',
-    status: 'claimed'
-  }
+  // {
+  //   icon: Building,
+  //   title: 'Inboedelschade',
+  //   description: '24-09-2020 aan Josink Hofweg 9A',
+  //   status: 'claimed'
+  // }
 ]
 </script>
 

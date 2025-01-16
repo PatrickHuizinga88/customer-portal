@@ -10,15 +10,15 @@ const fallbackObjects = [
   {
     id: 1,
     type: 'car',
-    object_name: 'Tesla 3',
-    object_details: 'PP-UU=77',
+    object_name: 'Tesla Model Y',
+    object_details: 'BC-123-D',
   },
-  // {
-  //   id: 2,
-  //   type: 'business_premises',
-  //   object_name: 'Bedrijfspand',
-  //   object_details: 'Josink Hofweg 9A, 7545 PP Enschede',
-  // }
+  {
+    id: 2,
+    type: 'business_premises',
+    object_name: 'Bedrijfspand',
+    object_details: 'Josink Hofweg 9A, 7545 PP Enschede',
+  }
 ]
 
 const {data: objects} = await useFetch('/api/customers', {
