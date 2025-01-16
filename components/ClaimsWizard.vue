@@ -6,21 +6,35 @@ import * as z from "zod";
 
 const currentStep = ref(1)
 
-const objects = [{
-  id: 1,
-  type: 'car',
-  object_name: 'Tesla Model Y',
-  object_details: 'BC-123-D',
-}, {
-  id: 2,
-  type: 'business_premises',
-  object_name: 'Bedrijfspand',
-  object_details: 'Josink Hofweg 9A, 7545 PP Enschede',
-}]
+const fallbackObjects = [
+  {
+    id: 1,
+    type: 'car',
+    object_name: 'Tesla 3',
+    object_details: 'PP-UU=77',
+  },
+  // {
+  //   id: 2,
+  //   type: 'business_premises',
+  //   object_name: 'Bedrijfspand',
+  //   object_details: 'Josink Hofweg 9A, 7545 PP Enschede',
+  // }
+]
+
+const {data: objects} = await useFetch('/api/customers', {
+  transform: (data) => {
+    if (!data.objects) return fallbackObjects
+    return data.objects.map((object: any) => {
+      object.object_name = object.object_name.split(' - ')[0]
+      object.object_details = object.object_details.split(' - ')[1] || 'BC-123-D'
+      return object
+    })
+  }
+})
 
 const objectIcon = (type: string) => {
   switch (type) {
-    case 'car':
+    case 'Voertuig':
       return CarFront
     case 'business_premises':
       return Building
@@ -50,7 +64,8 @@ const onSubmit = handleSubmit(() => {
             <FormControl>
               <FormItem v-for="object in objects" class="relative space-y-0">
                 <FormControl>
-                  <input v-bind="field" type="radio" :value="object.id.toString()" class="peer absolute right-4 top-1/2 -translate-y-1/2"/>
+                  <input v-bind="field" type="radio" :value="object.guid"
+                         class="peer absolute right-4 top-1/2 -translate-y-1/2"/>
                 </FormControl>
                 <FormLabel
                     class="bg-background flex items-center rounded-lg border p-3 pr-8 cursor-pointer transition-[background-color] duration-200 hover:bg-background/90 peer-focus-visible:bg-muted peer-checked:border-primary peer-checked:outline peer-checked:outline-2 peer-checked:outline-primary">

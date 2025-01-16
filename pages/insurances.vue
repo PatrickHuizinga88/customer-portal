@@ -4,7 +4,40 @@ import {CarFront, Building} from "lucide-vue-next";
 import {Separator} from "~/components/ui/separator";
 import InsuranceCard from "~/components/InsuranceCard.vue";
 
-const objects = [
+const insurances = [
+  {
+    id: 1,
+    name: 'Autoverzekering',
+    status: 'actief',
+    premium: 78.87,
+    coverage: 'Allrisk',
+    is_claimable: true,
+    is_editable: false,
+    policy_id: 123
+  },
+  {
+    id: 1,
+    name: 'Autoverzekering',
+    status: 'actief',
+    premium: 65.12,
+    coverage: 'WA+',
+    is_claimable: true,
+    is_editable: false,
+    policy_id: 124
+  },
+  {
+    id: 1,
+    name: 'Autoverzekering',
+    status: 'actief',
+    premium: 68.23,
+    coverage: 'Allrisk',
+    is_claimable: true,
+    is_editable: false,
+    policy_id: 125
+  },
+]
+
+const fallbackObjects = [
   {
     id: 1,
     type: 'car',
@@ -61,9 +94,20 @@ const objects = [
   }
 ]
 
+const {data: objects} = await useFetch('/api/customers', {
+  transform: (data) => {
+    if (!data.objects) return fallbackObjects
+    return data.objects.map((object: any) => {
+      object.object_name = object.object_name.split(' - ')[0]
+      object.object_details = object.object_details.split(' - ')[1] || 'BC-123-D'
+      return object
+    })
+  }
+})
+
 const objectIcon = (type: string) => {
   switch (type) {
-    case 'car':
+    case 'Voertuig':
       return CarFront
     case 'business_premises':
       return Building
@@ -85,9 +129,8 @@ const objectIcon = (type: string) => {
           </div>
         </div>
         <div class="grid md:grid-cols-2 lg:grid-cols-3 items-start gap-6">
-          <InsuranceCard v-for="insurance in object.insurances"
-                         :object="{object_name: object.object_name, object_details: object.object_details}"
-                         :insurance="insurance"/>
+          <InsuranceCard :object="{object_name: object.object_name, object_details: object.object_details}"
+                         :insurance="insurances[index]"/>
         </div>
         <Separator v-if="index !== objects.length - 1" class="w-full !mt-8"/>
       </div>

@@ -78,7 +78,7 @@ const statusClasses = computed(() => {
                 <dl>
                   <div class="flex justify-between items-center gap-x-6 odd:bg-muted rounded p-3">
                     <dt>Verzekeringstype</dt>
-                    <dd class="font-medium text-right">Autoverzekering (Allrisk)</dd>
+                    <dd class="font-medium text-right">{{ insurance.coverage }}</dd>
                   </div>
                   <div class="flex justify-between items-center gap-x-6 odd:bg-muted rounded p-3">
                     <dt>Kenteken</dt>
@@ -98,11 +98,11 @@ const statusClasses = computed(() => {
                   </div>
                   <div class="flex justify-between items-center gap-x-6 odd:bg-muted rounded p-3">
                     <dt>Polisnummer</dt>
-                    <dd class="font-medium text-right">123456789</dd>
+                    <dd class="font-medium text-right">{{ insurance.policy_id }}</dd>
                   </div>
                   <div class="flex justify-between items-center gap-x-6 odd:bg-muted rounded p-3">
                     <dt>Contactpersoon</dt>
-                    <dd class="font-medium text-right">Jane Doe</dd>
+                    <dd class="font-medium text-right">John Doe</dd>
                   </div>
                 </dl>
               </div>
