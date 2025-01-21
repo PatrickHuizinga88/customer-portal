@@ -90,7 +90,8 @@ useHead({
       </div>
     </transition>
 
-    <img :src="branding.logo_url" alt="" aria-hidden="true" class="fixed left-1/2 -translate-x-1/2 bottom-0 translate-y-3/4 w-screen max-w-2xl aspect-square opacity-[4%] -z-10"/>
+    <img :src="branding.logo_url" alt="" aria-hidden="true" loading="lazy"
+         class="fixed left-1/2 -translate-x-1/2 bottom-0 translate-y-3/4 w-screen max-w-2xl aspect-square opacity-[4%] -z-10"/>
   </div>
 
   <NotificationList :notifications="notificationStore.notifications"/>
@@ -98,10 +99,11 @@ useHead({
 </template>
 
 <style scoped>
-.gradient-shadows {
-  box-shadow:
-      32px 64px 128px -48px hsl(var(--primary) / .1),
-      -64px -24px 128px -48px color-mix(in lch increasing hue, hsl(var(--primary) / .1) 33%, hsl(var(--accent) / .1)),
-      64px -48px 128px -48px color-mix(in lch increasing hue, hsl(var(--primary) / .1) 67%, hsl(var(--accent) / .1));
+@media (min-width: 640px) {
+  .gradient-shadows {
+    box-shadow: 32px 64px 128px -48px hsl(var(--primary) / .1),
+    -64px -24px 128px -48px color-mix(in lch increasing hue, hsl(var(--primary) / .1) 33%, hsl(var(--accent) / .1)),
+    64px -48px 128px -48px color-mix(in lch increasing hue, hsl(var(--primary) / .1) 67%, hsl(var(--accent) / .1));
+  }
 }
 </style>
