@@ -23,6 +23,7 @@ export default {
     },
     extend: {
       fontFamily: {
+        headings: ['var(--font-headings)', 'sans-serif'],
         sans: ['Inter', 'sans-serif'],
       },
       colors: {
@@ -37,9 +38,9 @@ export default {
           foreground: "hsl(var(--primary-foreground))",
         },
         secondary: {
-          DEFAULT: "hsl(var(--secondary))",
-          dark: "color-mix(in srgb, hsl(var(--secondary)) 80%, hsl(var(--foreground)))",
-          foreground: "hsl(var(--secondary-foreground))",
+          DEFAULT: "color-mix(in srgb, hsl(var(--primary)) 20%, hsl(var(--background)))",
+          dark: "color-mix(in srgb, hsl(var(--primary)) 30%, hsl(var(--background)))",
+          foreground: "hsl(var(--foreground))",
         },
         accent: {
           DEFAULT: "hsl(var(--accent))",
@@ -80,10 +81,14 @@ export default {
         },
       },
       borderRadius: {
-      	xl: "calc(var(--radius) + 4px)",
+        DEFAULT: "calc(var(--radius) * 0.5)",
+        '3xl': "calc(var(--radius) * 2)",
+        '2xl': "calc(var(--radius) * 1.5)",
+        xl: "calc(var(--radius) * 1.25)",
         lg: "var(--radius)",
-        md: "calc(var(--radius) - 2px)",
-        sm: "calc(var(--radius) - 4px)",
+        md: "calc(var(--radius) * 0.75)",
+        sm: "calc(var(--radius) * 0.25)",
+        button: "var(--radius-button)",
       },
       keyframes: {
         "accordion-down": {

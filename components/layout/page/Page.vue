@@ -7,7 +7,7 @@ defineProps<{
 </script>
 
 <template>
-  <LayoutHeader :pageTitle="title" :pageSubtitle="subtitle" :pageDescription="description"/>
+  <LayoutHeading :pageTitle="title" :pageSubtitle="subtitle" :pageDescription="description"/>
   <main>
     <slot/>
   </main>

@@ -40,9 +40,10 @@
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 98%;
  
-    --ring: 30 100% 50%;
+    --ring: var(--primary);
  
     --radius: 0.5rem;
+    --radius-button: 0.5rem;
   }
  
   .dark {
