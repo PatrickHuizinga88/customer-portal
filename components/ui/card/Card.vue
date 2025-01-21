@@ -14,11 +14,11 @@ const props = withDefaults(defineProps<CardProps>(), {
 </script>
 
 <template>
-  <div :class="cn('overflow-hidden border border-border rounded-2xl bg-card', props.class)">
-    <div class="flex items-start justify-between gap-4 p-5 sm:p-6">
+  <div :class="cn('overflow-hidden border border-border rounded-2xl shadow-md shadow-black/5 bg-card', props.class)">
+    <div class="flex items-start justify-between gap-4 px-4 py-5 sm:px-6">
       <slot name="header"/>
       <div v-if="!$slots.header">
-        <h3 v-if="title" class="text-base font-medium mb-0.5">
+        <h3 v-if="title" class="font-medium mb-0.5">
           {{ title }}
         </h3>
         <p class="text-sm text-muted-foreground">{{ description }}</p>

@@ -3,7 +3,8 @@ import {Loader2, ArrowRight} from 'lucide-vue-next'
 import {PasswordInput} from "~/components/ui/password-input";
 
 definePageMeta({
-  layout: 'authentication',
+  layout: false,
+  layoutTransition: 'fade'
 })
 
 const supabase = useSupabaseClient()
@@ -36,42 +37,36 @@ const signIn = async () => {
 </script>
 
 <template>
-  <div class="sm:mx-auto sm:w-full sm:max-w-sm">
-    <img src="~/assets/images/logo.svg" alt="Logo" class="mx-auto h-12 w-auto">
-    <h2 class="mt-10 text-center text-3xl font-bold leading-9 tracking-tight">{{ $t('authentication.common.sign_in') }}</h2>
-  </div>
+  <div>
+    <NuxtLayout name="authentication" :title="$t('authentication.common.sign_in')">
 
-  <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-[480px]">
-    <div class="bg-card sm:border px-6 py-12 sm:shadow-[0_10px_50px_-15px] sm:shadow-primary/25 sm:rounded-xl sm:px-12">
       <form class="space-y-6" @submit.prevent="signIn">
         <div>
           <Label for="email" class="block text-sm font-medium leading-6">{{ $t('common.general.email') }}</Label>
-          <div class="mt-2">
-            <Input
-                v-model="form.email"
-                id="email"
-                name="email"
-                type="email"
-                required/>
-          </div>
+          <Input
+              v-model="form.email"
+              id="email"
+              name="email"
+              type="email"
+              required/>
         </div>
 
         <div>
           <div class="flex items-center justify-between">
-            <Label for="password" class="block text-sm font-medium leading-6">{{ $t('authentication.common.password') }}</Label>
-            <Button variant="link" size="sm" class="h-auto p-0" as-child>
+            <Label for="password" class="block text-sm font-medium leading-6">{{
+                $t('authentication.common.password')
+              }}</Label>
+            <Button variant="link" size="sm" class="h-auto p-0 mb-1.5" as-child>
               <NuxtLinkLocale to="password-recovery">
                 {{ $t('authentication.login.forgot_password') }}
               </NuxtLinkLocale>
             </Button>
           </div>
-          <div class="mt-2">
-            <PasswordInput
-                v-model="form.password"
-                id="password"
-                name="password"
-                required/>
-          </div>
+          <PasswordInput
+              v-model="form.password"
+              id="password"
+              name="password"
+              required/>
         </div>
 
         <Button type="submit" :disabled="loading" class="w-full">
@@ -85,16 +80,16 @@ const signIn = async () => {
         <p v-if="errorMessage" class="text-sm text-destructive">{{ errorMessage }}</p>
 
       </form>
-    </div>
 
-    <p class="mt-10 text-center text-sm text-muted-foreground">
-      {{ $t('authentication.login.no_account') }}
-      <Button variant="link" class="h-auto p-0 ml-1" as-child>
-        <NuxtLinkLocale to="register">
-          {{ $t('authentication.login.register_now') }}
-          <ArrowRight class="size-4" aria-hidden="true"/>
-        </NuxtLinkLocale>
-      </Button>
-    </p>
+      <template #footer>
+        {{ $t('authentication.login.no_account') }}
+        <Button variant="link" size="sm" class="h-auto p-0 ml-1" as-child>
+          <NuxtLinkLocale to="register">
+            {{ $t('authentication.login.register_now') }}
+            <ArrowRight class="size-4" aria-hidden="true"/>
+          </NuxtLinkLocale>
+        </Button>
+      </template>
+    </NuxtLayout>
   </div>
 </template>

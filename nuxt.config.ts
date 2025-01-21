@@ -62,8 +62,9 @@ export default defineNuxtConfig({
       login: '/login',
       callback: '/confirm',
       exclude: [
-        '/register',
+        '/confirm-registration',
         '/password-recovery',
+        '/register',
         '/update-password',
       ],
     }

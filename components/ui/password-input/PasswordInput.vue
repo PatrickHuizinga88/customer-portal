@@ -22,7 +22,7 @@ const modelValue = useVModel(props, 'modelValue', emits, {
 </script>
 
 <template>
-  <div class="relative rounded-md shadow-sm">
+  <div class="relative rounded-md">
     <Input
         v-model="modelValue"
         :class="cn('pr-10', props.class)"

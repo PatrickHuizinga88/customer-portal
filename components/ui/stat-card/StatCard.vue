@@ -3,7 +3,7 @@ import { ArrowUp, ArrowDown } from 'lucide-vue-next'
 
 defineProps<{
   title: string
-  stat: string | number
+  stat?: string | number
   difference?: number
   subtitle?: string
 }>()
@@ -18,7 +18,7 @@ defineProps<{
           <div class="mt-4">
             <div class="flex items-center">
               <span class="text-2xl font-semibold">
-                {{ stat }}
+                {{ stat || '-' }}
               </span>
               <div v-if="difference" :class="[difference > 0 ? 'text-success' : 'text-destructive', 'inline-flex items-center text-xs font-medium ml-2.5']">
                 <div v-if="difference > 0" class="bg-success/15 text-success inline-flex justify-center rounded-full size-4 mr-1">

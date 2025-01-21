@@ -21,7 +21,7 @@ const fallbackObjects = [
   }
 ]
 
-const {data: objects} = await useFetch('/api/customers', {
+const {data: objects} = await useLazyFetch('/api/customers', {
   transform: (data) => {
     if (!data.objects) return fallbackObjects
     return data.objects.map((object: any) => {

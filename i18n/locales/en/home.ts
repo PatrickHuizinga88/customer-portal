@@ -1,18 +1,25 @@
 export default {
-  dashboard: {
-    dashboard: "Dashboard",
+  home: {
+    home: "Home",
 
-    welcome: "Welcome",
+    header: {
+      title: {
+        good_morning: "Good morning",
+        good_afternoon: "Good afternoon",
+        good_evening: "Good evening",
+      },
+      description: "How can we help you today?",
+    },
 
-    compared_to_last_week: "Compared to last week",
-    last_sign_in: "Last sign in",
+    quick_actions: {
+      new_insurance: "New insurance",
+      show_documents: "View documents",
+      contact_us: "Contact us",
+    },
 
-    no_data: "No data available",
-    revenue_history: "Revenue history",
-
-    recent_registered_customers: "Recent registered customers",
-    in_the_last_30_days: "In the last 30 days",
-    view_all: "View all",
-
+    recent_activities: {
+      title: "Recent activities",
+      description: "An overview of recent updates."
+    },
   }
 }

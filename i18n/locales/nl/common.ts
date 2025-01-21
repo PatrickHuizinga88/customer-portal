@@ -25,6 +25,7 @@ export default {
       delete: "Verwijder {item}",
       edit: "Bewerk {item}",
       save: "Bewaar {item}",
+      skip: "Overslaan",
 
       delete_confirmation: "Weet je zeker dat je {item} wilt verwijderen? Het zal permanent worden verwijderd.",
     },
@@ -55,7 +56,26 @@ export default {
           description: "Het verwijderen van {item} is mislukt."
         },
       },
-
+      update: {
+        success: {
+          title: "Update geslaagd",
+          description: "{item} is succesvol bijgewerkt."
+        },
+        error: {
+          title: "Update mislukt",
+          description: "Het bijwerken van {item} is mislukt."
+        },
+      },
+      retrieve: {
+        success: {
+          title: "Ophalen geslaagd",
+          description: "{item} is succesvol opgehaald."
+        },
+        error: {
+          title: "Ophalen mislukt",
+          description: "Het ophalen van {item} is mislukt."
+        },
+      },
       error: {
         title: "Er is iets misgegaan",
         description: "Probeer het later opnieuw of neem contact met ons op.",
