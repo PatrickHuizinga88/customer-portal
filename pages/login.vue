@@ -4,7 +4,6 @@ import {PasswordInput} from "~/components/ui/password-input";
 
 definePageMeta({
   layout: false,
-  layoutTransition: 'fade'
 })
 
 const supabase = useSupabaseClient()

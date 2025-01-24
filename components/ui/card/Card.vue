@@ -18,7 +18,7 @@ const props = withDefaults(defineProps<CardProps>(), {
     <div class="flex items-start justify-between gap-4 px-4 py-5 sm:px-6">
       <slot name="header"/>
       <div v-if="!$slots.header">
-        <h3 v-if="title" class="font-medium mb-0.5">
+        <h3 v-if="title" class="text-base font-medium mb-0.5">
           {{ title }}
         </h3>
         <p class="text-sm text-muted-foreground">{{ description }}</p>
