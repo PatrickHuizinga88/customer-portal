@@ -21,7 +21,7 @@ const fallbackObjects = [
   }
 ]
 
-const {data: objects} = await useLazyFetch('/api/customers', {
+const {data: objects, status} = await useLazyFetch('/api/customers', {
   transform: (data) => {
     if (!data.objects) return fallbackObjects
     return data.objects.map((object: any) => {
@@ -61,7 +61,11 @@ const onSubmit = handleSubmit(() => {
         <h2>Waarmee heb je schade opgelopen?</h2>
         <FormField v-slot="{ field }" name="object">
           <FormItem class="grid md:grid-cols-2 gap-3 space-y-0">
-            <FormControl>
+            <template v-if="status === 'pending'">
+              <Skeleton class="h-20 w-full bg-muted-foreground/10"/>
+              <Skeleton class="h-20 w-full bg-muted-foreground/10"/>
+            </template>
+            <FormControl v-else>
               <FormItem v-for="object in objects" class="relative space-y-0">
                 <FormControl>
                   <input v-bind="field" type="radio" :value="object.guid"
