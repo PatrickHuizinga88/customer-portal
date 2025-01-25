@@ -42,6 +42,7 @@ export default defineNuxtConfig({
       baseUrl: 'localhost:3000',
       backendUrl: 'http://localhost:3001',
     },
+    openaiApiKey: '',
     novuloUsername: '',
     novuloPassword: '',
   },

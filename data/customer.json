@@ -1,0 +1,63 @@
+{
+  "name": "Ten Brake Groep",
+  "primary_address": {
+    "postalcode": "7261JA",
+    "city": "Dinxperlo",
+    "streetandnumber": "Vrijbuiterweg 11"
+  },
+  "electronic_invoice": "Nee",
+  "guid": "d9caa03c-2544-46b3-bb12-53ae94e7f025",
+  "email": "facilitair@tebrake.local",
+  "bankaccount": null,
+  "telephone": "0543123456",
+  "objects": [
+    {
+      "guid": "40f0fd06-0fd9-4356-adae-dc325ec675f8",
+      "type": "Voertuig",
+      "object_name": "Mercedes Vito - XX-LL-42",
+      "object_details": "Mercedes Vito - XX-LL-42",
+      "insurances": [
+        {
+          "guid": "b2ec3b43-a28a-4fb7-8362-4eac2f3bf51e",
+          "name": "Bestelauto",
+          "reference": "212131321231",
+          "status": "Lopend",
+          "premium": "40.00",
+          "coverage": "Wettelijke aansprakelijkheid en Casco"
+        }
+      ]
+    },
+    {
+      "guid": "4762c8b4-c6f0-4e8b-830d-a85eacd3bf10",
+      "type": "Voertuig",
+      "object_name": "Volkswagen Caddy ",
+      "object_details": "Volkswagen Caddy",
+      "insurances": [
+        {
+          "guid": "ca31d94e-98af-45f9-9dc6-89210f17f687",
+          "name": "Bestelauto",
+          "reference": "432423",
+          "status": "Lopend",
+          "premium": "40.00",
+          "coverage": "Wettelijke aansprakelijkheid en Casco"
+        }
+      ]
+    },
+    {
+      "guid": "8a1896c5-e98a-4d08-a38f-8aa19e6d2641",
+      "type": "Voertuig",
+      "object_name": "Tesla 3 - PP-UU-77",
+      "object_details": "Tesla 3 - PP-UU-77",
+      "insurances": [
+        {
+          "guid": "522562a8-ce76-4a66-b665-c8fb2c41cee7",
+          "name": "Personenauto",
+          "reference": "32432432342",
+          "status": "Lopend",
+          "premium": "40.00",
+          "coverage": "Wettelijke aansprakelijkheid en Casco"
+        }
+      ]
+    }
+  ]
+}
