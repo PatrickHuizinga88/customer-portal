@@ -76,7 +76,7 @@ const greeting = computed(() => {
         </ul>
       </Card>
       <div
-          class="relative bg-gradient-to-br from-primary to-primary-dark rounded-2xl p-5 sm:p-6 flex flex-col gap-y-6 text-primary-foreground mt-7 md:mt-0">
+          class="relative bg-gradient-to-br from-primary to-primary/75 rounded-2xl p-5 sm:p-6 flex flex-col gap-y-6 text-primary-foreground mt-7 md:mt-0">
         <div class="absolute right-0 -top-7" aria-hidden="true">
           <div class="relative text-[#ddd] h-20 w-[104px]">
             <Snowflake class="absolute size-16 right-0 bottom-0"/>

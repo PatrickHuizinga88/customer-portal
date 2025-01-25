@@ -6,33 +6,41 @@ definePageMeta({
   layout: 'chat'
 })
 
-const {messages, input, handleSubmit} = useChat()
+const loading = ref(false)
+const finished = ref(false)
+
+const {messages, input, isLoading, handleSubmit} = useChat({
+  onFinish: async () => {
+    if (messages.value[messages.value.length - 1].content.includes('Bedankt voor de informatie!')) {
+      finished.value = true
+      await completeClaim()
+    }
+  }
+})
 
 const completeClaim = async () => {
-  const response = await $fetch('/api/complete-claim', {
+  await $fetch('/api/complete-claim', {
     method: 'POST',
     body: {
       messages
     }
   })
-  console.log(response)
 }
-
-const loading = ref(false)
 </script>
 
 <template>
   <div class="h-full flex flex-col">
-    <Messages :messages="messages"/>
-
-    <div class="w-full flex justify-center py-6 border-t z-10">
+    <Messages :messages="messages" :isLoading="isLoading"/>
+    <div class="w-full flex justify-center py-6 border-t z-10 px-4">
       <div class="w-full sm:max-w-4xl">
-        <form @submit="handleSubmit">
-          <div class="flex gap-x-3">
+        <form v-if="!finished" @submit="handleSubmit">
+          <div class="flex gap-x-2">
             <Textarea
               v-model="input"
-              placeholder="Omschrijf wat er is gebeurd"
+              placeholder="Typ hier je bericht..."
               class="text-base"
+              rows="3"
+              @keydown.enter.prevent="handleSubmit"
             />
             <Button type="submit" size="icon" :disabled="loading" class="shrink-0">
               <Send v-if="!loading" class="h-4 w-4"/>
@@ -40,9 +48,12 @@ const loading = ref(false)
             </Button>
           </div>
         </form>
-        <Button @click="completeClaim" class="w-full mt-4">
-          Claim indienen
-        </Button>
+        <template v-else>
+          <p class="text-center text-sm text-muted-foreground">Je schade melding is opgeslagen. Je kunt wegnavigeren van deze pagina</p>
+          <Button @click="completeClaim" class="w-full mt-4">
+            Naar homepagina
+          </Button>
+        </template>
       </div>
     </div>
   </div>

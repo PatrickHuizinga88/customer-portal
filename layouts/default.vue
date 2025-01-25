@@ -10,7 +10,7 @@ const notificationStore = useNotificationStore()
 const {data: branding} = await useAsyncData(async () => {
   const {data} = await supabase.from('branding')
       .select('logo_url,company_name,primary_color,accent_color,border_radius,button_radius,heading_font,body_font')
-      .filter('id', 'eq', 6)
+      .filter('id', 'eq', 22)
       .single()
   return data
 })

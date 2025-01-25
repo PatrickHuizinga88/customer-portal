@@ -1,0 +1,49 @@
+{
+  "id": "xDGZIgV1e5lLA2su",
+  "messages": [
+    {
+      "content": "Ik heb schade opgelopen",
+      "role": "user"
+    },
+    {
+      "content": "Wat is er beschadigd? Je kunt kiezen uit de volgende verzekerde objecten:\n\n1. Mercedes Vito - XX-LL-42\n2. Volkswagen Caddy\n3. Tesla 3 - PP-UU-77",
+      "role": "assistant"
+    },
+    {
+      "content": "Mijn Tesla",
+      "role": "user"
+    },
+    {
+      "content": "Wat is de oorzaak van de schade aan je Tesla?",
+      "role": "assistant"
+    },
+    {
+      "content": "Ik reed tegen een lantaarnpaal aan.",
+      "role": "user"
+    },
+    {
+      "content": "Wanneer is de schade ontstaan?",
+      "role": "assistant"
+    },
+    {
+      "content": "Vandaag om 14:00",
+      "role": "user"
+    },
+    {
+      "content": "Waar is de schade ontstaan aan je Tesla?",
+      "role": "assistant"
+    },
+    {
+      "content": "Linker voorkant",
+      "role": "user"
+    },
+    {
+      "content": "Heb je nog andere toevoegingen?",
+      "role": "assistant"
+    },
+    {
+      "content": "Nee",
+      "role": "user"
+    }
+  ]
+}
