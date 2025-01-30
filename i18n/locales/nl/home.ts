@@ -8,7 +8,7 @@ export default {
         good_afternoon: "Goedemiddag",
         good_evening: "Goedenavond",
       },
-      description: "Waar kunnen wij u vandaag mee helpen?",
+      description: "Waar kunnen wij jou vandaag mee helpen?",
     },
 
     quick_actions: {

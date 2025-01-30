@@ -88,10 +88,10 @@ const greeting = computed(() => {
           <div class="pr-16">
             <h2 class="h3">Ben jij klaar voor de wintersport?</h2>
           </div>
-          <p>Met onze uitgebreide reisverzekering bent u overal ter wereld gedekt tegen onverwachte kosten. Of het nu
-            gaat om medische hulp, verlies van bagage of geannuleerde vluchten, wij staan voor u klaar.</p>
+          <p>Met onze uitgebreide reisverzekering ben je overal ter wereld gedekt tegen onverwachte kosten. Of het nu
+            gaat om medische hulp, verlies van bagage of geannuleerde vluchten, wij staan voor jou klaar.</p>
         </div>
-        <div class="bg-accent p-[3px] rounded-lg">
+        <div class="bg-accent p-[3px] rounded-[calc(var(--radius-button)+3px)]">
           <Button variant="ghost" size="lg" class="group bg-background text-foreground w-full" as-child>
             <NuxtLink to="#">
               Bekijk onze reisverzekering

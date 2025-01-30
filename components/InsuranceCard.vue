@@ -137,7 +137,7 @@ const statusClasses = computed(() => {
     <div class="flex mb-4">
       <Gem class="size-8 text-primary shrink-0 mr-3"/>
       <p class="text-lg font-medium">
-        Heeft u veel sieraden? Overweeg een aanvullende dekking.
+        Heb je veel sieraden? Overweeg een aanvullende dekking.
       </p>
     </div>
     <Button size="sm" class="w-full">
