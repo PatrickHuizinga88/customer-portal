@@ -18,7 +18,7 @@ export default defineEventHandler(async (event) => {
       .join("\n");
   }
 
-  try {
+  // try {
     // const {messages} = await readBody(event)
 
     const user = "Pietje Puck"
@@ -35,13 +35,21 @@ export default defineEventHandler(async (event) => {
     ### Instructions:
     1. Antwoord alleen met pure, parsable JSON zonder geen extra tekst, captions of het formaat van de response aan het begin.
     2. Gebruik de derde persoonsvorm voor de klant.
-    2. De JSON moet exact overeen komen met de volgende structuur:
+    3. De JSON moet exact overeen komen met de volgende structuur:
     {
-      "claimed_by": {{ (bedrijfs)naam van klant }},
+      "claimed_by": "729",
       "claim_date": {{ retrieve date from chat history in format "YYYY-MM-DD", ten opzichte van vandaag ${date} }},
-      "policy_guid": "32432432342",
+      "policy_guid": "ca31d94e-98af-45f9-9dc6-89210f17f687",
       "claim_type": "1b7bd772-1fcd-43e2-a6cb-9522297bbfd5",
-      "claim_cause": {{ retrieve cause from chat history }},
+      "claim_subject": {{ retrieve subject of cause from chat history }},
+      "claim_cause": "b970f089-3493-440f-b087-28d9d82a9ac9",
+      "answers": [
+        {
+            "guid": "08309c2c-4647-4ab0-9881-51b06f43aa7f",
+            "answer_as_string": "12",
+            "explanation": "uitleg"
+        }
+      ]
     }
     
     Begin het genereren hieronder.
@@ -57,7 +65,7 @@ export default defineEventHandler(async (event) => {
 
     const {public: {backendUrl}, novuloUsername, novuloPassword} = useRuntimeConfig(event)
 
-    return await $fetch(`${backendUrl}/addclaim`, {
+    const response = await $fetch(`${backendUrl}/addclaim`, {
       method: "POST",
       headers: {
         Authorization: `Basic ${btoa(novuloUsername + ":" + novuloPassword)}`
@@ -65,13 +73,19 @@ export default defineEventHandler(async (event) => {
       body: JSON.parse(data.choices[0].message.content)
     })
 
-  } catch (error) {
     return {
-      data: null,
-      error: {
-        message: "An error occurred. Please try again later.",
-        error
-      }
+      data,
+      response,
+      chat: formatChatToMarkdown(chat)
     }
-  }
+
+  // } catch (error) {
+  //   return {
+  //     data: null,
+  //     error: {
+  //       message: "An error occurred. Please try again later.",
+  //       error
+  //     }
+  //   }
+  // }
 })

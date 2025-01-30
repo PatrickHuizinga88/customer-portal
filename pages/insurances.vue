@@ -107,7 +107,7 @@ const {data: objects} = await useFetch('/api/customers', {
 
 const objectIcon = (type: string) => {
   switch (type) {
-    case 'Voertuig':
+    case 'Motorvoertuig':
       return CarFront
     case 'business_premises':
       return Building

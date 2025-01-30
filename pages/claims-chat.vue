@@ -49,7 +49,7 @@ const completeClaim = async () => {
           </div>
         </form>
         <template v-else>
-          <p class="text-center text-sm text-muted-foreground">Je schade melding is opgeslagen. Je kunt wegnavigeren van deze pagina</p>
+          <p class="text-center text-sm text-muted-foreground">Je schade melding is opgeslagen. Je kunt deze pagina verlaten.</p>
           <Button @click="completeClaim" class="w-full mt-4" as-child>
             <NuxtLink to="/">
               Naar homepagina

@@ -40,7 +40,8 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       baseUrl: 'localhost:3000',
-      backendUrl: 'http://localhost:3001',
+      backendUrl: process.env.NUXT_PUBLIC_BACKEND_URL || 'http://localhost:3001',
+      brandingId: '',
     },
     openaiApiKey: '',
     novuloUsername: '',
@@ -53,7 +54,7 @@ export default defineNuxtConfig({
     '@nuxtjs/supabase',
     "shadcn-nuxt",
     '@vueuse/nuxt',
-    '@nuxtjs/color-mode',
+    // '@nuxtjs/color-mode',
     '@nuxtjs/i18n',
     'dayjs-nuxt',
   ],
@@ -76,10 +77,10 @@ export default defineNuxtConfig({
     componentDir: './components/ui',
   },
 
-  colorMode: {
-    preference: 'light',
-    classSuffix: '',
-  },
+  // colorMode: {
+  //   preference: 'light',
+  //   classSuffix: '',
+  // },
 
   i18n: {
     strategy: 'no_prefix',

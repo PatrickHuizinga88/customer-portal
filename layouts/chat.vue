@@ -4,11 +4,12 @@ import type {Database} from "~/types/database.types";
 import {useNotificationStore} from "~/stores/notificationStore";
 
 const supabase = useSupabaseClient<Database>()
+const {public: {brandingId}} = useRuntimeConfig()
 
 const {data: branding} = await useAsyncData(async () => {
   const {data} = await supabase.from('branding')
     .select('logo_url,company_name,primary_color,accent_color,border_radius,button_radius,heading_font,body_font')
-    .filter('id', 'eq', 22)
+    .filter('id', 'eq', brandingId)
     .single()
   return data
 })
