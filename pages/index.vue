@@ -52,7 +52,7 @@ const greeting = computed(() => {
         <Files class="size-10 text-primary"/>
         {{ $t('home.quick_actions.show_documents') }}
       </NuxtLink>
-      <NuxtLink to="#"
+      <NuxtLink to="/contact"
                 class="w-full flex flex-col items-center gap-y-2 text-sm text-center bg-primary/10 hover:bg-primary/20 duration-150 rounded-xl border text-sm font-medium px-7 py-5">
         <Headset class="size-10 text-primary"/>
         {{ $t('home.quick_actions.contact_us') }}
@@ -75,33 +75,35 @@ const greeting = computed(() => {
           </li>
         </ul>
       </Card>
-      <div
-          class="relative bg-gradient-to-br from-primary to-primary/75 rounded-2xl p-5 sm:p-6 flex flex-col gap-y-6 text-primary-foreground mt-7 md:mt-0">
-        <div class="absolute right-0 -top-7" aria-hidden="true">
-          <div class="relative text-[#ddd] h-20 w-[104px]">
-            <Snowflake class="absolute size-16 right-0 bottom-0"/>
-            <Snowflake class="absolute size-10 left-0 top-2"/>
-            <Snowflake class="absolute size-4 top-0 left-10"/>
+      <div>
+        <div
+            class="relative bg-gradient-to-br from-primary to-primary/75 rounded-2xl rounded-b-none p-5 sm:p-6 flex flex-col gap-y-6 text-primary-foreground mt-7 md:mt-0">
+          <div class="absolute right-0 -top-7" aria-hidden="true">
+            <div class="relative text-[#ddd] h-20 w-[104px]">
+              <Snowflake class="absolute size-16 right-0 bottom-0"/>
+              <Snowflake class="absolute size-10 left-0 top-2"/>
+              <Snowflake class="absolute size-4 top-0 left-10"/>
+            </div>
           </div>
-        </div>
-        <div class="space-y-3">
-          <div class="pr-16">
-            <h2 class="h3">Ben jij klaar voor de wintersport?</h2>
+          <div class="space-y-3">
+            <div class="pr-16">
+              <h2 class="h3">Ben jij klaar voor de wintersport?</h2>
+            </div>
+            <p>Met onze uitgebreide reisverzekering ben je overal ter wereld gedekt tegen onverwachte kosten. Of het nu
+              gaat om medische hulp, verlies van bagage of geannuleerde vluchten, wij staan voor jou klaar.</p>
           </div>
-          <p>Met onze uitgebreide reisverzekering ben je overal ter wereld gedekt tegen onverwachte kosten. Of het nu
-            gaat om medische hulp, verlies van bagage of geannuleerde vluchten, wij staan voor jou klaar.</p>
-        </div>
-        <div class="bg-accent p-[3px] rounded-[calc(var(--radius-button)+3px)]">
+          <!--        <div class="bg-accent p-[3px] rounded-[calc(var(&#45;&#45;radius-button)+3px)]">-->
           <Button variant="ghost" size="lg" class="group bg-background text-foreground w-full" as-child>
             <NuxtLink to="#">
               Bekijk onze reisverzekering
               <ArrowRight class="size-5 group-hover:translate-x-0.5 duration-150"/>
             </NuxtLink>
           </Button>
-            <p class="text-xs text-center text-accent-foreground font-medium mt-2 mb-1">
-              <strong>Actie!</strong> Ontvang tijdelijk de eerste maand gratis.
-            </p>
+          <!--        </div>-->
         </div>
+        <p class="bg-accent text-xs text-center text-accent-foreground rounded-md rounded-t-none font-medium py-4">
+          <strong>Actie!</strong> Ontvang tijdelijk de eerste maand gratis.
+        </p>
       </div>
     </div>
   </Page>

@@ -11,7 +11,10 @@ const props = defineProps<{
     name: string
     status: 'Lopend' | 'Verwerking' | 'Afgelopen'
     premium: number
-    coverage: string
+    coverages: {
+      guid: string
+      product: string
+    }
     is_claimable: boolean
     is_editable: boolean
     reference?: number
@@ -29,6 +32,17 @@ const statusClasses = computed(() => {
       return 'bg-red-500'
   }
 })
+
+const transformedCoverage = (product: string) => {
+  switch (product) {
+    case 'Allrisk':
+      return 'Allrisk'
+    case 'WA+':
+      return 'WA+'
+    case 'WA Wettelijke Aansprakelijkheid':
+      return 'WA'
+  }
+}
 </script>
 
 <template>
@@ -46,7 +60,7 @@ const statusClasses = computed(() => {
       </div>
       <div class="flex justify-between items-center gap-x-6 bg-muted rounded px-3 py-1">
         {{ $t('insurances.coverage') }}
-        <span class="font-medium text-right">{{ insurance.coverage }}</span>
+        <span class="font-medium text-right">{{ transformedCoverage(insurance.coverages[0].product) }}</span>
       </div>
     </div>
     <div class="space-y-2">
@@ -57,7 +71,8 @@ const statusClasses = computed(() => {
             {{ $t('insurances.view_policy') }}
           </Button>
         </SheetTrigger>
-        <SheetContent side="bottom" class="flex flex-col gap-0 rounded-t-2xl lg:inset-x-[15%] xl:inset-x-1/4 p-0 max-h-[calc(100svh-3rem)]">
+        <SheetContent side="bottom"
+                      class="flex flex-col gap-0 rounded-t-2xl lg:inset-x-[15%] xl:inset-x-1/4 p-0 max-h-[calc(100svh-3rem)]">
           <SheetHeader class="sticky text-left p-5 sm:p-6">
             <SheetTitle>{{ $t('insurances.policy_overview') }}</SheetTitle>
           </SheetHeader>
@@ -78,7 +93,7 @@ const statusClasses = computed(() => {
                 <dl>
                   <div class="flex justify-between items-center gap-x-6 odd:bg-muted rounded p-3">
                     <dt>Dekking</dt>
-                    <dd class="font-medium text-right">{{ insurance.coverage }}</dd>
+                    <dd class="font-medium text-right">{{ insurance.coverages[0].product }}</dd>
                   </div>
                   <div class="flex justify-between items-center gap-x-6 odd:bg-muted rounded p-3">
                     <dt>Kenteken</dt>
