@@ -60,7 +60,7 @@ watch(useRoute(), () => {
           </NuxtLink>
           <ul class="hidden md:flex gap-4">
             <li v-for="item in mainNavItems">
-              <NuxtLink :to="item.url" activeClass="text-primary bg-muted"
+              <NuxtLink :to="item.url" activeClass="bg-muted"
                         class="inline-block px-2 py-1.5 rounded-md text-sm font-medium hover:bg-muted duration-150">
                 {{ item.name }}
               </NuxtLink>

@@ -50,7 +50,7 @@ watch(() => [props.messages, props.isLoading], () => {
         </div>
         <div v-else class="h-full flex flex-col justify-center items-center text-center">
           <div class="size-16 rounded-full overflow-hidden mb-4">
-            <img src="../assets/images/support.webp" alt="Support"/>
+            <img src="../assets/images/support-1.webp" alt="Support"/>
           </div>
           <h1 class="text-2xl font-bold mb-3">
             Ik ben jouw schade assistent
