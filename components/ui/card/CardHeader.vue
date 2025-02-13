@@ -7,7 +7,11 @@ const props = defineProps<{
 </script>
 
 <template>
-  <div :class="cn('overflow-hidden border border-border rounded-2xl shadow-md shadow-black/5 bg-card px-4 sm:px-6 py-5', props.class)">
+  <div :class="cn('flex items-start justify-between gap-4 pb-5', props.class)">
     <slot/>
   </div>
 </template>
+
+<style scoped>
+
+</style>

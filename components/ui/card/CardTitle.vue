@@ -7,7 +7,11 @@ const props = defineProps<{
 </script>
 
 <template>
-  <div :class="cn('overflow-hidden border border-border rounded-2xl shadow-md shadow-black/5 bg-card px-4 sm:px-6 py-5', props.class)">
+  <h3 :class="cn('text-base font-medium mb-0.5', props.class)">
     <slot/>
-  </div>
+  </h3>
 </template>
+
+<style scoped>
+
+</style>

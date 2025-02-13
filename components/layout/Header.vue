@@ -127,7 +127,7 @@ watch(useRoute(), () => {
                   </NuxtLink>
                 </li>
                 <li v-for="item in userNavItems">
-                  <NuxtLink v-if="item.url" :to="item.url" activeClass="text-primary"
+                  <NuxtLink v-if="item.url" :to="item.url" activeClass="text-primary-dark"
                             class="inline-block px-2 py-1 text-2xl font-semibold text-right rounded hover:bg-muted duration-150">
                     {{ item.name }}
                   </NuxtLink>

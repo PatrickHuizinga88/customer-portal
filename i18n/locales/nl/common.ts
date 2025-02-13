@@ -25,6 +25,7 @@ export default {
       delete: "Verwijder {item}",
       edit: "Bewerk {item}",
       save: "Bewaar {item}",
+      send: "Verstuur {item}",
       skip: "Overslaan",
 
       delete_confirmation: "Weet je zeker dat je {item} wilt verwijderen? Het zal permanent worden verwijderd.",
@@ -32,6 +33,8 @@ export default {
 
     validations: {
       required: "Dit veld is verplicht",
+      min: "Dit veld moet minimaal {min} tekens bevatten",
+      max: "Dit veld mag maximaal {max} tekens bevatten",
     },
 
     notifications: {

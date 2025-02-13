@@ -25,6 +25,7 @@ export default {
       delete: "Delete {item}",
       edit: "Edit {item}",
       save: "Save {item}",
+      send: "Send {item}",
       skip: "Skip",
 
       delete_confirmation: "Are you sure you want to delete {item}? It will be permanently removed.",
@@ -32,6 +33,8 @@ export default {
 
     validations: {
       required: "This field is required",
+      min: "This field must be at least {min} characters",
+      max: "This field must be at most {max} characters",
     },
 
     notifications: {

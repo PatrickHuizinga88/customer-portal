@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {Card} from "~/components/ui/card";
+import {Card, CardHeader, CardTitle, CardDescription} from "~/components/ui/card";
 import {ShieldPlus, AlertTriangle, Files, Headset, ArrowRight, Snowflake} from 'lucide-vue-next';
 import {Page} from "~/components/layout/page";
 
@@ -60,8 +60,13 @@ const greeting = computed(() => {
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 items-start gap-4 mb-8 md:mt-12">
-      <Card :title="$t('home.recent_activities.title')"
-            :description="$t('home.recent_activities.description')">
+      <Card>
+        <CardHeader>
+          <div>
+            <CardTitle>{{ $t('home.recent_activities.title') }}</CardTitle>
+            <CardDescription>{{ $t('home.recent_activities.description') }}</CardDescription>
+          </div>
+        </CardHeader>
         <ul class="space-y-1">
           <li v-for="activity in recentActivities" class="flex py-2 px-2 -mx-2">
             <component :is="activity.icon" class="size-5 text-primary"/>
@@ -101,7 +106,7 @@ const greeting = computed(() => {
           </Button>
           <!--        </div>-->
         </div>
-        <p class="bg-accent text-xs text-center text-accent-foreground rounded-md rounded-t-none font-medium py-4">
+        <p class="bg-accent text-xs text-center text-accent-foreground rounded-2xl rounded-t-none font-medium py-4">
           <strong>Actie!</strong> Ontvang tijdelijk de eerste maand gratis.
         </p>
       </div>

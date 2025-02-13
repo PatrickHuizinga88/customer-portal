@@ -46,7 +46,7 @@ const transformedCoverage = (product: string) => {
 </script>
 
 <template>
-  <div class="bg-background border rounded-2xl space-y-4 p-5 sm:p-6">
+  <Card class="space-y-4">
     <div class="flex items-center">
       <h3 class="h4 truncate">{{ insurance.name }}</h3>
       <div :class="['h-5 flex items-center text-xs font-medium border rounded px-2 ml-2 shrink-0', statusClasses]">
@@ -145,7 +145,7 @@ const transformedCoverage = (product: string) => {
         {{ $t('insurances.edit_coverage') }}
       </Button>
     </div>
-  </div>
+  </Card>
 
   <div v-if="insurance.potential && insurance.potential === 'jewelry'"
        class="bg-primary/10 border border-primary rounded-2xl p-5 sm:p-6">
