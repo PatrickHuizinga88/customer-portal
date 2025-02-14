@@ -8,6 +8,7 @@ definePageMeta({
 })
 
 const {t} = useI18n()
+const {public: {portalUrl}} = useRuntimeConfig()
 
 const {data: profile} = await useFetch('/api/customers')
 
@@ -37,7 +38,7 @@ const greeting = computed(() => {
 <template>
   <Page :title="`${greeting}, ${profile.name || 'common.general.guest'}!`" :description="$t('home.header.description')">
     <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-8">
-      <NuxtLink to="#"
+      <NuxtLink :to="portalUrl || '#'"
                 class="w-full flex flex-col items-center gap-y-2 text-sm text-center bg-primary/10 hover:bg-primary/20 duration-150 rounded-xl border text-sm font-medium px-7 py-5">
         <ShieldPlus class="size-10 text-primary"/>
         {{ $t('home.quick_actions.new_insurance') }}
