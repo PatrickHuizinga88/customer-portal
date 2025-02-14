@@ -22,9 +22,13 @@ const recentClaims = [
 <template>
   <Page :title="$t('claims.header.title')" :description="$t('claims.header.description')">
     <ClaimsWizard/>
-    <Card :title="$t('claims.recent_claims.title')"
-          :description="$t('claims.recent_claims.description')"
-          class="mt-8">
+    <Card class="mt-8">
+      <CardHeader>
+        <div>
+          <CardTitle>{{ $t('claims.recent_claims.title') }}</CardTitle>
+          <CardDescription>{{ $t('claims.recent_claims.description')}}</CardDescription>
+        </div>
+      </CardHeader>
       <ul class="space-y-1">
         <li v-for="claim in recentClaims" class="flex py-2 px-2 -mx-2">
           <component :is="claim.icon" class="size-5 text-primary"/>
