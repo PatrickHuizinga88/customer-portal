@@ -42,7 +42,7 @@ useGlobalHead(company.value?.branding[0])
           enter-to-class="opacity-1 translate-y-none"
           appear
       >
-        <img :src="branding.logo_url" :alt="branding.company_name" class="mx-auto h-12 w-auto">
+        <img v-if="company.logo_url" :src="company.logo_url" :alt="company.company_name" class="mx-auto h-12 w-auto">
       </transition>
       <transition
           enter-active-class="duration-500 delay-100"
@@ -81,7 +81,7 @@ useGlobalHead(company.value?.branding[0])
       </div>
     </transition>
 
-    <img :src="branding.logo_url" alt="" aria-hidden="true" loading="lazy"
+    <img v-if="company.logo_url" :src="company.logo_url" alt="" aria-hidden="true" loading="lazy"
          class="fixed left-1/2 -translate-x-1/2 bottom-0 translate-y-3/4 w-screen max-w-2xl aspect-square opacity-[4%] -z-10"/>
   </div>
 
