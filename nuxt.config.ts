@@ -21,6 +21,7 @@ export default defineNuxtConfig({
         {name: 'og:description', content: 'Kickstart your Nuxt app.'},
         {name: 'msapplication-TileColor', content: '#ffffff'},
         {name: 'theme-color', content: '#ffffff'},
+        {name: 'robots', content: 'noindex'},
       ],
       link: [
         {rel: 'icon', type: 'image/x-icon', href: '/logo.svg'},
