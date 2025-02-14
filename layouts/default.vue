@@ -7,22 +7,32 @@ import {useGlobalHead} from "~/composable/useGlobalHead";
 
 const supabase = useSupabaseClient<Database>()
 const notificationStore = useNotificationStore()
-const {public: {brandingId}} = useRuntimeConfig()
+const {public: {companyId}} = useRuntimeConfig()
 
-const {data: branding} = await useAsyncData(async () => {
-  const {data} = await supabase.from('branding')
-      .select('logo_url,company_name,primary_color,accent_color,border_radius,button_radius,heading_font,body_font')
-      .filter('id', 'eq', brandingId)
+const {data: company} = await useAsyncData(async () => {
+  const {data} = await supabase.from('companies')
+      .select(`
+      company_name,
+      logo_url,
+      branding (
+        primary_color,
+        accent_color,
+        border_radius,
+        button_radius,
+        heading_font,
+        body_font
+      )`)
+      .filter('id', 'eq', companyId)
       .single()
   return data
 })
 
-useGlobalHead(branding?.value)
+useGlobalHead(company.value?.branding[0])
 </script>
 
 <template>
   <NuxtLoadingIndicator color="hsl(var(--primary)"/>
-  <Header :logoUrl="branding.logo_url" :companyName="branding.company_name"/>
+  <Header :logoUrl="company?.logo_url ?? ''" :companyName="company?.company_name ?? ''"/>
 
   <div class="py-10">
     <div class="container">

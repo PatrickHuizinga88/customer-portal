@@ -6,7 +6,7 @@ export function useGlobalHead(branding: any) {
     if (!hsl) return '0 0% 0%';
 
     const [h, s, l] = hsl.slice(1).map(Number);
-    const luminance = (l < 50) ? 98 : 4;
+    const luminance = (l <= 50) ? 98 : 4;
 
     return `224 71% ${luminance}%`
   }

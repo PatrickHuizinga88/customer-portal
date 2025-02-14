@@ -4,33 +4,47 @@ import {Mail, MapPin, Phone, Send, MessageCircle} from "lucide-vue-next";
 import {toTypedSchema} from "@vee-validate/zod";
 import * as z from 'zod'
 import {useForm} from "vee-validate";
-import {CardHeader, CardTitle} from "~/components/ui/card";
+import {CardHeader} from "~/components/ui/card";
+import type {Database} from "~/types/database.types";
 
+interface ContactDetail {
+  type: string
+  label: string
+  value: string
+}
+
+const supabase = useSupabaseClient<Database>()
 const notificationStore = useNotificationStore()
 const {t} = useI18n()
+const {public: {companyId}} = useRuntimeConfig()
 
-const contactDetails = [
-  {
-    type: 'phone',
-    label: t('contact.phone'),
-    value: '+31 6 12345678'
-  },
-  {
-    type: 'whatsapp',
-    label: 'WhatsApp',
-    value: '+31 6 12345678'
-  },
-  {
-    type: 'email',
-    label: t('contact.email'),
-    value: 'support@example.com'
-  },
-  {
-    type: 'address',
-    label: t('contact.address'),
-    value: 'Straatnaam 123, 1234 AB, Plaatsnaam'
+const {data: supportSettings} = await useAsyncData(async () => {
+  try {
+    const {data, error} = await supabase.from('support_settings')
+        .select('email,phone,whatsapp,address,opening_hours')
+        .filter('company_id', 'eq', companyId)
+        .single()
+    if (error) throw error
+    return {
+      openingHours: data.opening_hours,
+      contactDetails: Object.entries(data)
+          .filter(([type, value]) => type !== 'opening_hours' && value)
+          .map(([type, value]) => ({
+            type,
+            label: t(`contact.contact_details.${type}`),
+            value
+          })) as ContactDetail[]
+    }
+  } catch (error) {
+    notificationStore.createNotification({
+      type: 'destructive',
+      action: 'retrieve',
+      item: t('contact.contact_details')
+    })
+    console.error(error)
+    return {data: null, error}
   }
-]
+})
 
 const subjectOptions = [
   {id: 1, value: 'Vraag over mijn huidige verzekering(en)'},
@@ -79,7 +93,7 @@ const formSchema = toTypedSchema(z.object({
   }).min(10, t('common.validations.min', {min: 10})),
 }))
 
-const { handleSubmit } = useForm({
+const {handleSubmit} = useForm({
   validationSchema: formSchema,
 })
 
@@ -94,7 +108,7 @@ const onSubmit = handleSubmit((values) => {
     notificationStore.createNotification({
       type: 'destructive',
       action: 'save', // TODO: Change to 'send'
-      item: t('contact.message')
+      item: t('contact.contact_form.message')
     })
     console.error(error)
   } finally {
@@ -108,13 +122,15 @@ const onSubmit = handleSubmit((values) => {
   <Page :title="$t('contact.header.title')" :description="$t('contact.header.description')">
     <div class="grid md:grid-cols-3 items-start gap-6">
       <div class="md:order-last">
-        <img src="../assets/images/support.webp" alt="Support" class="hidden md:block w-full rounded-2xl aspect-video mb-6 object-cover">
+        <img src="../assets/images/support.webp" alt="Support"
+             class="hidden md:block w-full rounded-2xl aspect-video mb-6 object-cover">
         <Card class="p-5">
-          <ul class="space-y-2">
-            <li v-for="detail in contactDetails" :key="detail.type">
+          <ul v-if="supportSettings" class="space-y-2">
+            <li v-for="detail in supportSettings.contactDetails" :key="detail.type">
               <a :href="contactDetailUrl(detail.type, detail.value)" target="_blank"
                  class="flex items-center gap-4 bg-muted/50 rounded-xl p-3 hover:bg-muted duration-150">
-                <div class="size-9 bg-primary/20 text-primary-dark rounded-lg flex items-center justify-center shrink-0">
+                <div
+                    class="size-9 bg-primary/20 text-primary-dark rounded-lg flex items-center justify-center shrink-0">
                   <component :is="contactDetailIcon(detail.type)" class="size-5"/>
                 </div>
                 <div class="text-sm w-0 flex-1">
@@ -124,6 +140,9 @@ const onSubmit = handleSubmit((values) => {
               </a>
             </li>
           </ul>
+          <div v-else class="text-muted-foreground">
+            {{ $t('common.general.no_records_found', {item: lowercase($t('contact.contact_details'))}) }}
+          </div>
         </Card>
       </div>
       <Card class="md:col-span-2">
@@ -136,12 +155,12 @@ const onSubmit = handleSubmit((values) => {
         <form @submit="onSubmit" class="space-y-6">
           <FormField v-slot="{ componentField}" name="subject">
             <FormItem>
-              <FormLabel>{{ $t('contact.subject') }}</FormLabel>
+              <FormLabel>{{ $t('contact.contact_form.subject') }}</FormLabel>
               <FormControl>
                 <Select v-bind="componentField">
                   <FormControl>
                     <SelectTrigger>
-                      <SelectValue :placeholder="$t('contact.select_a_subject')"/>
+                      <SelectValue :placeholder="$t('contact.contact_form.select_a_subject')"/>
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
@@ -156,7 +175,7 @@ const onSubmit = handleSubmit((values) => {
           </FormField>
           <FormField v-slot="{ componentField}" name="message">
             <FormItem>
-              <FormLabel>{{ $t('contact.message') }}</FormLabel>
+              <FormLabel>{{ $t('contact.contact_form.message') }}</FormLabel>
               <FormControl>
                 <Textarea v-bind="componentField" rows="4"/>
               </FormControl>
@@ -165,7 +184,7 @@ const onSubmit = handleSubmit((values) => {
           </FormField>
           <Button type="submit" :loading="loading" class="w-full sm:w-auto">
             <Send/>
-            {{ $t('common.actions.send', {item: lowercase($t('contact.message'))}) }}
+            {{ $t('common.actions.send', {item: lowercase($t('contact.contact_form.message'))}) }}
           </Button>
         </form>
       </Card>

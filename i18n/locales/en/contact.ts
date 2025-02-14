@@ -10,15 +10,20 @@ export default {
     contact_form: {
       title: "Send us a message",
       description: "Leave your question or comment and we will contact you as soon as possible.",
+
+      message: "Message",
+      subject: "Subject",
+
+      select_a_subject: "Select a subject",
     },
 
-    subject: "Subject",
-    message: "Message",
+    contact_details: {
+      contact_details: "Contact details",
 
-    phone: "Phone",
-    email: "Email",
-    address: "Address",
-
-    select_a_subject: "Select a subject",
+      address: "Address",
+      email: "Email",
+      phone: "Phone",
+      whatsapp: "WhatsApp",
+    },
   }
 }

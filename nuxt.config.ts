@@ -41,7 +41,7 @@ export default defineNuxtConfig({
     public: {
       baseUrl: 'localhost:3000',
       backendUrl: process.env.NUXT_PUBLIC_BACKEND_URL || 'http://localhost:3001',
-      brandingId: '',
+      companyId: '',
     },
     openaiApiKey: '',
     novuloUsername: '',

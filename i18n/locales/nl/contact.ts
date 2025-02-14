@@ -10,15 +10,20 @@ export default {
     contact_form: {
       title: "Stuur ons een bericht",
       description: "Laat je vraag of opmerking achter en wij nemen zo snel mogelijk contact met je op.",
+
+      message: "Bericht",
+      subject: "Onderwerp",
+
+      select_a_subject: "Selecteer een onderwerp",
     },
 
-    subject: "Onderwerp",
-    message: "Bericht",
+    contact_details: {
+      contact_details: "Contactgegevens",
 
-    phone: "Telefoon",
-    email: "E-mail",
-    address: "Adres",
-
-    select_a_subject: "Selecteer een onderwerp",
+      address: "Adres",
+      email: "E-mail",
+      phone: "Telefoon",
+      whatsapp: "WhatsApp",
+    },
   }
 }

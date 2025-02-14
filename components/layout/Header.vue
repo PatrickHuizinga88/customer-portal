@@ -11,7 +11,7 @@ import {
 import type {Database} from "~/types/database.types";
 
 defineProps<{
-  logoUrl: string
+  logoUrl?: string
   companyName: string
 }>()
 
