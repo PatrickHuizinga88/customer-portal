@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {Page} from "~/components/layout/page";
-import {Mail, MapPin, Phone, Send, MessageCircle} from "lucide-vue-next";
+import {Mail, MapPin, Phone, Send, MessageCircle, CheckCircle} from "lucide-vue-next";
 import {toTypedSchema} from "@vee-validate/zod";
 import * as z from 'zod'
 import {useForm} from "vee-validate";
@@ -57,6 +57,7 @@ const subjectOptions = [
 ]
 
 const loading = ref(false)
+const success = ref(false)
 
 const contactDetailIcon = (type: string) => {
   switch (type) {
@@ -104,6 +105,7 @@ const onSubmit = handleSubmit((values) => {
     // TODO: Send contact form data to backend
     console.log(values)
 
+    success.value = true
   } catch (error) {
     notificationStore.createNotification({
       type: 'destructive',
@@ -146,13 +148,14 @@ const onSubmit = handleSubmit((values) => {
         </Card>
       </div>
       <Card class="md:col-span-2">
-        <CardHeader>
+        <CardHeader class="pb-0 justify-start">
+          <CheckCircle v-if="success" class="size-6 text-success shrink-0 mt-1 sm:mt-2"/>
           <div>
-            <h2 class="h3">{{ $t('contact.contact_form.title') }}</h2>
-            <p class="text-muted-foreground">{{ $t('contact.contact_form.description') }}</p>
+            <h2 class="h3">{{ !success ? $t('contact.contact_form.title') : $t('contact.contact_form.success.title') }}</h2>
+            <p class="text-muted-foreground mt-1">{{ !success ? $t('contact.contact_form.description') : $t('contact.contact_form.success.description') }}</p>
           </div>
         </CardHeader>
-        <form @submit="onSubmit" class="space-y-6">
+        <form v-if="!success" @submit="onSubmit" class="space-y-6 mt-5">
           <FormField v-slot="{ componentField}" name="subject">
             <FormItem>
               <FormLabel>{{ $t('contact.contact_form.subject') }}</FormLabel>

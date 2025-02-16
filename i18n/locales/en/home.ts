@@ -13,8 +13,13 @@ export default {
 
     quick_actions: {
       new_insurance: "New insurance",
-      show_documents: "View documents",
+      show_documents: "View insurances",
       contact_us: "Contact us",
+
+      insurance_dialog: {
+        title: "New insurance",
+        description: "Which insurance would you like to take out? You will be redirected to our premium comparator.",
+      }
     },
 
     recent_activities: {

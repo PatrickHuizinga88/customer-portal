@@ -13,8 +13,13 @@ export default {
 
     quick_actions: {
       new_insurance: "Nieuwe verzekering",
-      show_documents: "Documenten inzien",
+      show_documents: "Verzekeringen inzien",
       contact_us: "Contact opnemen",
+
+      insurance_dialog: {
+        title: "Nieuwe verzekering",
+        description: "Welke verzekering wil je afsluiten? Je wordt doorverwezen naar onze premievergelijker.",
+      }
     },
 
     recent_activities: {

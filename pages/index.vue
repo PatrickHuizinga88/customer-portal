@@ -1,7 +1,20 @@
 <script setup lang="ts">
 import {Card, CardHeader, CardTitle, CardDescription} from "~/components/ui/card";
-import {ShieldPlus, AlertTriangle, Files, Headset, ArrowRight, Snowflake} from 'lucide-vue-next';
+import {
+  ShieldPlus,
+  AlertTriangle,
+  Files,
+  Headset,
+  ArrowRight,
+  Snowflake,
+  CarFront,
+  Backpack,
+  Home,
+  Package,
+  ChevronRight
+} from 'lucide-vue-next';
 import {Page} from "~/components/layout/page";
+import {NuxtLinkLocale} from "#components";
 
 definePageMeta({
   layout: 'default'
@@ -11,6 +24,26 @@ const {t} = useI18n()
 const {public: {portalUrl}} = useRuntimeConfig()
 
 const {data: profile} = await useFetch('/api/customers')
+
+const insurances = [
+  {
+    icon: Home,
+    name: 'Woonhuisverzekering',
+    url: portalUrl
+  },
+  {
+    icon: CarFront,
+    name: 'Autoverzekering'
+  },
+  {
+    icon: Backpack,
+    name: 'Reisverzekering'
+  },
+  {
+    icon: Package,
+    name: 'Inboedelverzekering'
+  },
+]
 
 const recentActivities = [
   {
@@ -38,23 +71,49 @@ const greeting = computed(() => {
 <template>
   <Page :title="`${greeting}, ${profile.name || 'common.general.guest'}!`" :description="$t('home.header.description')">
     <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-8">
-      <NuxtLink :to="portalUrl || '#'"
-                class="w-full flex flex-col items-center gap-y-2 text-sm text-center bg-primary/10 hover:bg-primary/20 duration-150 rounded-xl border text-sm font-medium px-7 py-5">
-        <ShieldPlus class="size-10 text-primary"/>
-        {{ $t('home.quick_actions.new_insurance') }}
-      </NuxtLink>
+      <Dialog>
+        <DialogTrigger as-child>
+          <button
+              class="w-full flex flex-col items-center gap-y-2 text-sm text-center bg-primary/10 hover:bg-primary/20 duration-150 rounded-xl border text-sm font-medium px-7 py-5">
+            <ShieldPlus class="size-10 text-primary"/>
+            {{ $t('home.quick_actions.new_insurance') }}
+          </button>
+        </DialogTrigger>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>{{ $t('home.quick_actions.insurance_dialog.title') }}</DialogTitle>
+            <DialogDescription>{{ $t('home.quick_actions.insurance_dialog.description') }}</DialogDescription>
+          </DialogHeader>
+          <ul class="space-y-3">
+            <li v-for="insurance in insurances">
+              <component :is="insurance.url ? NuxtLinkLocale : 'div'" :to="insurance.url"
+                         :class="['flex justify-between items-center text-lg border p-2.5 rounded-lg hover:bg-primary/10 duration-150', {
+                           'opacity-50 cursor-not-allowed': !insurance.url
+                         }]">
+                <div class="flex items-center font-medium">
+                  <component :is="insurance.icon" class="size-6 text-primary shrink-0 mr-3"/>
+                  {{ insurance.name }}
+                </div>
+                <ChevronRight v-if="insurance.url" class="size-4 text-muted-foreground"/>
+                <div v-else class="text-xs text-muted-foreground">Nog niet beschikbaar</div>
+              </component>
+            </li>
+          </ul>
+        </DialogContent>
+      </Dialog>
+
       <NuxtLinkLocale to="report-claim"
-                class="w-full flex flex-col items-center gap-y-2 text-sm text-center bg-primary/10 hover:bg-primary/20 duration-150 rounded-xl border text-sm font-medium px-7 py-5">
+                      class="w-full flex flex-col items-center gap-y-2 text-sm text-center bg-primary/10 hover:bg-primary/20 duration-150 rounded-xl border text-sm font-medium px-7 py-5">
         <AlertTriangle class="size-10 text-primary"/>
         {{ $t('claims.report_a_claim') }}
       </NuxtLinkLocale>
       <NuxtLinkLocale to="insurances"
-                class="w-full flex flex-col items-center gap-y-2 text-sm text-center bg-primary/10 hover:bg-primary/20 duration-150 rounded-xl border text-sm font-medium px-7 py-5">
+                      class="w-full flex flex-col items-center gap-y-2 text-sm text-center bg-primary/10 hover:bg-primary/20 duration-150 rounded-xl border text-sm font-medium px-7 py-5">
         <Files class="size-10 text-primary"/>
         {{ $t('home.quick_actions.show_documents') }}
       </NuxtLinkLocale>
       <NuxtLinkLocale to="contact"
-                class="w-full flex flex-col items-center gap-y-2 text-sm text-center bg-primary/10 hover:bg-primary/20 duration-150 rounded-xl border text-sm font-medium px-7 py-5">
+                      class="w-full flex flex-col items-center gap-y-2 text-sm text-center bg-primary/10 hover:bg-primary/20 duration-150 rounded-xl border text-sm font-medium px-7 py-5">
         <Headset class="size-10 text-primary"/>
         {{ $t('home.quick_actions.contact_us') }}
       </NuxtLinkLocale>
@@ -73,7 +132,7 @@ const greeting = computed(() => {
             <component :is="activity.icon" class="size-5 text-primary"/>
             <div class="text-sm ml-3">
               <NuxtLinkLocale to="#"
-                        class="font-medium hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
+                              class="font-medium hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
                 {{ activity.title }}
               </NuxtLinkLocale>
               <div class="text-muted-foreground">{{ activity.description }}</div>

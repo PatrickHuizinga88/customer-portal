@@ -11,6 +11,11 @@ export default {
       title: "Stuur ons een bericht",
       description: "Laat je vraag of opmerking achter en wij nemen zo snel mogelijk contact met je op.",
 
+      success: {
+        title: "Bericht verstuurd",
+        description: "Bedankt voor je bericht. Wij nemen zo snel mogelijk contact met je op.",
+      },
+
       message: "Bericht",
       subject: "Onderwerp",
 

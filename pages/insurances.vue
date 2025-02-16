@@ -94,7 +94,7 @@ const fallbackObjects = [
   }
 ]
 
-const {data: objects} = await useFetch('/api/customers', {
+const {data: objects, status} = await useLazyFetch('/api/customers', {
   transform: (data) => {
     if (!data.objects) return fallbackObjects
     return data.objects.map((object: any) => {
@@ -118,7 +118,7 @@ const objectIcon = (type: string) => {
 <template>
   <Page :title="$t('insurances.header.title')" :description="$t('insurances.header.description')">
     <div class="flex flex-col gap-y-8">
-      <div v-for="(object, index) in objects" class="space-y-4">
+      <div v-if="objects.length && status !== 'pending'" v-for="(object, index) in objects" class="space-y-4">
         <div class="flex items-center">
           <div class="p-2 bg-primary/10 text-primary rounded-lg mr-3">
             <component v-if="object.type" :is="objectIcon(object.type)" class="size-10"/>
@@ -133,6 +133,16 @@ const objectIcon = (type: string) => {
                          :insurance="insurance"/>
         </div>
         <Separator v-if="index !== objects.length - 1" class="w-full !mt-8"/>
+      </div>
+      <div v-else-if="status === 'pending'" class="space-y-4">
+        <div class="flex items-center">
+          <Skeleton class="mr-3 size-14"/>
+          <Skeleton class="h-8 w-64"/>
+        </div>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <Skeleton class="h-64"/>
+          <Skeleton class="h-64"/>
+        </div>
       </div>
     </div>
   </Page>
