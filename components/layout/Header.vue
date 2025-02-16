@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {LogOut, Bell, User, Menu} from 'lucide-vue-next'
+import {LogOut, Bell, User, Menu, ReceiptText} from 'lucide-vue-next'
 import {APP_NAME} from "~/constants";
 import {
   DropdownMenu,
@@ -22,9 +22,9 @@ const open = ref(false)
 
 const mainNavItems = [
   {name: t('home.home'), url: '/'},
-  {name: t('insurances.my_insurances'), url: '/insurances'},
-  {name: t('claims.report_a_claim'), url: '/report-claim'},
-  {name: t('contact.contact'), url: '/contact'},
+  {name: t('insurances.my_insurances'), url: 'insurances'},
+  {name: t('claims.report_a_claim'), url: 'report-claim'},
+  {name: t('contact.contact'), url: 'contact'},
 ]
 
 const secondaryNavItems = [
@@ -32,7 +32,8 @@ const secondaryNavItems = [
 ]
 
 const userNavItems = [
-  {name: t('profile.my_profile'), url: '/profile', icon: User},
+  {name: t('profile.my_profile'), url: 'profile', icon: User},
+  {name: t('invoices.invoices', 2), url: 'invoices', icon: ReceiptText},
   {name: t('authentication.common.sign_out'), icon: LogOut},
 ]
 
@@ -55,15 +56,15 @@ watch(useRoute(), () => {
     <div class="container">
       <nav class="flex justify-between items-center">
         <div class="flex gap-8 items-center">
-          <NuxtLink to="/">
+          <NuxtLinkLocale to="/">
             <img :src="logoUrl" :alt="companyName" class="h-9">
-          </NuxtLink>
+          </NuxtLinkLocale>
           <ul class="hidden md:flex gap-4">
             <li v-for="item in mainNavItems">
-              <NuxtLink :to="item.url" activeClass="bg-muted"
+              <NuxtLinkLocale :to="item.url" activeClass="bg-muted"
                         class="inline-block px-2 py-1.5 rounded-md text-sm font-medium hover:bg-muted duration-150">
                 {{ item.name }}
-              </NuxtLink>
+              </NuxtLinkLocale>
             </li>
           </ul>
         </div>
@@ -101,10 +102,10 @@ watch(useRoute(), () => {
             </DropdownMenuTrigger>
             <DropdownMenuContent>
               <DropdownMenuItem v-for="item in userNavItems" @click="!item.url ? signOut() : null" :asChild="item.url !== undefined">
-                <NuxtLink v-if="item.url" to="/profile">
+                <NuxtLinkLocale v-if="item.url" :to="item.url">
                   <component :is="item.icon" class="size-4"/>
                   <span>{{ item.name }}</span>
-                </NuxtLink>
+                </NuxtLinkLocale>
                 <template v-else>
                   <component :is="item.icon" class="size-4"/>
                   <span>{{ item.name }}</span>
@@ -121,16 +122,16 @@ watch(useRoute(), () => {
             <SheetContent class="flex flex-col justify-center">
               <ul class="flex flex-col align-stretch gap-4">
                 <li v-for="item in mainNavItems">
-                  <NuxtLink :to="item.url" activeClass="text-primary"
+                  <NuxtLinkLocale :to="item.url" activeClass="text-primary"
                             class="inline-block px-2 py-1 text-2xl font-semibold text-right rounded hover:bg-muted duration-150">
                     {{ item.name }}
-                  </NuxtLink>
+                  </NuxtLinkLocale>
                 </li>
                 <li v-for="item in userNavItems">
-                  <NuxtLink v-if="item.url" :to="item.url" activeClass="text-primary-dark"
+                  <NuxtLinkLocale v-if="item.url" :to="item.url" activeClass="text-primary-dark"
                             class="inline-block px-2 py-1 text-2xl font-semibold text-right rounded hover:bg-muted duration-150">
                     {{ item.name }}
-                  </NuxtLink>
+                  </NuxtLinkLocale>
                   <button v-else @click="signOut"
                           class="inline-block px-2 py-1 text-2xl font-semibold text-right rounded hover:bg-muted duration-150">
                     {{ item.name }}

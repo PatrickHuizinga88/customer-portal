@@ -88,9 +88,9 @@ const onSubmit = handleSubmit(async (values) => {
           {{ $t('common.actions.save') }}
         </Button>
         <Button variant="outline" type="button" class="w-full" :disabled="loading" as-child>
-          <NuxtLink to="/">
+          <NuxtLinkLocale to="/">
             {{ $t('common.actions.skip') }}
-          </NuxtLink>
+          </NuxtLinkLocale>
         </Button>
       </div>
     </form>

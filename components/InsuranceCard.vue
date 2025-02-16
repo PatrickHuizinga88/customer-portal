@@ -135,10 +135,10 @@ const transformedCoverage = (product: string) => {
       </Sheet>
 
       <Button variant="outline" class="w-full" as-child>
-        <NuxtLink to="/report-claim">
+        <NuxtLinkLocale to="report-claim">
           <AlertTriangle class="size-5"/>
           {{ $t('claims.report_a_claim') }}
-        </NuxtLink>
+        </NuxtLinkLocale>
       </Button>
       <Button v-if="insurance.is_editable" variant="outline" class="w-full">
         <Pencil class="size-5"/>

@@ -41,10 +41,10 @@ const breadcrumbs = computed(() => {
     <ol v-if="breadcrumbs.length" class="flex items-center space-x-3">
       <li v-for="(crumb, index) in breadcrumbs">
         <div class="flex items-center">
-          <NuxtLink :to="crumb.link"
+          <NuxtLinkLocale :to="crumb.link"
                     :class="[{ 'text-muted-foreground hover:text-foreground': crumb.link }, { 'font-medium': index === breadcrumbs.length - 1 }, { 'mr-3': breadcrumbs.length > 1 }]">
             {{ crumb.title }}
-          </NuxtLink>
+          </NuxtLinkLocale>
           <ChevronRight v-if="index !== breadcrumbs.length - 1" class="size-4 flex-shrink-0 text-muted-foreground"
                         role="presentation" aria-hidden="true"/>
         </div>

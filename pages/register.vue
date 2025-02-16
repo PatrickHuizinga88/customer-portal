@@ -129,10 +129,10 @@ const signUp = async () => {
     <template #footer>
       {{ $t('authentication.register.have_account') + ' ' }}
       <Button variant="link" class="h-auto p-0 ml-1" as-child>
-        <NuxtLink to="/login">
+        <NuxtLinkLocale to="/login">
           {{ $t('authentication.common.sign_in') }}
           <ArrowRight class="size-4" aria-hidden="true"/>
-        </NuxtLink>
+        </NuxtLinkLocale>
       </Button>
     </template>
   </Authentication>

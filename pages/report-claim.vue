@@ -33,10 +33,10 @@ const recentClaims = [
         <li v-for="claim in recentClaims" class="flex py-2 px-2 -mx-2">
           <component :is="claim.icon" class="size-5 text-primary"/>
           <div class="text-sm ml-3">
-            <NuxtLink to="#"
+            <NuxtLinkLocale to="#"
                       class="font-medium hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
               {{ claim.title }}
-            </NuxtLink>
+            </NuxtLinkLocale>
             <div class="text-muted-foreground">{{ claim.description }}</div>
           </div>
         </li>

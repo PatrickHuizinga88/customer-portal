@@ -43,21 +43,21 @@ const greeting = computed(() => {
         <ShieldPlus class="size-10 text-primary"/>
         {{ $t('home.quick_actions.new_insurance') }}
       </NuxtLink>
-      <NuxtLink to="/report-claim"
+      <NuxtLinkLocale to="report-claim"
                 class="w-full flex flex-col items-center gap-y-2 text-sm text-center bg-primary/10 hover:bg-primary/20 duration-150 rounded-xl border text-sm font-medium px-7 py-5">
         <AlertTriangle class="size-10 text-primary"/>
         {{ $t('claims.report_a_claim') }}
-      </NuxtLink>
-      <NuxtLink to="/insurances"
+      </NuxtLinkLocale>
+      <NuxtLinkLocale to="insurances"
                 class="w-full flex flex-col items-center gap-y-2 text-sm text-center bg-primary/10 hover:bg-primary/20 duration-150 rounded-xl border text-sm font-medium px-7 py-5">
         <Files class="size-10 text-primary"/>
         {{ $t('home.quick_actions.show_documents') }}
-      </NuxtLink>
-      <NuxtLink to="/contact"
+      </NuxtLinkLocale>
+      <NuxtLinkLocale to="contact"
                 class="w-full flex flex-col items-center gap-y-2 text-sm text-center bg-primary/10 hover:bg-primary/20 duration-150 rounded-xl border text-sm font-medium px-7 py-5">
         <Headset class="size-10 text-primary"/>
         {{ $t('home.quick_actions.contact_us') }}
-      </NuxtLink>
+      </NuxtLinkLocale>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 items-start gap-4 mb-8 md:mt-12">
@@ -72,10 +72,10 @@ const greeting = computed(() => {
           <li v-for="activity in recentActivities" class="flex py-2 px-2 -mx-2">
             <component :is="activity.icon" class="size-5 text-primary"/>
             <div class="text-sm ml-3">
-              <NuxtLink to="#"
+              <NuxtLinkLocale to="#"
                         class="font-medium hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
                 {{ activity.title }}
-              </NuxtLink>
+              </NuxtLinkLocale>
               <div class="text-muted-foreground">{{ activity.description }}</div>
             </div>
           </li>
@@ -100,10 +100,10 @@ const greeting = computed(() => {
           </div>
           <!--        <div class="bg-accent p-[3px] rounded-[calc(var(&#45;&#45;radius-button)+3px)]">-->
           <Button variant="ghost" size="lg" class="group bg-background text-foreground w-full" as-child>
-            <NuxtLink to="#">
+            <NuxtLinkLocale to="#">
               Bekijk onze reisverzekering
               <ArrowRight class="size-5 group-hover:translate-x-0.5 duration-150"/>
-            </NuxtLink>
+            </NuxtLinkLocale>
           </Button>
           <!--        </div>-->
         </div>

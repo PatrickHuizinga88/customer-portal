@@ -85,59 +85,74 @@ export default defineNuxtConfig({
   // },
 
   i18n: {
-    strategy: 'no_prefix',
+    strategy: 'prefix_except_default',
+    defaultLocale: 'nl',
+    detectBrowserLanguage: {
+      useCookie: false,
+    },
     locales: [
       {
         code: 'nl',
         name: 'Nederlands',
-        files: ['nl/common', 'nl/authentication', 'nl/claims', 'nl/contact', 'nl/home', 'nl/insurances', 'nl/profile']
+        files: ['nl/common', 'nl/authentication', 'nl/claims', 'nl/contact', 'nl/home', 'nl/insurances', 'nl/invoices', 'nl/profile']
       },
-      // {
-      //   code: 'en',
-      //   name: 'English',
-      //   files: ['en/common', 'en/authentication', 'en/home']
-      // },
+      {
+        code: 'en',
+        name: 'English',
+        files: ['en/common', 'en/authentication', 'en/claims', 'en/contact', 'en/home', 'en/insurances', 'en/invoices', 'en/profile']
+      },
     ],
-    // customRoutes: 'config',
-    // pages: {
-    //   register: {
-    //     en: '/register',
-    //     nl: '/registreren',
-    //   },
-    //   'password-recovery': {
-    //     en: '/password-recovery',
-    //     nl: '/wachtwoord-herstellen',
-    //   },
-    //   'update-password': {
-    //     en: '/update-password',
-    //     nl: '/wachtwoord-bijwerken',
-    //   },
-    //   users: {
-    //     en: '/users',
-    //     nl: '/gebruikers',
-    //   },
-    //   'users-create': {
-    //     en: '/users/create',
-    //     nl: '/gebruikers/aanmaken',
-    //   },
-    //   'users-id': {
-    //     en: '/users/[id]',
-    //     nl: '/gebruikers/[id]',
-    //   },
-    //   'users-id-edit': {
-    //     en: '/users/[id]/edit',
-    //     nl: '/gebruikers/[id]/bewerken',
-    //   },
-    //   customers: {
-    //     en: '/customers/',
-    //     nl: '/klanten/',
-    //   },
-    //   settings: {
-    //     en: '/settings',
-    //     nl: '/instellingen',
-    //   },
-    // },
-    defaultLocale: 'nl',
+    customRoutes: 'config',
+    pages: {
+      'claims-chat': {
+        en: '/claims-chat',
+        nl: '/schade-chat',
+      },
+      contact: {
+        en: '/contact',
+        nl: '/contact',
+      },
+      insurances: {
+        en: '/insurances',
+        nl: '/verzekeringen',
+      },
+      intro: {
+        en: '/intro',
+        nl: '/intro',
+      },
+      invoices: {
+        en: '/invoices',
+        nl: '/facturen',
+      },
+      login: {
+        en: '/login',
+        nl: '/inloggen',
+      },
+      'password-recovery': {
+        en: '/password-recovery',
+        nl: '/wachtwoord-herstellen',
+      },
+      profile: {
+        en: '/profile',
+        nl: '/profiel',
+      },
+      register: {
+        en: '/register',
+        nl: '/registreren',
+      },
+      'report-claim': {
+        en: '/report-claim',
+        nl: '/schade-melden',
+      },
+      settings: {
+        en: '/settings',
+        nl: '/instellingen',
+      },
+      'update-password': {
+        en: '/update-password',
+        nl: '/wachtwoord-bijwerken',
+      },
+    },
   },
 
   dayjs: {
