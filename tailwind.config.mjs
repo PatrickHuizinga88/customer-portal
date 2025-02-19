@@ -17,11 +17,11 @@ export default {
         xl: "5rem",
         "2xl": "6rem",
       },
+    },
+    extend: {
       screens: {
         "2xl": "1400px",
       },
-    },
-    extend: {
       fontFamily: {
         headings: ['var(--font-headings)', 'sans-serif'],
         sans: ['Inter', 'sans-serif'],

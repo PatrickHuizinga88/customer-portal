@@ -7,13 +7,8 @@ import {useForm} from "vee-validate";
 import {CardHeader} from "~/components/ui/card";
 import type {Database} from "~/types/database.types";
 
-interface ContactDetail {
-  type: string
-  label: string
-  value: string
-}
-
 const supabase = useSupabaseClient<Database>()
+const user = useSupabaseUser()
 const notificationStore = useNotificationStore()
 const {t} = useI18n()
 const {public: {companyId}} = useRuntimeConfig()
@@ -21,20 +16,11 @@ const {public: {companyId}} = useRuntimeConfig()
 const {data: supportSettings} = await useAsyncData(async () => {
   try {
     const {data, error} = await supabase.from('support_settings')
-        .select('email,phone,whatsapp,address,opening_hours')
+        .select('email,phone,whatsapp,street_name,house_number,postal_code,city,opening_hours')
         .filter('company_id', 'eq', companyId)
         .single()
     if (error) throw error
-    return {
-      openingHours: data.opening_hours,
-      contactDetails: Object.entries(data)
-          .filter(([type, value]) => type !== 'opening_hours' && value)
-          .map(([type, value]) => ({
-            type,
-            label: t(`contact.contact_details.${type}`),
-            value
-          })) as ContactDetail[]
-    }
+    return data
   } catch (error) {
     notificationStore.createNotification({
       type: 'destructive',
@@ -59,32 +45,6 @@ const subjectOptions = [
 const loading = ref(false)
 const success = ref(false)
 
-const contactDetailIcon = (type: string) => {
-  switch (type) {
-    case 'phone':
-      return Phone
-    case 'whatsapp':
-      return MessageCircle
-    case 'email':
-      return Mail
-    case 'address':
-      return MapPin
-  }
-}
-
-const contactDetailUrl = (type: string, value: string) => {
-  switch (type) {
-    case 'phone':
-      return `tel:${value}`
-    case 'whatsapp':
-      return `https://wa.me/${value}`
-    case 'email':
-      return `mailto:${value}`
-    case 'address':
-      return `https://www.google.com/maps/search/?api=1&query=${value}`
-  }
-}
-
 const formSchema = toTypedSchema(z.object({
   subject: z.string({
     message: t('common.validations.required')
@@ -98,12 +58,19 @@ const {handleSubmit} = useForm({
   validationSchema: formSchema,
 })
 
-const onSubmit = handleSubmit((values) => {
+const onSubmit = handleSubmit(async (values) => {
   try {
     loading.value = true
 
-    // TODO: Send contact form data to backend
-    console.log(values)
+    const {error} = await $fetch('/api/send', {
+      method: 'POST',
+      body: {
+        sender: user.value?.email,
+        subject: values.subject,
+        message: values.message,
+      }
+    })
+    if (error) throw error
 
     success.value = true
   } catch (error) {
@@ -128,16 +95,51 @@ const onSubmit = handleSubmit((values) => {
              class="hidden md:block w-full rounded-2xl aspect-video mb-6 object-cover">
         <Card class="p-5">
           <ul v-if="supportSettings" class="space-y-2">
-            <li v-for="detail in supportSettings.contactDetails" :key="detail.type">
-              <a :href="contactDetailUrl(detail.type, detail.value)" target="_blank"
+            <li v-if="supportSettings.phone">
+              <a :href="`tel:${supportSettings.phone}`"
                  class="flex items-center gap-4 bg-muted/50 rounded-xl p-3 hover:bg-muted duration-150">
-                <div
-                    class="size-9 bg-primary/20 text-primary-dark rounded-lg flex items-center justify-center shrink-0">
-                  <component :is="contactDetailIcon(detail.type)" class="size-5"/>
+                <div class="size-9 bg-primary/20 text-primary-dark rounded-lg flex items-center justify-center shrink-0">
+                  <Phone class="size-5"/>
                 </div>
                 <div class="text-sm w-0 flex-1">
-                  <div class="font-medium">{{ detail.label }}</div>
-                  <div class="truncate">{{ detail.value }}</div>
+                  <div class="font-medium">{{ $t('contact.contact_details.phone') }}</div>
+                  <div class="truncate">{{ supportSettings.phone }}</div>
+                </div>
+              </a>
+            </li>
+            <li v-if="supportSettings.email">
+              <a :href="`mailto:${supportSettings.email}`"
+                 class="flex items-center gap-4 bg-muted/50 rounded-xl p-3 hover:bg-muted duration-150">
+                <div class="size-9 bg-primary/20 text-primary-dark rounded-lg flex items-center justify-center shrink-0">
+                  <Mail class="size-5"/>
+                </div>
+                <div class="text-sm w-0 flex-1">
+                  <div class="font-medium">{{ $t('contact.contact_details.email') }}</div>
+                  <div class="truncate">{{ supportSettings.email }}</div>
+                </div>
+              </a>
+            </li>
+            <li v-if="supportSettings.whatsapp">
+              <a :href="`https://wa.me/${supportSettings.whatsapp}`" target="_blank"
+                 class="flex items-center gap-4 bg-muted/50 rounded-xl p-3 hover:bg-muted duration-150">
+                <div class="size-9 bg-primary/20 text-primary-dark rounded-lg flex items-center justify-center shrink-0">
+                  <MessageCircle class="size-5"/>
+                </div>
+                <div class="text-sm w-0 flex-1">
+                  <div class="font-medium">{{ $t('contact.contact_details.whatsapp') }}</div>
+                  <div class="truncate">{{ supportSettings.whatsapp }}</div>
+                </div>
+              </a>
+            </li>
+            <li v-if="supportSettings.street_name && supportSettings.house_number && supportSettings.postal_code && supportSettings.city">
+              <a :href="`https://www.google.com/maps/search/?api=1&query=${supportSettings.whatsapp}`" target="_blank"
+                 class="flex items-center gap-4 bg-muted/50 rounded-xl p-3 hover:bg-muted duration-150">
+                <div class="size-9 bg-primary/20 text-primary-dark rounded-lg flex items-center justify-center shrink-0">
+                  <MapPin class="size-5"/>
+                </div>
+                <div class="text-sm w-0 flex-1">
+                  <div class="font-medium">{{ $t('contact.contact_details.address') }}</div>
+                  <div class="truncate">{{ `${supportSettings.street_name} ${supportSettings.house_number}, ${supportSettings.postal_code} ${supportSettings.city}` }}</div>
                 </div>
               </a>
             </li>
@@ -187,7 +189,7 @@ const onSubmit = handleSubmit((values) => {
           </FormField>
           <Button type="submit" :loading="loading" class="w-full sm:w-auto">
             <Send/>
-            {{ $t('common.actions.send', {item: lowercase($t('contact.contact_form.message'))}) }}
+            {{ capitalizeSentence($t('common.actions.send_item', {item: $t('contact.contact_form.message')})) }}
           </Button>
         </form>
       </Card>

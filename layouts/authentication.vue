@@ -30,7 +30,7 @@ const {data: company} = await useAsyncData(async () => {
   return data
 })
 
-useGlobalHead(company.value?.branding[0])
+useGlobalHead(company.value?.branding)
 </script>
 
 <template>

@@ -107,7 +107,7 @@ onMounted(() => {
       <div class="flex flex-col items-start sm:flex-row sm:items-center gap-2 sm:gap-4">
         <Button :disabled="loading">
           <Loader2 v-if="loading" class="size-5 animate-spin"/>
-          {{ $t('common.actions.save', {item: lowercase($t('settings.settings', 2))}) }}
+          {{ capitalizeSentence($t('common.actions.save_item', {item: $t('settings.settings', 2)})) }}
         </Button>
         <p class="text-sm text-muted-foreground">{{ $t('settings.refresh_page') }}</p>
       </div>

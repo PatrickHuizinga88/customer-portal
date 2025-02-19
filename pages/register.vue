@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import {ArrowRight, CheckCircle, Loader2} from 'lucide-vue-next'
 import Authentication from "~/layouts/authentication.vue";
+import {toTypedSchema} from "@vee-validate/zod";
+import {useForm} from "vee-validate";
+import * as z from 'zod'
+
 
 definePageMeta({
   layout: false
@@ -9,11 +13,6 @@ definePageMeta({
 const supabase = useSupabaseClient()
 const {t} = useI18n()
 
-const form = reactive({
-  email: '',
-  password: '',
-  repeatedPassword: ''
-})
 const errorMessage = ref('')
 const success = ref(false)
 const resendDelay = ref(10)
@@ -28,9 +27,42 @@ const countDown = () => {
   }, 1000)
 }
 
-const signUp = async () => {
-  if (form.password !== form.repeatedPassword) {
-    errorMessage.value = t('authentication.register.passwords_dont_match')
+const formSchema = toTypedSchema(z.object({
+  email: z
+      .string({message: t('common.validations.required')})
+      .email({message: t('authentication.validations.email')}),
+  password: z
+      .string({message: t('common.validations.required')})
+      .min(8, {message: t('authentication.validations.password_length', {length: 8})}),
+  repeated_password: z
+      .string({message: t('common.validations.required')})
+      .min(8, {message: t('authentication.validations.password_length', {length: 8})}),
+}))
+
+const form = useForm({
+  validationSchema: formSchema,
+})
+
+const signUp = async (email: string, password: string) => {
+  const {public: {baseUrl}} = useRuntimeConfig()
+
+  const {error} = await supabase.auth.signUp({
+    email: email,
+    password: password,
+    options: {
+      emailRedirectTo: `${baseUrl}/intro`
+    }
+  })
+  if (error) throw error
+
+  resendDelay.value = 10
+  countDown()
+}
+
+
+const onSubmit = form.handleSubmit(async (values) => {
+  if (values.password !== values.repeated_password) {
+    errorMessage.value = t('authentication.validations.passwords_dont_match')
     return
   }
 
@@ -40,84 +72,79 @@ const signUp = async () => {
     const {public: {baseUrl}} = useRuntimeConfig()
 
     const {error} = await supabase.auth.signUp({
-      email: form.email,
-      password: form.password,
+      email: values.email,
+      password: values.password,
       options: {
-        emailRedirectTo: `${baseUrl}/intro` // TODO: Fix redirection
+        emailRedirectTo: `${baseUrl}/intro`
       }
     })
-    if (error) {
-      loading.value = false
-      throw error
-    }
-    success.value = true
+    if (error) throw error
+
     resendDelay.value = 10
     countDown()
+
+    success.value = true
   } catch (error) {
     errorMessage.value = t('authentication.register.sign_up_failed')
     console.error(error)
+  } finally {
+    loading.value = false
   }
-}
+})
 </script>
 
 <template>
   <Authentication :title="$t('authentication.register.create_new_account')">
-    <form v-if="!success" class="space-y-6" @submit.prevent="signUp">
-      <div>
-        <Label for="email" class="block text-sm font-medium leading-6">{{ $t('common.general.email') }}</Label>
-        <Input
-            v-model="form.email"
-            id="email"
-            name="email"
-            type="email"
-            required/>
-      </div>
+    <form v-show="!success" class="space-y-6" @submit="onSubmit">
+      <FormField v-slot="{ componentField }" :validate-on-blur="false" name="email">
+        <FormItem>
+          <FormLabel>{{ $t('common.general.email') }}</FormLabel>
+          <FormControl>
+            <Input v-bind="componentField" type="email"/>
+          </FormControl>
+          <FormMessage/>
+        </FormItem>
+      </FormField>
+      <FormField v-slot="{ componentField }" name="password">
+        <FormItem>
+          <FormLabel>{{ $t('authentication.common.password') }}</FormLabel>
+          <FormControl>
+            <PasswordInput v-bind="componentField"/>
+          </FormControl>
+          <FormMessage/>
+        </FormItem>
+      </FormField>
+      <FormField v-slot="{ componentField }" name="repeated_password">
+        <FormItem>
+          <FormLabel>{{ $t('authentication.register.repeat_password') }}</FormLabel>
+          <FormControl>
+            <PasswordInput v-bind="componentField"/>
+          </FormControl>
+          <FormMessage/>
+        </FormItem>
+      </FormField>
 
-      <div>
-        <Label for="password"
-               class="block text-sm font-medium leading-6">{{ $t('authentication.common.password') }}</Label>
-        <PasswordInput
-            v-model="form.password"
-            id="password"
-            name="password"
-            required/>
-      </div>
-
-      <div>
-        <Label for="repeated-password"
-               class="block text-sm font-medium leading-6">{{ $t('authentication.register.repeat_password') }}</Label>
-        <PasswordInput
-            v-model="form.repeatedPassword"
-            id="repeated-password"
-            name="repeated-password"
-            required/>
-      </div>
-
-      <Button type="submit" :disabled="loading" class="w-full">
-        <div v-if="loading" role="status">
-          <Loader2 class="size-5 animate-spin"/>
-          <span class="sr-only">{{ $t('common.general.loading') }}...</span>
-        </div>
+      <Button type="submit" :loading="loading" class="w-full">
         {{ $t('authentication.register.sign_up') }}
       </Button>
 
       <p v-if="errorMessage" class="text-sm text-destructive">{{ errorMessage }}</p>
-
     </form>
 
-    <div v-else class="flex flex-col items-center">
+    <div v-if="success" class="flex flex-col items-center">
       <Alert variant="success">
         <CheckCircle class="size-4"/>
         <AlertTitle>{{ $t('authentication.register.sign_up_success.title') }}</AlertTitle>
         <AlertDescription>{{
-            $t('authentication.register.sign_up_success.description', {email: form.email})
+            $t('authentication.register.sign_up_success.description', {email: form.values.email})
           }}
         </AlertDescription>
       </Alert>
 
-      <p class="text-sm text-muted-foreground mt-4">
+      <p class="text-sm text-muted-foreground text-center mt-4">
         {{ $t('authentication.register.received_nothing') }}
-        <Button @click="signUp" variant="link" class="h-auto p-0 text-primary" :disabled="resendDelay > 0">
+        <Button @click="signUp(form.values.email, form.values.password)" variant="link" class="h-auto p-0 text-primary"
+                :disabled="resendDelay > 0">
           {{ $t('authentication.register.send_again') }}
         </Button>
         <span v-if="resendDelay > 0" class="inline-block ml-1">
@@ -126,13 +153,13 @@ const signUp = async () => {
       </p>
     </div>
 
-    <template #footer>
+    <template v-if="!success" #footer>
       {{ $t('authentication.register.have_account') + ' ' }}
-      <Button variant="link" class="h-auto p-0 ml-1" as-child>
-        <NuxtLinkLocale to="/login">
+      <Button variant="link" size="sm" class="h-auto p-0 ml-1" as-child>
+        <NuxtLink to="/login">
           {{ $t('authentication.common.sign_in') }}
-          <ArrowRight class="size-4" aria-hidden="true"/>
-        </NuxtLinkLocale>
+          <ArrowRight aria-hidden="true"/>
+        </NuxtLink>
       </Button>
     </template>
   </Authentication>

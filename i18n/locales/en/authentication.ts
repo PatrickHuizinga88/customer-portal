@@ -6,6 +6,12 @@ export default {
       sign_out: "Logout",
       toggle_password_visibility: "Toggle password visibility",
     },
+    validations: {
+      email: "Dit is geen geldig e-mailadres",
+      incorrect_current_password: "Huidig wachtwoord is onjuist",
+      passwords_dont_match: "Wachtwoorden komen niet overeen",
+      password_length: "Wachtwoord moet minimaal {length} tekens lang zijn",
+    },
     login: {
       forgot_password: "Forgot password?",
       no_account: "Don't have an account?",
@@ -18,7 +24,6 @@ export default {
       continue: "Continue",
       create_new_account: "Create your new account",
       have_account: "Already have an account?",
-      passwords_dont_match: "Passwords don't match",
       received_nothing: "Didn't receive anything?",
       repeat_password: "Repeat password",
       send_again: "Send again",

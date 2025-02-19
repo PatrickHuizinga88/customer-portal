@@ -19,13 +19,19 @@ export default {
 
     actions: {
       actions: "Actions",
-      add: "Add {item}",
-      back_to: "Back to {item}",
+      add: "Add",
+      add_item: "Add {item}",
+      back: "Back",
+      back_to_item: "Back to {item}",
       cancel: "Cancel",
-      delete: "Delete {item}",
-      edit: "Edit {item}",
-      save: "Save {item}",
-      send: "Send {item}",
+      delete: "Delete",
+      delete_item: "Delete {item}",
+      edit: "Edit",
+      edit_item: "Edit {item}",
+      save: "Save",
+      save_item: "Save {item}",
+      send: "Send",
+      send_item: "Send {item}",
       skip: "Skip",
 
       delete_confirmation: "Are you sure you want to delete {item}? It will be permanently removed.",
@@ -33,8 +39,8 @@ export default {
 
     validations: {
       required: "This field is required",
-      min: "This field must be at least {min} characters",
-      max: "This field must be at most {max} characters",
+      max_length: "This field must be at most {max} characters",
+      min_length: "This field must be at least {min} characters",
     },
 
     notifications: {
@@ -42,7 +48,7 @@ export default {
       save: {
         success: {
           title: "Save successful",
-          description: "{item} was saved successfully."
+          description: "{item} saved successfully."
         },
         error: {
           title: "Save Failed",
@@ -52,7 +58,7 @@ export default {
       delete: {
         success: {
           title: "Delete successful",
-          description: "{item} was deleted successfully."
+          description: "{item} deleted successfully."
         },
         error: {
           title: "Delete Failed",
@@ -62,7 +68,7 @@ export default {
       update: {
         success: {
           title: "Update successful",
-          description: "{item} was updated successfully."
+          description: "{item} updated successfully."
         },
         error: {
           title: "Update Failed",
@@ -72,7 +78,7 @@ export default {
       retrieve: {
         success: {
           title: "Retrieve successful",
-          description: "{item} was retrieved successfully."
+          description: "{item} retrieved successfully."
         },
         error: {
           title: "Retrieve Failed",

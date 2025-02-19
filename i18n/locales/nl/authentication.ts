@@ -6,6 +6,12 @@ export default {
       sign_out: "Uitloggen",
       toggle_password_visibility: "Wachtwoord zichtbaarheid wisselen",
     },
+    validations: {
+      email: "This is not a valid email address",
+      incorrect_current_password: "Current password is incorrect",
+      passwords_dont_match: "Passwords don't match",
+      password_length: "Password must be at least {length} characters long",
+    },
     login: {
       forgot_password: "Wachtwoord vergeten?",
       no_account: "Heb je geen account?",
@@ -19,7 +25,6 @@ export default {
       create_new_account: "Nieuw account aanmaken",
       have_account: "Heb je al een account?",
       in_seconds: "over {seconds} seconden.",
-      passwords_dont_match: "Wachtwoorden komen niet overeen",
       received_nothing: "Niets ontvangen?",
       repeat_password: "Herhaal wachtwoord",
       send_again: "Opnieuw versturen",

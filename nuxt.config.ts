@@ -46,6 +46,7 @@ export default defineNuxtConfig({
       companyId: '',
     },
     openaiApiKey: '',
+    resendApiKey: '',
     novuloUsername: '',
     novuloPassword: '',
   },
@@ -63,7 +64,7 @@ export default defineNuxtConfig({
 
   supabase: {
     redirectOptions: {
-      login: '/login',
+      login: '/inloggen',
       callback: '/confirm',
       exclude: [
         '/confirm-registration',

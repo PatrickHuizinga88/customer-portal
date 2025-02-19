@@ -14,20 +14,13 @@ const {data: company} = await useAsyncData(async () => {
       .select(`
       company_name,
       logo_url,
-      branding (
-        primary_color,
-        accent_color,
-        border_radius,
-        button_radius,
-        heading_font,
-        body_font
-      )`)
+      branding (*)`)
       .filter('id', 'eq', companyId)
       .single()
   return data
 })
 
-useGlobalHead(company.value?.branding[0])
+useGlobalHead(company.value?.branding)
 </script>
 
 <template>

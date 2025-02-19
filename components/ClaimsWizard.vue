@@ -58,7 +58,7 @@ const onSubmit = handleSubmit(() => {
   <div class="wizard relative bg-muted py-10 min-[1400px]:after:rounded-2xl">
     <form @submit="onSubmit">
       <div v-if="currentStep === 1" class="space-y-8">
-        <h2>Waarmee heb je schade opgelopen?</h2>
+        <h2>{{ $t('claims.wizard.questions.object') }}</h2>
         <FormField v-slot="{ field }" name="object">
           <FormItem class="grid md:grid-cols-2 gap-3 space-y-0">
             <template v-if="status === 'pending'">
@@ -90,15 +90,15 @@ const onSubmit = handleSubmit(() => {
         </FormField>
       </div>
       <div v-else-if="currentStep === 2" class="space-y-8">
-        <h2>Wanneer en waar heeft het incident plaats gevonden?</h2>
+        <h2>{{ $t('claims.wizard.questions.time_and_location') }}</h2>
       </div>
       <div class="flex gap-3 mt-8">
         <Button v-if="currentStep > 1" @click="currentStep--" type="button" variant="outline" size="icon-lg"
-                class="shrink-0" aria-label="Vorige stap">
+                class="shrink-0" :aria-label="$t('claims.wizard.previous_step')">
           <ArrowLeft class="size-5"/>
         </Button>
         <Button type="submit" size="lg" class="w-full">
-          {{ currentStep === 1 ? 'Doorgaan met schade melden' : 'Volgende stap' }}
+          {{ currentStep === 1 ? $t('claims.wizard.continue') : $t('claims.wizard.next_step') }}
           <ArrowRight class="size-5"/>
         </Button>
       </div>
