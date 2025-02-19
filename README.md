@@ -1,15 +1,18 @@
-# Webapp boilerplate
+# Customer Portal
 
-This project provides a solid front-end foundation for webapps. Made with Nuxt 3 + Tailwind CSS + Supabase.
+A customer portal for insurance companies, built with Nuxt.js and Tailwind CSS.
 
 ## Features
+
 - Authentication by Supabase
-- User CRUD functionalities
-- UI components using Tailwind CSS
-- Multilayout
-- Dynamic breadcrumbs
-- Global notifications using Pinia
-- Dark & light mode switch
+- Custom branding (logo, colors, etc.)
+- View insurances from back-end
+- Reporting claims for insured objects (WIP)
+- Invoices overview (WIP)
+- Configurable contact details and form
+- Profile page to view and edit user information
+- Multi-language support
+- Fully responsive design
 
 ## Setup
 
