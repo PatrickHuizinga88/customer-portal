@@ -74,59 +74,83 @@ const transformedCoverage = (product: string) => {
         <SheetContent side="bottom"
                       class="flex flex-col gap-0 rounded-t-2xl lg:inset-x-[15%] xl:inset-x-1/4 p-0 max-h-[calc(100svh-3rem)]">
           <SheetHeader class="sticky text-left p-5 sm:p-6">
-            <SheetTitle>{{ $t('insurances.policy_overview') }}</SheetTitle>
+            <SheetTitle>{{ $t('insurances.insurance_details.policy_details') }}</SheetTitle>
           </SheetHeader>
           <div class="flex-1 overflow-y-auto">
             <div class="p-5 sm:p-6 pt-0 pb-10 space-y-8">
               <div class="grid grid-cols-2 gap-x-3">
                 <div class="flex flex-col bg-muted rounded-xl px-4 py-5 space-y-1">
-                  <span class="text-sm text-primary font-medium">Model</span>
+                  <span class="text-sm text-primary font-medium">{{ $t('insurances.insurance_details.vehicle') }}</span>
                   <span class="h4">{{ object.object_name }}</span>
                 </div>
                 <div class="flex flex-col bg-muted rounded-xl px-4 py-5 space-y-1">
-                  <span class="text-sm text-primary font-medium">Kenteken</span>
+                  <span class="text-sm text-primary font-medium">{{ $t('insurances.insurance_details.licence_plate') }}</span>
                   <span class="h4">{{ object.object_details }}</span>
                 </div>
               </div>
               <div class="space-y-4">
-                <h3 class="h4">Algemene informatie</h3>
+                <h3 class="h4">{{ $t('insurances.insurance_details.general_information') }}</h3>
                 <dl>
                   <div class="flex justify-between items-center gap-x-6 odd:bg-muted rounded p-3">
-                    <dt>Dekking</dt>
+                    <dt>{{ $t('insurances.coverage') }}</dt>
                     <dd class="font-medium text-right">{{ insurance.coverages[0].product }}</dd>
                   </div>
                   <div class="flex justify-between items-center gap-x-6 odd:bg-muted rounded p-3">
-                    <dt>Kenteken</dt>
-                    <dd class="font-medium text-right">{{ object.object_details }}</dd>
+                    <dt>{{ $t('insurances.insurance_details.premium') }}</dt>
+                    <dd class="font-medium text-right">{{ formattedPrice(insurance.premium) }} {{ $t('insurances.insurance_details.per_month') }}</dd>
                   </div>
                   <div class="flex justify-between items-center gap-x-6 odd:bg-muted rounded p-3">
-                    <dt>Premie</dt>
-                    <dd class="font-medium text-right">{{ formattedPrice(insurance.premium) }} per maand</dd>
-                  </div>
-                  <div class="flex justify-between items-center gap-x-6 odd:bg-muted rounded p-3">
-                    <dt>Status</dt>
+                    <dt>{{ $t('insurances.insurance_details.status') }}</dt>
                     <dd class="font-medium text-right">{{ capitalize(insurance.status) }}</dd>
                   </div>
                   <div class="flex justify-between items-center gap-x-6 odd:bg-muted rounded p-3">
-                    <dt>Looptijd</dt>
+                    <dt>{{ $t('insurances.insurance_details.term') }}</dt>
                     <dd class="font-medium text-right">01-01-2024 t/m 31-12-25</dd>
                   </div>
                   <div class="flex justify-between items-center gap-x-6 odd:bg-muted rounded p-3">
-                    <dt>Polisnummer</dt>
+                    <dt>{{ $t('insurances.insurance_details.policy_id') }}</dt>
                     <dd class="font-medium text-right">{{ insurance.reference }}</dd>
                   </div>
                   <div class="flex justify-between items-center gap-x-6 odd:bg-muted rounded p-3">
-                    <dt>Contactpersoon</dt>
+                    <dt>{{ $t('insurances.insurance_details.contact_person') }}</dt>
                     <dd class="font-medium text-right">John Doe</dd>
                   </div>
                 </dl>
               </div>
               <div class="space-y-4">
-                <h3 class="h4">Dekking en voorwaarden</h3>
+                <h3 class="h4">{{ $t('insurances.insurance_details.coverages_and_policies') }}</h3>
                 <div class="w-full h-16 rounded bg-muted"></div>
                 <Button variant="outline" class="w-full mt-4">
-                  <Pencil class="size-5"/>
-                  {{ $t('insurances.edit_coverage') }}
+                  <Pencil/>
+                  {{ $t('insurances.insurance_details.edit_coverage') }}
+                </Button>
+              </div>
+              <div class="space-y-4">
+                <h3 class="h4">{{ $t('insurances.insurance_details.documents') }}</h3>
+                <ul class="space-y-3">
+                  <li>
+                    <div class="w-full h-12 rounded bg-muted"></div>
+                  </li>
+                  <li>
+                    <div class="w-full h-12 rounded bg-muted"></div>
+                  </li>
+                </ul>
+              </div>
+              <div class="space-y-4">
+                <h3 class="h4">{{ $t('insurances.insurance_details.claims') }}</h3>
+                <ul class="space-y-3">
+                  <li>
+                    <div class="w-full h-12 rounded bg-muted"></div>
+                  </li>
+                  <li>
+                    <div class="w-full h-12 rounded bg-muted"></div>
+                  </li>
+                </ul>
+                <Button variant="outline" class="w-full mt-4" as-child>
+                  <NuxtLinkLocale to="report-claim">
+                    <AlertTriangle/>
+                    {{ $t('claims.report_a_claim') }}
+                  </NuxtLinkLocale>
                 </Button>
               </div>
             </div>

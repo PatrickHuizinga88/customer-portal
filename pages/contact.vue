@@ -93,68 +93,73 @@ const onSubmit = handleSubmit(async (values) => {
       <div class="md:order-last">
         <img src="../assets/images/support.webp" alt="Support"
              class="hidden md:block w-full rounded-2xl aspect-video mb-6 object-cover">
-        <Card class="p-5">
-          <ul v-if="supportSettings" class="space-y-2">
-            <li v-if="supportSettings.phone">
-              <a :href="`tel:${supportSettings.phone}`"
-                 class="flex items-center gap-4 bg-muted/50 rounded-xl p-3 hover:bg-muted duration-150">
-                <div class="size-9 bg-primary/20 text-primary-dark rounded-lg flex items-center justify-center shrink-0">
-                  <Phone class="size-5"/>
+        <ul v-if="supportSettings" class="space-y-2">
+          <li v-if="supportSettings.phone">
+            <a :href="`tel:${supportSettings.phone}`"
+               class="flex items-center gap-4 bg-muted/50 rounded-xl p-3 hover:bg-muted duration-150">
+              <div class="size-9 bg-primary/20 text-primary-dark rounded-lg flex items-center justify-center shrink-0">
+                <Phone class="size-5"/>
+              </div>
+              <div class="text-sm w-0 flex-1">
+                <div class="font-medium">{{ $t('contact.contact_details.phone') }}</div>
+                <div class="truncate">{{ supportSettings.phone }}</div>
+              </div>
+            </a>
+          </li>
+          <li v-if="supportSettings.email">
+            <a :href="`mailto:${supportSettings.email}`"
+               class="flex items-center gap-4 bg-muted/50 rounded-xl p-3 hover:bg-muted duration-150">
+              <div class="size-9 bg-primary/20 text-primary-dark rounded-lg flex items-center justify-center shrink-0">
+                <Mail class="size-5"/>
+              </div>
+              <div class="text-sm w-0 flex-1">
+                <div class="font-medium">{{ $t('contact.contact_details.email') }}</div>
+                <div class="truncate">{{ supportSettings.email }}</div>
+              </div>
+            </a>
+          </li>
+          <li v-if="supportSettings.whatsapp">
+            <a :href="`https://wa.me/${supportSettings.whatsapp}`" target="_blank"
+               class="flex items-center gap-4 bg-muted/50 rounded-xl p-3 hover:bg-muted duration-150">
+              <div class="size-9 bg-primary/20 text-primary-dark rounded-lg flex items-center justify-center shrink-0">
+                <MessageCircle class="size-5"/>
+              </div>
+              <div class="text-sm w-0 flex-1">
+                <div class="font-medium">{{ $t('contact.contact_details.whatsapp') }}</div>
+                <div class="truncate">{{ supportSettings.whatsapp }}</div>
+              </div>
+            </a>
+          </li>
+          <li v-if="supportSettings.street_name && supportSettings.house_number && supportSettings.postal_code && supportSettings.city">
+            <a :href="`https://www.google.com/maps/search/?api=1&query=${supportSettings.whatsapp}`" target="_blank"
+               class="flex items-center gap-4 bg-muted/50 rounded-xl p-3 hover:bg-muted duration-150">
+              <div class="size-9 bg-primary/20 text-primary-dark rounded-lg flex items-center justify-center shrink-0">
+                <MapPin class="size-5"/>
+              </div>
+              <div class="text-sm w-0 flex-1">
+                <div class="font-medium">{{ $t('contact.contact_details.address') }}</div>
+                <div class="truncate">{{
+                    `${supportSettings.street_name} ${supportSettings.house_number}, ${supportSettings.postal_code} ${supportSettings.city}`
+                  }}
                 </div>
-                <div class="text-sm w-0 flex-1">
-                  <div class="font-medium">{{ $t('contact.contact_details.phone') }}</div>
-                  <div class="truncate">{{ supportSettings.phone }}</div>
-                </div>
-              </a>
-            </li>
-            <li v-if="supportSettings.email">
-              <a :href="`mailto:${supportSettings.email}`"
-                 class="flex items-center gap-4 bg-muted/50 rounded-xl p-3 hover:bg-muted duration-150">
-                <div class="size-9 bg-primary/20 text-primary-dark rounded-lg flex items-center justify-center shrink-0">
-                  <Mail class="size-5"/>
-                </div>
-                <div class="text-sm w-0 flex-1">
-                  <div class="font-medium">{{ $t('contact.contact_details.email') }}</div>
-                  <div class="truncate">{{ supportSettings.email }}</div>
-                </div>
-              </a>
-            </li>
-            <li v-if="supportSettings.whatsapp">
-              <a :href="`https://wa.me/${supportSettings.whatsapp}`" target="_blank"
-                 class="flex items-center gap-4 bg-muted/50 rounded-xl p-3 hover:bg-muted duration-150">
-                <div class="size-9 bg-primary/20 text-primary-dark rounded-lg flex items-center justify-center shrink-0">
-                  <MessageCircle class="size-5"/>
-                </div>
-                <div class="text-sm w-0 flex-1">
-                  <div class="font-medium">{{ $t('contact.contact_details.whatsapp') }}</div>
-                  <div class="truncate">{{ supportSettings.whatsapp }}</div>
-                </div>
-              </a>
-            </li>
-            <li v-if="supportSettings.street_name && supportSettings.house_number && supportSettings.postal_code && supportSettings.city">
-              <a :href="`https://www.google.com/maps/search/?api=1&query=${supportSettings.whatsapp}`" target="_blank"
-                 class="flex items-center gap-4 bg-muted/50 rounded-xl p-3 hover:bg-muted duration-150">
-                <div class="size-9 bg-primary/20 text-primary-dark rounded-lg flex items-center justify-center shrink-0">
-                  <MapPin class="size-5"/>
-                </div>
-                <div class="text-sm w-0 flex-1">
-                  <div class="font-medium">{{ $t('contact.contact_details.address') }}</div>
-                  <div class="truncate">{{ `${supportSettings.street_name} ${supportSettings.house_number}, ${supportSettings.postal_code} ${supportSettings.city}` }}</div>
-                </div>
-              </a>
-            </li>
-          </ul>
-          <div v-else class="text-muted-foreground">
-            {{ $t('common.general.no_records_found', {item: lowercase($t('contact.contact_details'))}) }}
-          </div>
-        </Card>
+              </div>
+            </a>
+          </li>
+        </ul>
+        <div v-else class="text-muted-foreground">
+          {{ $t('common.general.no_records_found', {item: lowercase($t('contact.contact_details'))}) }}
+        </div>
       </div>
       <Card class="md:col-span-2">
         <CardHeader class="pb-0 justify-start">
           <CheckCircle v-if="success" class="size-6 text-success shrink-0 mt-1 sm:mt-2"/>
           <div>
-            <h2 class="h3">{{ !success ? $t('contact.contact_form.title') : $t('contact.contact_form.success.title') }}</h2>
-            <p class="text-muted-foreground mt-1">{{ !success ? $t('contact.contact_form.description') : $t('contact.contact_form.success.description') }}</p>
+            <h2 class="h3">{{
+                !success ? $t('contact.contact_form.title') : $t('contact.contact_form.success.title')
+              }}</h2>
+            <p class="text-muted-foreground mt-1">{{
+                !success ? $t('contact.contact_form.description') : $t('contact.contact_form.success.description')
+              }}</p>
           </div>
         </CardHeader>
         <form v-if="!success" @submit="onSubmit" class="space-y-6 mt-5">

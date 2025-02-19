@@ -55,7 +55,7 @@ const onSubmit = handleSubmit(() => {
 </script>
 
 <template>
-  <div class="wizard relative bg-muted py-10 min-[1400px]:after:rounded-2xl">
+  <div class="wizard relative bg-muted py-10 min-[1400px]:after:rounded-2xl after:w-screen min-[1400px]:after:w-[calc(100%+4rem)]">
     <form @submit="onSubmit">
       <div v-if="currentStep === 1" class="space-y-8">
         <h2>{{ $t('claims.wizard.questions.object') }}</h2>
@@ -72,7 +72,7 @@ const onSubmit = handleSubmit(() => {
                          class="peer absolute right-4 top-1/2 -translate-y-1/2"/>
                 </FormControl>
                 <FormLabel
-                    class="bg-background flex items-center rounded-lg border p-3 pr-8 cursor-pointer transition-[background-color] duration-200 hover:bg-background/90 peer-focus-visible:bg-muted peer-checked:border-primary peer-checked:outline peer-checked:outline-2 peer-checked:outline-primary">
+                    class="bg-background flex items-center rounded-lg border h-full p-3 pr-8 cursor-pointer transition-[background-color] duration-200 hover:bg-background/90 peer-focus-visible:bg-muted peer-checked:border-primary peer-checked:outline peer-checked:outline-2 peer-checked:outline-primary">
                   <div class="p-2 bg-primary/10 text-primary rounded-lg mr-3">
                     <component v-if="object.type" :is="objectIcon(object.type)" class="size-10"/>
                   </div>
@@ -109,7 +109,6 @@ const onSubmit = handleSubmit(() => {
 <style scoped>
 .wizard::after {
   content: '';
-  width: calc(100% + 4rem);
   height: 100%;
   position: absolute;
   top: 0;
