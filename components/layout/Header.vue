@@ -27,10 +27,6 @@ const mainNavItems = [
   {name: t('contact.contact'), url: 'contact'},
 ]
 
-const secondaryNavItems = [
-  {name: t('common.notifications.notifications', 2), icon: Bell},
-]
-
 const userNavItems = [
   {name: t('profile.my_profile'), url: 'profile', icon: User},
   {name: t('invoices.invoices', 2), url: 'invoices', icon: ReceiptText},
