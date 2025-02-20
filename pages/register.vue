@@ -5,7 +5,6 @@ import {toTypedSchema} from "@vee-validate/zod";
 import {useForm} from "vee-validate";
 import * as z from 'zod'
 
-
 definePageMeta({
   layout: false
 })
@@ -44,13 +43,16 @@ const form = useForm({
 })
 
 const signUp = async (email: string, password: string) => {
-  const {public: {baseUrl}} = useRuntimeConfig()
+  const {public: {baseUrl, companyId}} = useRuntimeConfig()
 
   const {error} = await supabase.auth.signUp({
     email: email,
     password: password,
     options: {
-      emailRedirectTo: `${baseUrl}/intro`
+      emailRedirectTo: `${baseUrl}/intro`,
+      data: {
+        company_id: companyId.toString()
+      }
     }
   })
   if (error) throw error
@@ -69,19 +71,7 @@ const onSubmit = form.handleSubmit(async (values) => {
   try {
     loading.value = true
 
-    const {public: {baseUrl}} = useRuntimeConfig()
-
-    const {error} = await supabase.auth.signUp({
-      email: values.email,
-      password: values.password,
-      options: {
-        emailRedirectTo: `${baseUrl}/intro`
-      }
-    })
-    if (error) throw error
-
-    resendDelay.value = 10
-    countDown()
+    await signUp(values.email, values.password)
 
     success.value = true
   } catch (error) {

@@ -67,10 +67,12 @@ export default defineNuxtConfig({
       login: '/inloggen',
       callback: '/confirm',
       exclude: [
-        '/confirm-registration',
         '/password-recovery',
+        '/wachtwoord-herstellen',
         '/register',
+        '/registreren',
         '/update-password',
+        '/wachtwoord-bijwerken',
       ],
     }
   },
