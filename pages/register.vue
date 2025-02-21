@@ -44,12 +44,13 @@ const form = useForm({
 
 const signUp = async (email: string, password: string) => {
   const {public: {baseUrl, companyId}} = useRuntimeConfig()
+  const localePath = useLocalePath()
 
   const {error} = await supabase.auth.signUp({
     email: email,
     password: password,
     options: {
-      emailRedirectTo: `${baseUrl}/intro`,
+      emailRedirectTo: `${baseUrl + localePath('confirm-registration')}`,
       data: {
         company_id: companyId.toString()
       }

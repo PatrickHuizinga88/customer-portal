@@ -36,28 +36,28 @@ const props = defineProps<{
             <li v-if="props.companyInfo?.facebook_url">
               <Button variant="outline" size="icon" :aria-label="`${props.companyName} Facebook`" as-child>
                 <a href="https://facebook.com/" target="_blank" rel="noopener noreferrer">
-                  <img src="@/assets/images/icons/facebook.svg" alt="Facebook" class="size-5"/>
+                  <img src="@/assets/images/icons/facebook.svg" alt="Facebook" class="size-4"/>
                 </a>
               </Button>
             </li>
             <li v-if="props.companyInfo?.x_url">
               <Button variant="outline" size="icon" :aria-label="`${props.companyName} X (Twitter)`" as-child>
                 <a :href="props.companyInfo?.x_url" target="_blank" rel="noopener noreferrer">
-                  <img src="@/assets/images/icons/x.svg" alt="X" class="size-5"/>
+                  <img src="@/assets/images/icons/x.svg" alt="X" class="size-4"/>
                 </a>
               </Button>
             </li>
             <li v-if="props.companyInfo?.instagram_url">
               <Button variant="outline" size="icon" :aria-label="`${props.companyName} Instagram`" as-child>
                 <a :href="props.companyInfo?.instagram_url" target="_blank" rel="noopener noreferrer">
-                  <img src="@/assets/images/icons/instagram.svg" alt="Instagram" class="size-5"/>
+                  <img src="@/assets/images/icons/instagram.svg" alt="Instagram" class="size-4"/>
                 </a>
               </Button>
             </li>
             <li v-if="props.companyInfo?.linkedin_url">
               <Button variant="outline" size="icon" :aria-label="`${props.companyName} LinkedIn`" as-child>
                 <a :href="props.companyInfo?.linkedin_url" target="_blank" rel="noopener noreferrer">
-                  <img src="@/assets/images/icons/linkedin.svg" alt="LinkedIn" class="size-5"/>
+                  <img src="@/assets/images/icons/linkedin.svg" alt="LinkedIn" class="size-4"/>
                 </a>
               </Button>
             </li>
