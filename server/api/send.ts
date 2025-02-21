@@ -14,7 +14,7 @@ export default defineEventHandler(async (event) => {
   const client = await serverSupabaseClient(event)
 
   try {
-    const {data: supportSettings, error} = await client.from('support_settings').select('email').eq('company_id', companyId).single()
+    const {data: supportSettings, error} = await client.from('company_info').select('email').eq('company_id', companyId).single()
     if (error) throw error
 
     const {name: senderName} = await $fetch('/api/customers')

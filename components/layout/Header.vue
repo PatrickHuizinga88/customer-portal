@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import {LogOut, Bell, User, Menu, ReceiptText} from 'lucide-vue-next'
-import {APP_NAME} from "~/constants";
+import {Bell, Menu} from 'lucide-vue-next'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -13,25 +12,20 @@ import type {Database} from "~/types/database.types";
 defineProps<{
   logoUrl?: string
   companyName: string
+  mainNavItems: {
+    name: string,
+    url: string
+  }[]
+  userNavItems: {
+    name: string,
+    url?: string
+    icon: any
+  }[]
 }>()
 
 const supabase = useSupabaseClient<Database>()
-const {t} = useI18n()
 
 const open = ref(false)
-
-const mainNavItems = [
-  {name: t('home.home'), url: '/'},
-  {name: t('insurances.my_insurances'), url: 'insurances'},
-  {name: t('claims.report_a_claim'), url: 'report-claim'},
-  {name: t('contact.contact'), url: 'contact'},
-]
-
-const userNavItems = [
-  {name: t('profile.my_profile'), url: 'profile', icon: User},
-  {name: t('invoices.invoices', 2), url: 'invoices', icon: ReceiptText},
-  {name: t('authentication.common.sign_out'), icon: LogOut},
-]
 
 const notifications = []
 
@@ -48,7 +42,7 @@ watch(useRoute(), () => {
 </script>
 
 <template>
-  <header class="sticky top-0 flex items-center bg-background/80 border-b border-border h-16 backdrop-blur z-10">
+  <header class="flex items-center bg-background/80 border-b border-border h-16 backdrop-blur z-10">
     <div class="container">
       <nav class="flex justify-between items-center">
         <div class="flex gap-8 items-center">

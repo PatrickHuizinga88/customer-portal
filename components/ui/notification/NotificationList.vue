@@ -3,6 +3,7 @@ import Notification from "~/components/ui/notification/Notification.vue";
 
 defineProps<{
   notifications: {
+    id: string,
     type: 'success' | 'destructive',
     title: string,
     description?: string
@@ -26,7 +27,7 @@ defineProps<{
             :type="notification.type"
             :title="notification.title"
             :description="notification.description"
-            :key="index"
+            :key="notification.id"
           />
           <!--          <Notification-->
           <!--              v-for="(notification, index) in notifications"-->

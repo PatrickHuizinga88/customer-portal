@@ -19,6 +19,16 @@ export default {
       message: "Message",
       subject: "Subject",
 
+      subjects: {
+        current_insurances: "Question about my current insurance(s)",
+        new_insurances: "Question about a new insurance",
+        claim: "Question about my claim",
+        invoice: "Question about my invoice",
+        personal_data: "Question about my personal data",
+        complaint: "I want to file a complaint",
+        other: "Other",
+      },
+
       select_a_subject: "Select a subject",
     },
 

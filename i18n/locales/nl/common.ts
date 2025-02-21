@@ -43,6 +43,12 @@ export default {
       min_length: "Dit veld moet minimaal {min} tekens bevatten",
     },
 
+    footer: {
+      cookie_settings: "Cookie-instellingen",
+      privacy_policy: "Privacybeleid",
+      terms_of_service: "Algemene voorwaarden"
+    },
+
     notifications: {
       notifications: "Notificatie | Notificaties",
       save: {

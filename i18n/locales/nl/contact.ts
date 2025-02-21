@@ -19,6 +19,16 @@ export default {
       message: "Bericht",
       subject: "Onderwerp",
 
+      subjects: {
+        current_insurances: "Vraag over mijn huidige verzekering(en)",
+        new_insurances: "Vraag over een nieuwe verzekering",
+        claim: "Vraag over mijn schadeclaim",
+        invoice: "Vraag over mijn factuur",
+        personal_data: "Vraag over mijn persoonsgegevens",
+        complaint: "Ik wil een klacht indienen",
+        other: "Overig",
+      },
+
       select_a_subject: "Selecteer een onderwerp",
     },
 

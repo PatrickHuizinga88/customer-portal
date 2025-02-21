@@ -2,8 +2,8 @@ import {defineStore} from "pinia";
 import {v4 as uuid} from 'uuid';
 import {useT} from "~/composable/useT";
 
-type Notification = {
-  id?: string,
+interface Notification {
+  id: string,
   type: 'success' | 'destructive',
   title: string
   description?: string

@@ -43,6 +43,12 @@ export default {
       min_length: "This field must be at least {min} characters",
     },
 
+    footer: {
+      cookie_settings: "Cookie settings",
+      privacy_policy: "Privacy policy",
+      terms_of_service: "Terms of service"
+    },
+
     notifications: {
       notifications: "Notificatie | Notificaties",
       save: {

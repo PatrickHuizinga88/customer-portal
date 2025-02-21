@@ -15,7 +15,7 @@ const {public: {companyId}} = useRuntimeConfig()
 
 const {data: supportSettings} = await useAsyncData(async () => {
   try {
-    const {data, error} = await supabase.from('support_settings')
+    const {data, error} = await supabase.from('company_info')
         .select('email,phone,whatsapp,street_name,house_number,postal_code,city,opening_hours')
         .filter('company_id', 'eq', companyId)
         .single()
@@ -33,13 +33,13 @@ const {data: supportSettings} = await useAsyncData(async () => {
 })
 
 const subjectOptions = [
-  {id: 1, value: 'Vraag over mijn huidige verzekering(en)'},
-  {id: 2, value: 'Vraag over een nieuwe verzekering'},
-  {id: 3, value: 'Vraag over mijn schadeclaim'},
-  {id: 5, value: 'Vraag over mijn factuur'},
-  {id: 6, value: 'Vraag over mijn persoonlijke gegevens'},
-  {id: 7, value: 'Ik wil een klacht indienen'},
-  {id: 8, value: 'Overige'},
+  {id: 1, value: t('contact.contact_form.subjects.current_insurances')},
+  {id: 2, value: t('contact.contact_form.subjects.new_insurances')},
+  {id: 3, value: t('contact.contact_form.subjects.claim')},
+  {id: 5, value: t('contact.contact_form.subjects.invoice')},
+  {id: 6, value: t('contact.contact_form.subjects.personal_data')},
+  {id: 7, value: t('contact.contact_form.subjects.complaint')},
+  {id: 8, value: t('contact.contact_form.subjects.other')},
 ]
 
 const loading = ref(false)
@@ -51,7 +51,7 @@ const formSchema = toTypedSchema(z.object({
   }),
   message: z.string({
     message: t('common.validations.required')
-  }).min(10, t('common.validations.min', {min: 10})),
+  }).min(10, t('common.validations.min_length', {min: 10})),
 }))
 
 const {handleSubmit} = useForm({

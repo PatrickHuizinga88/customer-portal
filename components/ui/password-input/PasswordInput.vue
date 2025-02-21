@@ -6,6 +6,7 @@ import {Eye, EyeOff} from 'lucide-vue-next'
 const props = defineProps<{
   defaultValue?: string | number
   modelValue?: string | number
+  id?: string
   class?: HTMLAttributes['class']
 }>()
 
@@ -27,6 +28,7 @@ const modelValue = useVModel(props, 'modelValue', emits, {
         v-model="modelValue"
         :class="cn('pr-10', props.class)"
         :type="!showPassword ? 'password' : 'text'"
+        :id="props.id"
         v-bind="$attrs"/>
     <Button @click="showPassword = !showPassword" type="button" variant="ghost" size="icon" :aria-label="$t('authentication.common.toggle_password_visibility')" class="absolute inset-y-0 right-0 text-muted-foreground hover:bg-transparent">
       <Eye v-if="!showPassword" class="size-4"/>
