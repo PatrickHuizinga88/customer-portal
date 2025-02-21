@@ -28,7 +28,6 @@ const {data: company} = await useAsyncData(async () => {
       )`)
     .filter('id', 'eq', companyId)
     .single()
-  console.log(data)
   return data
 })
 
