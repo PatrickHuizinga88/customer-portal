@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {Page} from "~/components/layout/page";
-import {Mail, MapPin, Phone, Send, MessageCircle, CheckCircle} from "lucide-vue-next";
+import {Mail, MapPin, Phone, Send, MessageCircle, CheckCircle, ChevronRight} from "lucide-vue-next";
 import {toTypedSchema} from "@vee-validate/zod";
 import * as z from 'zod'
 import {useForm} from "vee-validate";
@@ -131,7 +131,7 @@ const onSubmit = handleSubmit(async (values) => {
             </a>
           </li>
           <li v-if="supportSettings.street_name && supportSettings.house_number && supportSettings.postal_code && supportSettings.city">
-            <a :href="`https://www.google.com/maps/search/?api=1&query=${supportSettings.whatsapp}`" target="_blank"
+            <a :href="`https://www.google.com/maps/search/?api=1&query=${supportSettings.street_name} ${supportSettings.house_number}, ${supportSettings.postal_code} ${supportSettings.city}`" target="_blank"
                class="flex items-center gap-4 bg-muted/50 rounded-xl p-3 hover:bg-muted duration-150">
               <div class="size-9 bg-primary/20 text-primary-dark rounded-lg flex items-center justify-center shrink-0">
                 <MapPin class="size-5"/>
@@ -150,54 +150,60 @@ const onSubmit = handleSubmit(async (values) => {
           {{ $t('common.general.no_records_found', {item: lowercase($t('contact.contact_details'))}) }}
         </div>
       </div>
-      <Card class="md:col-span-2">
-        <CardHeader class="pb-0 justify-start">
-          <CheckCircle v-if="success" class="size-6 text-success shrink-0 mt-1 sm:mt-2"/>
-          <div>
-            <h2 class="h3">{{
-                !success ? $t('contact.contact_form.title') : $t('contact.contact_form.success.title')
-              }}</h2>
-            <p class="text-muted-foreground mt-1">{{
-                !success ? $t('contact.contact_form.description') : $t('contact.contact_form.success.description')
-              }}</p>
-          </div>
-        </CardHeader>
-        <form v-if="!success" @submit="onSubmit" class="space-y-6 mt-5">
-          <FormField v-slot="{ componentField}" name="subject">
-            <FormItem>
-              <FormLabel>{{ $t('contact.contact_form.subject') }}</FormLabel>
-              <FormControl>
-                <Select v-bind="componentField">
-                  <FormControl>
-                    <SelectTrigger>
-                      <SelectValue :placeholder="$t('contact.contact_form.select_a_subject')"/>
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    <SelectItem v-for="option in subjectOptions" :value="option.value">
-                      {{ option.value }}
-                    </SelectItem>
-                  </SelectContent>
-                </Select>
-              </FormControl>
-              <FormMessage/>
-            </FormItem>
-          </FormField>
-          <FormField v-slot="{ componentField}" name="message">
-            <FormItem>
-              <FormLabel>{{ $t('contact.contact_form.message') }}</FormLabel>
-              <FormControl>
-                <Textarea v-bind="componentField" rows="4"/>
-              </FormControl>
-              <FormMessage/>
-            </FormItem>
-          </FormField>
-          <Button type="submit" :loading="loading" class="w-full sm:w-auto">
-            <Send/>
-            {{ capitalizeSentence($t('common.actions.send_item', {item: $t('contact.contact_form.message')})) }}
-          </Button>
-        </form>
-      </Card>
+      <div class="md:col-span-2">
+        <NuxtLinkLocale to="faq" class="flex items-center justify-between gap-6 text-lg font-medium bg-muted/50 rounded-xl px-4 sm:px-6 py-4 hover:bg-muted duration-150 mb-6">
+          {{ $t('contact.check_our_faq') }}
+          <ChevronRight class="size-5"/>
+        </NuxtLinkLocale>
+        <Card>
+          <CardHeader class="pb-0 justify-start">
+            <CheckCircle v-if="success" class="size-6 text-success shrink-0 mt-1 sm:mt-2"/>
+            <div>
+              <h2 class="h3">{{
+                  !success ? $t('contact.contact_form.title') : $t('contact.contact_form.success.title')
+                }}</h2>
+              <p class="text-muted-foreground mt-1">{{
+                  !success ? $t('contact.contact_form.description') : $t('contact.contact_form.success.description')
+                }}</p>
+            </div>
+          </CardHeader>
+          <form v-if="!success" @submit="onSubmit" class="space-y-6 mt-5">
+            <FormField v-slot="{ componentField}" name="subject">
+              <FormItem>
+                <FormLabel>{{ $t('contact.contact_form.subject') }}</FormLabel>
+                <FormControl>
+                  <Select v-bind="componentField">
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue :placeholder="$t('contact.contact_form.select_a_subject')"/>
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      <SelectItem v-for="option in subjectOptions" :value="option.value">
+                        {{ option.value }}
+                      </SelectItem>
+                    </SelectContent>
+                  </Select>
+                </FormControl>
+                <FormMessage/>
+              </FormItem>
+            </FormField>
+            <FormField v-slot="{ componentField}" name="message">
+              <FormItem>
+                <FormLabel>{{ $t('contact.contact_form.message') }}</FormLabel>
+                <FormControl>
+                  <Textarea v-bind="componentField" rows="4"/>
+                </FormControl>
+                <FormMessage/>
+              </FormItem>
+            </FormField>
+            <Button type="submit" :loading="loading" class="w-full sm:w-auto">
+              <Send/>
+              {{ capitalizeSentence($t('common.actions.send_item', {item: $t('contact.contact_form.message')})) }}
+            </Button>
+          </form>
+        </Card>
+      </div>
     </div>
   </Page>
 </template>

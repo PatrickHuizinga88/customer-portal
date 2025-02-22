@@ -78,32 +78,28 @@ export default {
     },
     account_management: {
       account_management: "Accountbeheer",
-      create_account: {
-        title: "Hoe maak ik een account aan?",
-        content: "Je kunt een account aanmaken op onze website door je e-mailadres en persoonsgegevens in te vullen."
+      update_personal_data: {
+        title: "Hoe werk ik mijn persoonsgegevens bij?",
+        content: "Je kunt je contactgegevens bijwerken via je profiel onder 'Persoonlijke gegevens'. Ben je verhuisd? Neem dan contact met ons op."
       },
-      reset_password: {
-        title: "Hoe reset ik mijn wachtwoord?",
-        content: "Je kunt je wachtwoord resetten via de 'Wachtwoord vergeten'-link op de inlogpagina."
+      change_email_or_password: {
+        title: "Hoe wijzig ik mijn e-mailadres of wachtwoord?",
+        content: "Je kunt je e-mailadres en wachtwoord wijzigen via je profiel onder 'Accountinstellingen'."
       },
-      update_contact_info: {
-        title: "Hoe werk ik mijn contactgegevens bij?",
-        content: "Je kunt je contactgegevens bijwerken via je online account onder 'Persoonlijke gegevens'."
-      }
     },
     contact_and_support: {
       contact_and_support: "Contact en Ondersteuning",
       contact_customer_service: {
         title: "Hoe neem ik contact op met de klantenservice?",
-        content: "Je kunt contact opnemen met onze klantenservice via telefoon, e-mail of live chat op onze website."
+        content: "Je kunt contact opnemen met onze klantenservice via telefoon, e-mail of het contactformulier op de contactpagina."
       },
       business_hours: {
         title: "Wat zijn jullie openingstijden?",
-        content: "Onze klantenservice is bereikbaar op werkdagen van 09:00 tot 17:00 uur."
+        content: "Onze openingstijden kun je vinden op de contactpagina."
       },
       file_a_complaint: {
         title: "Hoe dien ik een klacht in?",
-        content: "Je kunt een klacht indienen via ons klachtenformulier op de website of door contact op te nemen met onze klantenservice."
+        content: "Je kunt een klacht indienen via ons contactformulier op de website of door direct contact op te nemen."
       }
     }
   }

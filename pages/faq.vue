@@ -36,18 +36,18 @@ const faqCategories: FAQCategory[] = [
     questions: [
       {
         value: 'view_or_update_policy',
-        title: t('faq.policy_managementview_or_update_policy.title'),
-        content: t('faq.policy_managementview_or_update_policy.content')
+        title: t('faq.policy_management.view_or_update_policy.title'),
+        content: t('faq.policy_management.view_or_update_policy.content')
       },
       {
         value: 'cancel_policy',
-        title: t('faq.policy_managementcancel_policy.title'),
-        content: t('faq.policy_managementcancel_policy.content')
+        title: t('faq.policy_management.cancel_policy.title'),
+        content: t('faq.policy_management.cancel_policy.content')
       },
       {
         value: 'modify_coverage',
-        title: t('faq.policy_managementmodify_coverage.title'),
-        content: t('faq.policy_managementmodify_coverage.content')
+        title: t('faq.policy_management.modify_coverage.title'),
+        content: t('faq.policy_management.modify_coverage.content')
       }
     ]
   },
@@ -76,18 +76,18 @@ const faqCategories: FAQCategory[] = [
     questions: [
       {
         value: 'file_a_claim',
-        title: t('faq.claims_and_damagefile_a_claim.title'),
-        content: t('faq.claims_and_damagefile_a_claim.content')
+        title: t('faq.claims_and_damage.file_a_claim.title'),
+        content: t('faq.claims_and_damage.file_a_claim.content')
       },
       {
         value: 'claim_status',
-        title: t('faq.claims_and_damageclaim_status.title'),
-        content: t('faq.claims_and_damageclaim_status.content')
+        title: t('faq.claims_and_damage.claim_status.title'),
+        content: t('faq.claims_and_damage.claim_status.content')
       },
       {
         value: 'required_documents',
-        title: t('faq.claims_and_damagerequired_documents.title'),
-        content: t('faq.claims_and_damagerequired_documents.content')
+        title: t('faq.claims_and_damage.required_documents.title'),
+        content: t('faq.claims_and_damage.required_documents.content')
       }
     ]
   },
@@ -115,20 +115,15 @@ const faqCategories: FAQCategory[] = [
     title: t('faq.account_management.account_management'),
     questions: [
       {
-        value: 'create_account',
-        title: t('faq.account_management.create_account.title'),
-        content: t('faq.account_management.create_account.content')
+        value: 'update_personal_data',
+        title: t('faq.account_management.update_personal_data.title'),
+        content: t('faq.account_management.update_personal_data.content')
       },
       {
-        value: 'reset_password',
-        title: t('faq.account_management.reset_password.title'),
-        content: t('faq.account_management.reset_password.content')
+        value: 'change_email_or_password',
+        title: t('faq.account_management.change_email_or_password.title'),
+        content: t('faq.account_management.change_email_or_password.content')
       },
-      {
-        value: 'update_contact_info',
-        title: t('faq.account_management.update_contact_info.title'),
-        content: t('faq.account_management.update_contact_info.content')
-      }
     ]
   },
   {

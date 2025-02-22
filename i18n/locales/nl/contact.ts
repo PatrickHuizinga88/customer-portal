@@ -7,6 +7,8 @@ export default {
       description: "Wij staan klaar om je te helpen. Neem contact met ons op via onderstaande gegevens.",
     },
 
+    check_our_faq: "Vind direct je antwoord in onze Veelgestelde Vragen",
+
     contact_form: {
       title: "Stuur ons een bericht",
       description: "Laat je vraag of opmerking achter en wij nemen zo snel mogelijk contact met je op.",
