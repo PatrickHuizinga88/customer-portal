@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import {Page} from "~/components/layout/page";
 import {Accordion, AccordionTrigger} from "~/components/ui/accordion";
+import {ChevronRight} from "lucide-vue-next";
 
 interface FAQCategory {
   title: string;
@@ -163,6 +164,10 @@ const faqCategories: FAQCategory[] = [
           </AccordionItem>
         </Accordion>
       </div>
+      <NuxtLinkLocale to="contact" class="flex items-center justify-between gap-6 text-lg font-medium bg-muted/50 rounded-xl px-4 sm:px-6 py-4 hover:bg-muted duration-150 mb-6">
+        {{ $t('faq.question_missing') }}
+        <ChevronRight class="size-5"/>
+      </NuxtLinkLocale>
     </div>
   </Page>
 </template>

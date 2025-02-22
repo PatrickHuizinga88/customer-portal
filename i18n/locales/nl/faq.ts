@@ -5,6 +5,8 @@ export default {
       description: "Hier vind je antwoorden op veelgestelde vragen."
     },
 
+    question_missing: "Niet gevonden wat je zocht? Neem contact met ons op.",
+
     general: {
       general: "Algemeen",
       types_of_insurance: {

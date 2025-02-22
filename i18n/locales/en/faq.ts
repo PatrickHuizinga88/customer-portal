@@ -5,6 +5,8 @@ export default {
       description: "Here you will find answers to frequently asked questions."
     },
 
+    question_missing: "Can't find your question? Contact us for more information.",
+
     general: {
       general: "General",
       types_of_insurance: {
