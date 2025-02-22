@@ -97,12 +97,12 @@ export default defineNuxtConfig({
       {
         code: 'nl',
         name: 'Nederlands',
-        files: ['nl/common', 'nl/authentication', 'nl/claims', 'nl/contact', 'nl/home', 'nl/insurances', 'nl/invoices', 'nl/profile']
+        files: ['nl/common', 'nl/404', 'nl/authentication', 'nl/claims', 'nl/contact', 'nl/faq', 'nl/home', 'nl/insurances', 'nl/invoices', 'nl/profile']
       },
       {
         code: 'en',
         name: 'English',
-        files: ['en/common', 'en/authentication', 'en/claims', 'en/contact', 'en/home', 'en/insurances', 'en/invoices', 'en/profile']
+        files: ['en/common', 'en/404', 'en/authentication', 'en/claims', 'en/contact', 'en/faq', 'en/home', 'en/insurances', 'en/invoices', 'en/profile']
       },
     ],
     customRoutes: 'config',
@@ -114,6 +114,10 @@ export default defineNuxtConfig({
       contact: {
         en: '/contact',
         nl: '/contact',
+      },
+      faq: {
+        en: '/faq',
+        nl: '/veelgestelde-vragen',
       },
       insurances: {
         en: '/insurances',
