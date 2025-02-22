@@ -16,7 +16,7 @@ const {public: {companyId}} = useRuntimeConfig()
 const {data: supportSettings} = await useAsyncData(async () => {
   try {
     const {data, error} = await supabase.from('company_info')
-        .select('email,phone,whatsapp,street_name,house_number,postal_code,city,opening_hours')
+        .select('email,phone,whatsapp,street_name,house_number,postal_code,city,opening_hours,support_image_url')
         .filter('company_id', 'eq', companyId)
         .single()
     if (error) throw error
@@ -91,7 +91,7 @@ const onSubmit = handleSubmit(async (values) => {
   <Page :title="$t('contact.header.title')" :description="$t('contact.header.description')">
     <div class="grid md:grid-cols-3 items-start gap-6">
       <div class="md:order-last">
-        <img src="../assets/images/support.webp" alt="Support"
+        <img :src="supportSettings.support_image_url ?? '../assets/images/support.webp'" alt="Support"
              class="hidden md:block w-full rounded-2xl aspect-video mb-6 object-cover">
         <ul v-if="supportSettings" class="space-y-2">
           <li v-if="supportSettings.phone">

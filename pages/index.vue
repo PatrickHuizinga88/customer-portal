@@ -166,7 +166,7 @@ const greeting = computed(() => {
           </Button>
           <!--        </div>-->
         </div>
-        <p class="bg-accent text-xs text-center text-accent-foreground rounded-2xl rounded-t-none font-medium py-4">
+        <p class="bg-accent text-sm text-center text-accent-foreground rounded-2xl rounded-t-none font-medium py-3">
           <strong>Actie!</strong> Ontvang tijdelijk de eerste maand gratis.
         </p>
       </div>
