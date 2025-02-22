@@ -67,6 +67,8 @@ export default defineNuxtConfig({
       login: '/inloggen',
       callback: '/confirm',
       exclude: [
+        '/confirm-registration',
+        '/registratie-bevestigen',
         '/password-recovery',
         '/wachtwoord-herstellen',
         '/register',
@@ -110,6 +112,10 @@ export default defineNuxtConfig({
       'claims-chat': {
         en: '/claims-chat',
         nl: '/schade-chat',
+      },
+      'confirm-registration': {
+        en: '/confirm-registration',
+        nl: '/registratie-bevestigen',
       },
       contact: {
         en: '/contact',

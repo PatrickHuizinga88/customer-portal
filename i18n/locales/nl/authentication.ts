@@ -20,8 +20,8 @@ export default {
       sign_in_to_account: "Log in op je account",
     },
     register: {
-      account_activated: "Account geactiveerd!",
-      continue: "Doorgaan",
+      account_activated: "Je account is geactiveerd!",
+      continue_to_login: "Doorgaan naar inloggen",
       create_new_account: "Nieuw account aanmaken",
       have_account: "Heb je al een account?",
       in_seconds: "over {seconds} seconden.",
@@ -33,7 +33,7 @@ export default {
         title: "Registratie gelukt!",
         description: "Er is een e-mail verstuurd naar {email} om je account te activeren.",
       },
-      welcome_to: "Welkom bij {appName}."
+      welcome_to: "Welkom bij je {companyName} klantportaal."
     },
     password_recovery: {
       back_to_sign_in: "Terug naar inloggen",
