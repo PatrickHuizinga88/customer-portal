@@ -153,11 +153,9 @@ const faqCategories: FAQCategory[] = [
 <template>
   <Page :title="$t('faq.header.title')" :description="$t('faq.header.description')">
     <div class="space-y-12">
-      <div v-for="category in faqCategories" class="grid grid-cols-3 gap-12">
-        <div class="sticky top-0 pt-2">
-          <h2 class="h3">{{ category.title }}</h2>
-        </div>
-        <Accordion type="multiple" class="col-span-2">
+      <div v-for="category in faqCategories" class="grid md:grid-cols-3 gap-4 md:gap-12">
+        <h2 class="h3 md:mt-2">{{ category.title }}</h2>
+        <Accordion type="multiple" class="md:col-span-2">
           <AccordionItem v-for="question in category.questions" :key="question.value" :value="question.value">
             <AccordionTrigger>{{ question.title }}</AccordionTrigger>
             <AccordionContent>{{ question.content }}</AccordionContent>
@@ -166,7 +164,7 @@ const faqCategories: FAQCategory[] = [
       </div>
       <NuxtLinkLocale to="contact" class="flex items-center justify-between gap-6 text-lg font-medium bg-muted/50 rounded-xl px-4 sm:px-6 py-4 hover:bg-muted duration-150 mb-6">
         {{ $t('faq.question_missing') }}
-        <ChevronRight class="size-5"/>
+        <ChevronRight class="size-5 shrink-0"/>
       </NuxtLinkLocale>
     </div>
   </Page>

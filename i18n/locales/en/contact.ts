@@ -7,7 +7,7 @@ export default {
       description: "We are here to help you. Contact us using the information below.",
     },
 
-    check_our_faq: "Find your answer directly in our frequently asked questions",
+    check_our_faq: "Click here to find your answer directly in our frequently asked questions.",
 
     contact_form: {
       title: "Send us a message",

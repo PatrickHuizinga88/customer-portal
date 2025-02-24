@@ -1,5 +1,7 @@
 export default {
   faq: {
+    faq: "Frequently Asked Questions",
+
     header: {
       title: "Frequently Asked Questions",
       description: "Here you will find answers to frequently asked questions."

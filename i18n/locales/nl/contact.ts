@@ -7,7 +7,10 @@ export default {
       description: "Wij staan klaar om je te helpen. Neem contact met ons op via onderstaande gegevens.",
     },
 
-    check_our_faq: "Vind direct je antwoord in onze veelgestelde vragen",
+    check_our_faq: {
+      title: "Bekijk onze veelgestelde vragen",
+      description: "Klik hier om direct je antwoord te vinden in onze veelgestelde vragen."
+    },
 
     contact_form: {
       title: "Stuur ons een bericht",
@@ -42,5 +45,7 @@ export default {
       phone: "Telefoon",
       whatsapp: "WhatsApp",
     },
+
+    opening_hours: "Openingstijden",
   }
 }

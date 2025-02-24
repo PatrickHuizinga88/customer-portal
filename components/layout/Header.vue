@@ -29,6 +29,15 @@ const open = ref(false)
 
 const notifications = []
 
+const {data: profile} = await useFetch('/api/customers', {
+  pick: ['name']
+})
+
+const initials = computed(() => {
+  if (!profile.value) return ''
+  return profile.value.name.split(' ').map((name) => name.charAt(0)).join('')
+})
+
 const signOut = async () => {
   const { error } = await supabase.auth.signOut()
   if (!error) {
@@ -85,9 +94,9 @@ watch(useRoute(), () => {
             </DropdownMenuContent>
           </DropdownMenu>
           <DropdownMenu>
-            <DropdownMenuTrigger class="hidden md:block">
+            <DropdownMenuTrigger class="hidden md:block rounded-full ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
               <Avatar>
-                <AvatarFallback>PH</AvatarFallback>
+                <AvatarFallback>{{ initials }}</AvatarFallback>
               </Avatar>
             </DropdownMenuTrigger>
             <DropdownMenuContent>

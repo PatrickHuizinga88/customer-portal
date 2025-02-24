@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {Page} from "~/components/layout/page";
-import {Mail, MapPin, Phone, Send, MessageCircle, CheckCircle, ChevronRight} from "lucide-vue-next";
+import {Mail, MapPin, Phone, Send, MessageCircle, CheckCircle, ChevronRight, Info} from "lucide-vue-next";
 import {toTypedSchema} from "@vee-validate/zod";
 import * as z from 'zod'
 import {useForm} from "vee-validate";
@@ -90,7 +90,70 @@ const onSubmit = handleSubmit(async (values) => {
 <template>
   <Page :title="$t('contact.header.title')" :description="$t('contact.header.description')">
     <div class="grid md:grid-cols-3 items-start gap-6">
-      <div class="md:order-last">
+      <div class="md:col-span-2">
+        <NuxtLinkLocale to="faq" class="group">
+          <Alert variant="info" class="group-hover:bg-info/15 mb-6 duration-150 ring-offset-background transition-colors group-focus-visible:outline-none group-focus-visible:ring-2 group-focus-visible:ring-ring group-focus-visible:ring-offset-2">
+            <Info class="size-4"/>
+            <AlertTitle>{{ $t('contact.check_our_faq.title') }}</AlertTitle>
+            <AlertDescription>
+              {{ $t('contact.check_our_faq.description') }}
+            </AlertDescription>
+          </Alert>
+        </NuxtLinkLocale>
+<!--        <NuxtLinkLocale to="faq" class="flex items-center justify-between gap-6 text-lg font-medium bg-muted/50 rounded-xl px-4 sm:px-6 py-4 hover:bg-muted duration-150 mb-6">-->
+<!--          {{ $t('contact.check_our_faq') }}-->
+<!--          <ChevronRight class="size-5 shrink-0"/>-->
+<!--        </NuxtLinkLocale>-->
+        <Card>
+          <CardHeader class="pb-0 justify-start">
+            <CheckCircle v-if="success" class="size-6 text-success shrink-0 mt-1 sm:mt-2"/>
+            <div>
+              <h2 class="h3">{{
+                  !success ? $t('contact.contact_form.title') : $t('contact.contact_form.success.title')
+                }}</h2>
+              <p class="text-muted-foreground mt-1">{{
+                  !success ? $t('contact.contact_form.description') : $t('contact.contact_form.success.description')
+                }}</p>
+            </div>
+          </CardHeader>
+          <form v-if="!success" @submit="onSubmit" class="space-y-6 mt-5">
+            <FormField v-slot="{ componentField}" name="subject">
+              <FormItem>
+                <FormLabel>{{ $t('contact.contact_form.subject') }}</FormLabel>
+                <FormControl>
+                  <Select v-bind="componentField">
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue :placeholder="$t('contact.contact_form.select_a_subject')"/>
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      <SelectItem v-for="option in subjectOptions" :value="option.value">
+                        {{ option.value }}
+                      </SelectItem>
+                    </SelectContent>
+                  </Select>
+                </FormControl>
+                <FormMessage/>
+              </FormItem>
+            </FormField>
+            <FormField v-slot="{ componentField}" name="message">
+              <FormItem>
+                <FormLabel>{{ $t('contact.contact_form.message') }}</FormLabel>
+                <FormControl>
+                  <Textarea v-bind="componentField" rows="4"/>
+                </FormControl>
+                <FormMessage/>
+              </FormItem>
+            </FormField>
+            <Button type="submit" :loading="loading" class="w-full sm:w-auto">
+              <Send/>
+              {{ capitalizeSentence($t('common.actions.send_item', {item: $t('contact.contact_form.message')})) }}
+            </Button>
+          </form>
+        </Card>
+      </div>
+      <div class="order-first md:order-last">
         <img :src="supportSettings.support_image_url ?? '../assets/images/support.webp'" alt="Support"
              class="hidden md:block w-full rounded-2xl aspect-video mb-6 object-cover">
         <ul v-if="supportSettings" class="space-y-2">
@@ -146,62 +209,12 @@ const onSubmit = handleSubmit(async (values) => {
             </a>
           </li>
         </ul>
-        <div v-else class="text-muted-foreground">
-          {{ $t('common.general.no_records_found', {item: lowercase($t('contact.contact_details'))}) }}
-        </div>
-      </div>
-      <div class="md:col-span-2">
-        <NuxtLinkLocale to="faq" class="flex items-center justify-between gap-6 text-lg font-medium bg-muted/50 rounded-xl px-4 sm:px-6 py-4 hover:bg-muted duration-150 mb-6">
-          {{ $t('contact.check_our_faq') }}
-          <ChevronRight class="size-5"/>
-        </NuxtLinkLocale>
-        <Card>
-          <CardHeader class="pb-0 justify-start">
-            <CheckCircle v-if="success" class="size-6 text-success shrink-0 mt-1 sm:mt-2"/>
-            <div>
-              <h2 class="h3">{{
-                  !success ? $t('contact.contact_form.title') : $t('contact.contact_form.success.title')
-                }}</h2>
-              <p class="text-muted-foreground mt-1">{{
-                  !success ? $t('contact.contact_form.description') : $t('contact.contact_form.success.description')
-                }}</p>
-            </div>
-          </CardHeader>
-          <form v-if="!success" @submit="onSubmit" class="space-y-6 mt-5">
-            <FormField v-slot="{ componentField}" name="subject">
-              <FormItem>
-                <FormLabel>{{ $t('contact.contact_form.subject') }}</FormLabel>
-                <FormControl>
-                  <Select v-bind="componentField">
-                    <FormControl>
-                      <SelectTrigger>
-                        <SelectValue :placeholder="$t('contact.contact_form.select_a_subject')"/>
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      <SelectItem v-for="option in subjectOptions" :value="option.value">
-                        {{ option.value }}
-                      </SelectItem>
-                    </SelectContent>
-                  </Select>
-                </FormControl>
-                <FormMessage/>
-              </FormItem>
-            </FormField>
-            <FormField v-slot="{ componentField}" name="message">
-              <FormItem>
-                <FormLabel>{{ $t('contact.contact_form.message') }}</FormLabel>
-                <FormControl>
-                  <Textarea v-bind="componentField" rows="4"/>
-                </FormControl>
-                <FormMessage/>
-              </FormItem>
-            </FormField>
-            <Button type="submit" :loading="loading" class="w-full sm:w-auto">
-              <Send/>
-              {{ capitalizeSentence($t('common.actions.send_item', {item: $t('contact.contact_form.message')})) }}
-            </Button>
-          </form>
+        <Card v-if="supportSettings.opening_hours" class="mt-6">
+<!--          TODO: Show opening hours -->
+<!--          <CardHeader>-->
+<!--            <CardTitle>{{ $t('contact.opening_hours') }}</CardTitle>-->
+<!--            <CardAction>Nu geopend</CardAction>-->
+<!--          </CardHeader>-->
         </Card>
       </div>
     </div>

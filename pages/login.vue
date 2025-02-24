@@ -50,7 +50,7 @@ const onSubmit = form.handleSubmit(async (values) => {
     <NuxtLayout name="authentication" :title="$t('authentication.common.sign_in')">
 
       <form class="space-y-6" @submit="onSubmit">
-        <FormField v-slot="{ componentField }" :validate-on-blur="false" name="email">
+        <FormField v-slot="{ componentField }" name="email">
           <FormItem>
             <FormLabel>{{ $t('common.general.email') }}</FormLabel>
             <FormControl>
@@ -59,7 +59,7 @@ const onSubmit = form.handleSubmit(async (values) => {
             <FormMessage/>
           </FormItem>
         </FormField>
-        <FormField v-slot="{ componentField }" :validate-on-blur="false" name="password">
+        <FormField v-slot="{ componentField }" name="password">
           <FormItem>
             <div class="flex items-center justify-between">
               <FormLabel>

@@ -1,11 +1,13 @@
 export default {
   faq: {
+    faq: "Veelgestelde vragen",
+
     header: {
       title: "Veelgestelde vragen",
       description: "Hier vind je antwoorden op veelgestelde vragen."
     },
 
-    question_missing: "Niet gevonden wat je zocht? Neem contact met ons op.",
+    question_missing: "Niet gevonden wat je zocht? Wij helpen je graag verder.",
 
     general: {
       general: "Algemeen",
