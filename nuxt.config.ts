@@ -64,7 +64,7 @@ export default defineNuxtConfig({
 
   supabase: {
     redirectOptions: {
-      login: '/inloggen',
+      login: '/login',
       callback: '/confirm',
       exclude: [
         '/confirm-registration',
@@ -139,7 +139,7 @@ export default defineNuxtConfig({
       },
       login: {
         en: '/login',
-        nl: '/inloggen',
+        nl: '/login',
       },
       'password-recovery': {
         en: '/password-recovery',

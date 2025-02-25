@@ -13,6 +13,10 @@ export default {
       password_length: "Password must be at least {length} characters long",
     },
     login: {
+      email_sent_success: {
+        title: "Bevestigingslink verstuurd!",
+        description: "Er is een e-mail verstuurd naar {email}.",
+      },
       forgot_password: "Wachtwoord vergeten?",
       no_account: "Heb je geen account?",
       register_now: "Registreer nu",

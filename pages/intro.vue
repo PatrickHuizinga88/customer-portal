@@ -39,6 +39,9 @@ const onSubmit = handleSubmit(async (values) => {
           onConflict: 'id'
         })
     if (error) throw error
+
+    // TODO: Create external user
+
     notificationStore.createNotification({
       type: 'success',
       action: 'save',
