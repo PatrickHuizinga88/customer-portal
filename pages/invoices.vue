@@ -65,8 +65,8 @@ const {data: invoices, status} = await useLazyAsyncData(async () => {
         </li>
       </ul>
 
-      <div class="flex justify-center mt-8">
-        <Button v-if="invoices.count > endRange" variant="outline" @click="showMore" class="w-full sm:w-auto">{{ $t('invoices.show_more') }}</Button>
+      <div v-if="invoices.count > endRange" class="flex justify-center mt-8">
+        <Button variant="outline" @click="showMore" class="w-full sm:w-auto">{{ $t('invoices.show_more') }}</Button>
       </div>
     </div>
 

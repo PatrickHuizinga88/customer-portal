@@ -1,6 +1,7 @@
 export default {
   common: {
     general: {
+      and: "en",
       breadcrumbs: "Kruimelpad",
       email: "E-mailadres",
       dashboard: "Dashboard",
@@ -96,5 +97,12 @@ export default {
         description: "Probeer het later opnieuw of neem contact met ons op.",
       },
     },
+
+    accessibility: {
+      main_menu : {
+        title: "Hoofdmenu",
+        description: "Navigeer door de website met behulp van het hoofdmenu",
+      }
+    }
   }
 }

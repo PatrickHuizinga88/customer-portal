@@ -46,6 +46,25 @@ export default {
       whatsapp: "WhatsApp",
     },
 
-    opening_hours: "Openingstijden",
+    opening_hours: {
+      today_open_at: "Vandaag open om {timeRange}",
+      today_closed: "Vandaag gesloten",
+
+      currently_open: "Nu geopend",
+      currently_closed: "Nu gesloten",
+
+      show_all: "Toon alle openingstijden",
+      closed: "Gesloten",
+
+      days: {
+        monday: "Maandag",
+        tuesday: "Dinsdag",
+        wednesday: "Woensdag",
+        thursday: "Donderdag",
+        friday: "Vrijdag",
+        saturday: "Zaterdag",
+        sunday: "Zondag",
+      }
+    },
   }
 }

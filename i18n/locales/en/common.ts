@@ -1,6 +1,7 @@
 export default {
   common: {
     general: {
+      and: "and",
       breadcrumbs: "Breadcrumbs",
       email: "Email",
       dashboard: "Dashboard",

@@ -8,6 +8,7 @@ import {
   DropdownMenuTrigger
 } from "~/components/ui/dropdown-menu";
 import type {Database} from "~/types/database.types";
+import {VisuallyHidden} from "reka-ui";
 
 defineProps<{
   logoUrl?: string
@@ -118,7 +119,11 @@ watch(useRoute(), () => {
                 <Menu class="size-7"/>
               </Button>
             </SheetTrigger>
-            <SheetContent class="flex flex-col justify-center">
+            <SheetContent class="flex flex-col justify-center" aria-description="Main navigation">
+              <VisuallyHidden>
+                <SheetTitle>{{ $t('common.accessibility.main_menu.title') }}</SheetTitle>
+                <SheetDescription>{{ $t('common.accessibility.main_menu.description') }}</SheetDescription>
+              </VisuallyHidden>
               <ul class="flex flex-col align-stretch gap-4">
                 <li v-for="item in mainNavItems">
                   <NuxtLinkLocale :to="item.url" activeClass="text-primary"

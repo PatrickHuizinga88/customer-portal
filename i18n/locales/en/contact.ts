@@ -42,5 +42,26 @@ export default {
       phone: "Phone",
       whatsapp: "WhatsApp",
     },
+
+    opening_hours: {
+      today_open_at: "Today open at {timeRange}",
+      today_closed: "Today closed",
+
+      currently_open: "Currently open",
+      currently_closed: "Currently closed",
+
+      show_all: "Show all opening hours",
+      closed: "Closed",
+
+      days: {
+        monday: "Monday",
+        tuesday: "Tuesday",
+        wednesday: "Wednesday",
+        thursday: "Thursday",
+        friday: "Friday",
+        saturday: "Saturday",
+        sunday: "Sunday",
+      },
+    },
   }
 }
