@@ -12,20 +12,22 @@ watch(user, () => {
   if (user.value) {
     return navigateTo('/')
   }
-  error.value = 'Verification failed, please try again.'
+  error.value = 'Verificatie mislukt. Probeer het opnieuw.'
 }, { immediate: true })
 </script>
 
 <template>
-  <div v-if="!error" class="h-screen flex items-center justify-center w-full">
-    <LoaderCircle class="text-primary animate-spin size-6"/>
-    <span class="sr-only">Waiting to verify...</span>
-  </div>
-  <div v-else class="flex items-center justify-center w-full">
-    <p class="text-muted-foreground">{{ error }}</p>
-    <Button as-child>
-      <NuxtLink to="/login">Try again</NuxtLink>
-    </Button>
+  <div class="h-screen flex items-center justify-center w-full">
+    <template v-if="!error">
+      <LoaderCircle class="text-primary animate-spin size-6 mr-2"/>
+      <p>Bezig met het ophalen van je gegevens...</p>
+    </template>
+    <template v-else>
+      <p>{{ error }}</p>
+      <Button as-child>
+        <NuxtLink to="/login" size="sm" class="ml-2">Opnieuw proberen</NuxtLink>
+      </Button>
+    </template>
   </div>
 </template>
 
