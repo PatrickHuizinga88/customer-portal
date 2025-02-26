@@ -1,6 +1,7 @@
 export default {
   authentication: {
     common: {
+      fetching_your: "Bezig met het ophalen van je {item}...",
       password: 'Wachtwoord',
       sign_in: "Inloggen",
       sign_out: "Uitloggen",

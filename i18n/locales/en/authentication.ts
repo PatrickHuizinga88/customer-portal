@@ -1,6 +1,7 @@
 export default {
   authentication: {
     common: {
+      fetching_your: "Retrieving your {item}...",
       password: 'Password',
       sign_in: "Sign in",
       sign_out: "Logout",
