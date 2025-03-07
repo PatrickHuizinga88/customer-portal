@@ -8,7 +8,7 @@ interface Response {
 }
 
 export default defineEventHandler(async (event) => {
-  const {public: { backendUrl }, novuloUsername, novuloPassword} = useRuntimeConfig(event)
+  const {public: {backendUrl}, novuloUsername, novuloPassword} = useRuntimeConfig(event)
   const user = await serverSupabaseUser(event)
 
   if (!user) return null
@@ -22,5 +22,9 @@ export default defineEventHandler(async (event) => {
     }
   })
 
+  if (!response) throw createError({
+    statusCode: 500,
+    statusMessage: 'No response from Novulo'
+  })
   return response[0]
 })

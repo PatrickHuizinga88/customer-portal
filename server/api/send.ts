@@ -17,7 +17,8 @@ export default defineEventHandler(async (event) => {
     const {data: supportSettings, error} = await client.from('company_info').select('email').eq('company_id', companyId).single()
     if (error) throw error
 
-    const {name: senderName} = await $fetch('/api/customers')
+    const {name: senderName} = await event.$fetch('/api/customers')
+    if (!senderName) throw new Error('No sender name found')
 
     const dateAndTime = new Date().toLocaleString('nl-NL', { timeZone: 'Europe/Amsterdam' });
 

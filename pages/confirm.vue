@@ -29,7 +29,7 @@ const textList = [
 watchEffect(() => {
   const interval = setInterval(() => {
     currentIndex.value = (currentIndex.value + 1) % textList.length
-  }, 3000) // Change every 3 seconds
+  }, 2000)
   return () => clearInterval(interval)
 })
 
@@ -45,6 +45,7 @@ watch(user, () => {
   <div class="h-screen flex flex-col items-center justify-center w-full">
     <template v-if="!error">
       <LoaderCircle class="text-primary animate-spin size-8 mb-4"/>
+      <span class="sr-only">{{ $t('common.general.loading') }}</span>
       <transition
           enter-active-class="transition duration-300"
           enter-from-class="opacity-0 scale-95"
@@ -53,7 +54,7 @@ watch(user, () => {
           leave-from-class="opacity-100 scale-100"
           leave-to-class="opacity-0 scale-95"
           mode="out-in">
-        <p :key="textList[currentIndex].id">{{ textList[currentIndex].content }}</p>
+        <p :key="textList[currentIndex].id" aria-hidden="true">{{ textList[currentIndex].content }}</p>
       </transition>
     </template>
     <template v-else>
