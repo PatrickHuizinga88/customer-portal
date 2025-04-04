@@ -98,12 +98,12 @@ export default defineNuxtConfig({
       {
         code: 'nl',
         name: 'Nederlands',
-        files: ['nl/common', 'nl/404', 'nl/authentication', 'nl/claims', 'nl/contact', 'nl/faq', 'nl/home', 'nl/insurances', 'nl/invoices', 'nl/profile']
+        files: ['nl/common.ts', 'nl/404.ts', 'nl/authentication.ts', 'nl/claims.ts', 'nl/contact.ts', 'nl/faq.ts', 'nl/home.ts', 'nl/insurances.ts', 'nl/invoices.ts', 'nl/profile.ts']
       },
       {
         code: 'en',
         name: 'English',
-        files: ['en/common', 'en/404', 'en/authentication', 'en/claims', 'en/contact', 'en/faq', 'en/home', 'en/insurances', 'en/invoices', 'en/profile']
+        files: ['en/common.ts', 'en/404.ts', 'en/authentication.ts', 'en/claims.ts', 'en/contact.ts', 'en/faq.ts', 'en/home.ts', 'en/insurances.ts', 'en/invoices.ts', 'en/profile.ts']
       },
     ],
     customRoutes: 'config',

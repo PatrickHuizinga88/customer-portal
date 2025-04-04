@@ -14,6 +14,7 @@ export default {
       password_length: "Password must be at least {length} characters long",
     },
     login: {
+      description: "Welkom terug! Vul je e-mailadres in om verder te gaan.",
       email_sent_success: {
         title: "Bevestigingslink verstuurd!",
         description: "Er is een e-mail verstuurd naar {email}.",

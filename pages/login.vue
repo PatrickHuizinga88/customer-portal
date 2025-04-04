@@ -69,7 +69,7 @@ const onSubmit = form.handleSubmit(async (values) => {
 
 <template>
   <div>
-    <NuxtLayout name="authentication" :title="$t('authentication.common.sign_in')">
+    <NuxtLayout name="authentication" :title="$t('authentication.common.sign_in')" :description="$t('authentication.login.description')">
 
       <form v-show="!success" class="space-y-6" @submit="onSubmit">
         <FormField v-slot="{ componentField }" :validate-on-model-update="false" name="email">
